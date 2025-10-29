@@ -12,5 +12,3 @@
 </head>
 
 <body>
-
-    <?php require "navigation.php"; ?>
