@@ -1,4 +1,3 @@
-</body>
 <footer class="#BDE3FF">
     <div class="navbar-end">
         <div class="navbar-item">
