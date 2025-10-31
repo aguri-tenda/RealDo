@@ -1,34 +1,68 @@
-<?php require "parts/header.php"; ?>
-<?php require "parts/navigation.php"; ?>
-<div class="level">
-    <form class="box">
-        <div class="field">
-            <div class="control">
-                <label class="label">ユーザー名</label>
-                <input class="input" type="text" name="username">
+<?php require "header.php"; ?>
+<?php require "navigation.php"; ?>
+
+<div class="level-item">
+    <form class="box" style="width: 800px; text-align: center;">
+        <span class="subtitle is-4" style="color:#278EDD;">新規登録</span>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">ユーザー名</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="text" name="username" style="background-color: #D9D9D9;">
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="field">
-            <div class="control">
-                <label class="label">ユーザーID</label>
-                <input class="input" type="text" name="userid">
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">ユーザーID</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="text" name="userid" style="background-color: #D9D9D9;">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <div class="control">
-                <label class="label">メールアドレス</label>
-                <input class="input" type="email" name="useremail">
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">メールアドレス</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="email" name="useremail" style="background-color: #D9D9D9;">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="field">
-            <div class="control">
-                <label class="label">パスワード</label>
-                <input class="input" type="text" name="password">
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">パスワード</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="password" name="password" style="background-color: #D9D9D9;">
+                    </div>
+                </div>
             </div>
         </div>
-        <button class="button #41C0FF">確定</button>
+
+        <!-- ボタン -->
+        <div class="field has-text-centered" style="margin-top: 2rem;">
+            <input class="button is-info" type="submit" value="確定" style="background-color: #41C0FF; width: 300px;">
+        </div>
+
     </form>
 </div>
-<?php require "parts/user_bottom.php"; ?>
-<?php require "parts/footer.php"; ?>
+
+<?php require "user_bottom.php"; ?>
+<?php require "footer.php"; ?>
