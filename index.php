@@ -16,7 +16,7 @@
             <div class="card-content">
                 <div class="columns">
 
-                    <div class="column">
+                    <div class="column"><!--レコメンドで持ってきたデータを表示-->
                         <div class="card">
                             <div class="card-image">
                                 <div class="image is-256x256">
@@ -95,4 +95,15 @@
     </div>
 </div>
 
+<div class="section">
+    <div class="container is-fluid">
+        <div class="level">
+            <button class="button is-primary level-item has-textcenterd">
+                予約情報確認
+            </button>
+        </div>
+    </div>
+</div>
+
+<?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
