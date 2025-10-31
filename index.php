@@ -1,3 +1,6 @@
+<?php require "parts/header.php"; ?>
+<?php require "parts/navigation.php"; ?>
+
 <div class="section" id="recommend-app">
     <div class="container">
         <div class="card" style="background-color: #FFFDDF;">
@@ -91,3 +94,5 @@
         </div>
     </div>
 </div>
+
+<?php require "parts/footer.php"; ?>
