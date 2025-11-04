@@ -74,4 +74,4 @@
     <hr>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
-    <script src="script/header-script.js"></script>
+    <script src="script/navigation-script.js"></script>
