@@ -4,11 +4,11 @@
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
         <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" style="margin-top: 2rem;">
             <div class="field-label is-medium">
                 <label style="color:#278EDD;">評価</label>
             </div>
-            <div class="field-body" style="margin-top: 2rem;">
+            <div class="field-body">
                 <div class="field">
                     <div class="control">
                         <input class="input" type="text" name="rating" style="background-color: #D9D9D9;">
