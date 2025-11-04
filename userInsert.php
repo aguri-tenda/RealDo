@@ -4,7 +4,7 @@
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
         <span class="subtitle is-4" style="color:#278EDD;">新規登録</span>
-        <div class="field is-horizontal">
+        <div class="field is-horizontal" style="margin-top: 2rem;">
             <div class="field-label is-normal">
                 <label style="color:#278EDD;">ユーザー名</label>
             </div>

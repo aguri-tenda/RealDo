@@ -8,7 +8,7 @@
             <div class="field-label is-medium">
                 <label style="color:#278EDD;">評価</label>
             </div>
-            <div class="field-body">
+            <div class="field-body" style="margin-top: 2rem;">
                 <div class="field">
                     <div class="control">
                         <input class="input" type="text" name="rating" style="background-color: #D9D9D9;">
