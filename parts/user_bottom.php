@@ -2,7 +2,7 @@
     <div class="navbar-end">
         <div class="navbar-item is-flex is-justify-content-flex-end pr-5">
             <div class="image is-3200x1800">
-                <img src="../img/logo.png" alt="RealDo">
+                <img src="img/logo.png" alt="RealDo">
             </div>
         </div>
 
