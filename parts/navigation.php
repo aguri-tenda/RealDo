@@ -14,7 +14,7 @@
         </div>
 
         <!--メニュー-->
-        <div class="navbar-menu">
+        <div class="navbar-menu app-navigation">
 
             <div class="navbar-end">
                 <div class="navbar-item">
