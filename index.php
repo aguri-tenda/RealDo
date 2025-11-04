@@ -95,4 +95,5 @@
     </div>
 </div>
 
+<?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
