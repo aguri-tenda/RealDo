@@ -3,7 +3,7 @@
 
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
-        <span class="subtitle is-4" style="color:#278EDD;">新規登録</span>
+        <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
         <div class="field is-horizontal">
             <div class="field-label is-normal">
                 <label style="color:#278EDD;">ユーザー名</label>
