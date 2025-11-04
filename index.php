@@ -20,13 +20,16 @@
                         <div class="card">
                             <div class="card-image">
                                 <div class="image is-256x256">
-                                    <img src="いちご狩り.png" alt="サムネイル">
+                                    <img src="../product-img/いちご狩り.png" alt="サムネイル">
                                 </div>
                             </div>
 
                             <div class="card-content">
                                 <div class="content">
-                                    <p><strong>いちご狩り</strong><button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button></p>
+                                    <p>
+                                        <strong>いちご狩り</strong>
+                                        <button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button>
+                                    </p>
 
                                     <p>説明文～～～～～～～～～～</p>
                                 </div>
@@ -38,13 +41,16 @@
                         <div class="card">
                             <div class="card-image">
                                 <div class="image is-256x256">
-                                    <img src="いちご狩り.png" alt="サムネイル">
+                                    <img src="../product-img/いちご狩り.png" alt="サムネイル">
                                 </div>
                             </div>
 
                             <div class="card-content">
                                 <div class="content">
-                                    <p><strong>いちご狩り</strong><button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button></p>
+                                    <p>
+                                        <strong>いちご狩り</strong>
+                                        <button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button>
+                                    </p>
 
                                     <p>説明文～～～～～～～～～～</p>
                                 </div>
@@ -56,13 +62,16 @@
                         <div class="card">
                             <div class="card-image">
                                 <div class="image is-256x256">
-                                    <img src="いちご狩り.png" alt="サムネイル">
+                                    <img src="../product-img/いちご狩り.png" alt="サムネイル">
                                 </div>
                             </div>
 
                             <div class="card-content">
                                 <div class="content">
-                                    <p><strong>いちご狩り</strong><button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button></p>
+                                    <p>
+                                        <strong>いちご狩り</strong>
+                                        <button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button>
+                                    </p>
 
                                     <p>説明文～～～～～～～～～～</p>
                                 </div>
@@ -74,13 +83,16 @@
                         <div class="card">
                             <div class="card-image">
                                 <div class="image is-256x256">
-                                    <img src="いちご狩り.png" alt="サムネイル">
+                                    <img src="../product-img/いちご狩り.png" alt="サムネイル">
                                 </div>
                             </div>
 
                             <div class="card-content">
                                 <div class="content">
-                                    <p><strong>いちご狩り</strong><button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button></p>
+                                    <p>
+                                        <strong>いちご狩り</strong>
+                                        <button href="このタグ名で検索した検索結果画面URL(仮)" class="button is-small is-light is-rounded">タグ名</button>
+                                    </p>
 
                                     <p>説明文～～～～～～～～～～</p>
                                 </div>
