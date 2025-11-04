@@ -6,9 +6,11 @@
             <!--サイトロゴ-->
             <div class="navbar-brand">
                 <div class="navbar-item">
+                    <a href="index.php">
                     <div class="image is-3200x1800">
                         <img src="img/logo.png" alt="RealDo">
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
