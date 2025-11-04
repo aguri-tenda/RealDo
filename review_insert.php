@@ -5,13 +5,13 @@
     <form class="box" style="width: 800px; text-align: center;">
         <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
         <div class="field is-horizontal">
-            <div class="field-label is-normal">
+            <div class="field-label is-medium">
                 <label style="color:#278EDD;">評価</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" name="rating" style="background-color: #D9D9D9;">
+                        <textarea class="textarea" name="rating" rows="4" style="background-color: #fff;"></textarea>
                     </div>
                 </div>
             </div>
