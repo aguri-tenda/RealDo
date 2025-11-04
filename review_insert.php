@@ -11,7 +11,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <textarea class="input" name="rating" style="background-color: #fff;"></textarea>
+                        <textarea class="input" type="text" name="rating" style="background-color: #D9D9D9;"></textarea>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="textarea" rows="4" type="text" name="review" style="background-color: #D9D9D9;">
+                        <input class="textarea" rows="4" type="text" name="review" style="background-color: #fff;">
                     </div>
                 </div>
             </div>
