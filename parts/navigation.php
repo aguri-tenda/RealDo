@@ -5,7 +5,7 @@
 
             <!--サイトロゴ-->
             <div class="navbar-brand">
-                <div class="navbar-item">
+                <div class="image" style="width: 170px; height: auto;">
                     <a href="index.php">
                     <div class="image is-3200x1800">
                         <img src="img/logo.png" alt="RealDo">
