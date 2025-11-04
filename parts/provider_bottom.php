@@ -1,4 +1,4 @@
-<footer class="#C3FF9B">
+<footer class="footer" style="background-color:#C3FF9B; position: fixed; bottom: 0; width: 100%; padding: 1rem 0;">
     <div class="navbar-end">
         <div class="navbar-item">
             <div class="image is-3200x1800">
