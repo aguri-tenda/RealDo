@@ -7,7 +7,7 @@
             <div class="navbar-brand">
                 <div class="navbar-item">
                     <div class="image is-3200x1800">
-                        <img src="img/logo.png" alt="RealDo">
+                        <img src="../img/logo.png" alt="RealDo">
                     </div>
                 </div>
             </div>
