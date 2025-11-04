@@ -1,2 +1,0 @@
-# RealDo
-Real Doのプロジェクト
