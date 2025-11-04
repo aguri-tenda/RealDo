@@ -28,7 +28,7 @@
 
                 <div class="navbar-item">
                     <div v-if=" condition ">
-                        <a href="parts/userInsert.php">
+                        <a href="../userInsert.php">
                             <div>
                                 <div class="icon"><i class="far fa-edit"></i></div>
                                 <div>ユーザー新規登録</div>
@@ -36,7 +36,7 @@
                         </a>
                     </div>
                     <div v-else=" condition ">
-                        <a href="userUpdate">
+                        <a href="../userUpdate.php">
                             <div>
                                 <div class="icon"><i class="far fa-edit"></i></div>
                                 <div>ユーザー情報更新</div>
@@ -49,7 +49,7 @@
                 <div class="navbar-item">
 
                     <div v-if=" condition ">
-                        <a href="log-in.html">
+                        <a href="../log-in.php">
                             <div>
                                 <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
                                 <div v-if=" condition ">ログイン</div>
@@ -57,7 +57,7 @@
                         </a>
                     </div>
                     <div v-else=" condition ">
-                        <a href="log-out.html">
+                        <a href="../log-out.php">
                             <div>
                                 <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
                                 <div v-if=" condition ">ログアウト</div>
