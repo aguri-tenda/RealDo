@@ -8,7 +8,7 @@
             <div class="field-label is-medium">
                 <label class="label" style="color:#278EDD;">評価</label>
             </div>
-            <div class="field-body" style="margin-top: 1rem;">
+            <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
                         <rating-selector></rating-selector>
