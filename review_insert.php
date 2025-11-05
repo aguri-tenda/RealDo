@@ -25,7 +25,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <textarea class="textarea" rows="4" type="text" name="review" style="background-color: #fff;"></textarea>
+                        <textarea class="textarea" rows="4"  type="text" name="review" style="background-color: #fff; resize: none;"></textarea>
                     </div>
                 </div>
             </div>
