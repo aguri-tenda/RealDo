@@ -59,7 +59,7 @@
 
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <input class="button is-info" type="submit" value="ホーム画面へ" style="background-color: #41C0FF; width: 300px;">
+            <input class="button is-info" type="submit" value="ホーム画面へ" style="background-color: #C3FF9B; width: 300px;">
         </div>
 
     </form>
