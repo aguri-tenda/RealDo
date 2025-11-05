@@ -3,14 +3,13 @@
     <!-- ナビゲーション -->
     <div class="navbar" id="app-navigation">
 
-            <!--サイトロゴ-->
-            <div class="navbar-brand">
-                <div class="navbar-item">
-                    <div class="image is-3200x1800">
-                        <img src="img/logo.png" alt="RealDo">
-                    </div>
+        <!--サイトロゴ-->
+        <div class="navbar-brand">
+            <a href="index.php">
+                <div class="image" style="width: 170px; height: auto;">
+                    <img src="img/logo.png" alt="RealDo">
                 </div>
-            </div>
+            </a>
         </div>
 
         <!--メニュー-->
@@ -67,11 +66,12 @@
 
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>
 
-    <hr>
+<hr style="border: 1px solid #278EDD;">
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
-    <script src="script/navigation-script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
+<script src="script/navigation-script.js"></script>
