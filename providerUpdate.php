@@ -1,5 +1,5 @@
 <?php require "parts/header.php"; ?>
-<?php require "parts/navigation.php"; ?>
+<?php require "parts/provider_navigation.php"; ?>
 
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
