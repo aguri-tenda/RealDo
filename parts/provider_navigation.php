@@ -11,14 +11,6 @@
         <div class="navbar-menu app-navigation">
 
             <div class="navbar-end">
-                <div class="navbar-item">
-                    <a id="search">
-                        <div>
-                            <div class="icon"><i class="fas fa-search"></i></div>
-                            <div>検索</div>
-                        </div>
-                    </a>
-                </div>
 
                 <div class="navbar-item">
                     <?php if (isset($_SESSION['user'])): ?>
