@@ -75,6 +75,11 @@
 
     </form>
 </div>
+<br>
+<div class="field has-text-centered">
+    <a href="provider-create.php" class="button is-info is-medium"
+        style="background-color: #27ea6bff; width: 250px;">提供者新規登録</a>
+</div>
 
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
