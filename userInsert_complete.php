@@ -1,3 +1,6 @@
+<?php require "parts/header.php"; ?>
+<?php require "parts/navigation.php"; ?>
+
 <div class="level-item">
     <form class="box" style="width: 520px; text-align: center;" action="index.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">登録内容確認</span>
