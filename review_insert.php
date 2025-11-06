@@ -11,7 +11,7 @@
             <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
-                        <rating-selector></rating-selector>
+                        <rating-selector rating="0"></rating-selector>
                     </div>
                     <input type="hidden" name="rating" id="rating-value" value="0">
                 </div>

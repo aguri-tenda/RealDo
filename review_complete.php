@@ -12,9 +12,12 @@
             <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
-                        <rating-selector></rating-selector>
+                        <rating-selector
+                            rating="<?php echo htmlspecialchars($_POST['rating']); ?>"
+                            disabled="true"
+                        ></rating-selector>
                     </div>
-                    <input disabled type="hidden" name="rating" id="rating-value" value="<?php echo htmlspecialchars($_POST['rating']); ?>" + 6>
+                    <input type="hidden" name="rating" id="rating-value" value="<?php echo htmlspecialchars($_POST['rating']); ?>">
                 </div>
             </div>
         </div>
@@ -32,7 +35,6 @@
             </div>
         </div>
 
-        <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
             <a href="review_insert.php" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
             <input class="button is-link is-medium" type="submit" value="登録する"
