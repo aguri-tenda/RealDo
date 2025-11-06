@@ -2,8 +2,8 @@
 <?php require "parts/navigation.php"; ?>
 
 <div class="level-item">
-    <form class="box" style="width: 800px; text-align: center;">
-        <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
+    <form class="box" style="width: 520px; text-align: center;" action="review_complete.php" method="post">
+            <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
         <div class="field is-horizontal" style="margin-top: 2rem;">
             <div class="field-label is-medium">
                 <label class="label" style="color:#278EDD;">評価</label>
@@ -11,7 +11,7 @@
             <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
-                        <rating-selector></rating-selector>
+                        <rating-selector rating="0"></rating-selector>
                     </div>
                     <input type="hidden" name="rating" id="rating-value" value="0">
                 </div>
