@@ -40,7 +40,7 @@
 
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <a href="userInsert.php" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
+            <a href="review_insert.php" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
             <input class="button is-link is-medium" type="submit" value="登録する"
                 style="background-color: #41C0FF; width: 40%;">
         </div>
