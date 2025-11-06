@@ -1,9 +1,5 @@
-<!--ヘッダー-->
 <div>
-    <!-- ナビゲーション -->
     <div class="navbar" id="app-navigation">
-
-        <!--サイトロゴ-->
         <div class="navbar-brand">
             <a href="index.php">
                 <div class="image" style="width: 170px; height: auto;">
@@ -12,7 +8,6 @@
             </a>
         </div>
 
-        <!--メニュー-->
         <div class="navbar-menu app-navigation">
 
             <div class="navbar-end">
@@ -26,52 +21,44 @@
                 </div>
 
                 <div class="navbar-item">
-                    <div v-if=" condition ">
-                        <a href="./userInsert.php">
-                            <div>
-                                <div class="icon"><i class="far fa-edit"></i></div>
-                                <div>ユーザー新規登録</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div v-else=" condition ">
+                    **<?php if (isset($_SESSION['user'])): ?>**
                         <a href="./userUpdate.php">
                             <div>
                                 <div class="icon"><i class="far fa-edit"></i></div>
                                 <div>ユーザー情報更新</div>
                             </div>
                         </a>
-                    </div>
+                    **<?php else: ?>**
+                        <a href="./userInsert.php">
+                            <div>
+                                <div class="icon"><i class="far fa-edit"></i></div>
+                                <div>ユーザー新規登録</div>
+                            </div>
+                        </a>
+                    **<?php endif; ?>**
                 </div>
 
 
                 <div class="navbar-item">
-
-                    <div v-if=" condition ">
-                        <a href="./log-in.php">
-                            <div>
-                                <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
-                                <div v-if=" condition ">ログイン</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div v-else=" condition ">
+                    **<?php if (isset($_SESSION['user'])): ?>**
                         <a href="./log-out.php">
                             <div>
                                 <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
-                                <div v-if=" condition ">ログアウト</div>
+                                <div>ログアウト</div>
                             </div>
                         </a>
-                    </div>
-
+                    **<?php else: ?>**
+                        <a href="./log-in.php">
+                            <div>
+                                <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
+                                <div>ログイン</div>
+                            </div>
+                        </a>
+                    **<?php endif; ?>**
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
 <hr style="border: 1px solid #278EDD;">
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
-<script src="script/navigation-script.js"></script>
