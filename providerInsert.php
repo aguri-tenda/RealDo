@@ -1,10 +1,23 @@
 <?php require "parts/header.php"; ?>
-<?php require "parts/navigation.php"; ?>
+<?php require "parts/provider_navigation.php"; ?>
 
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
-        <span class="subtitle is-4" style="color:#278EDD;">ログイン</span>
+        <span class="subtitle is-4" style="color:#278EDD;">新規登録</span>
         <br>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">ユーザー名</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="text" name="username" style="background-color: #D9D9D9;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="field is-horizontal">
             <div class="field-label is-normal">
                 <label style="color:#278EDD;">ユーザーID</label>
@@ -13,6 +26,19 @@
                 <div class="field">
                     <div class="control">
                         <input class="input" type="text" name="userid" style="background-color: #D9D9D9;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">メールアドレス</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="email" name="useremail" style="background-color: #D9D9D9;">
                     </div>
                 </div>
             </div>
