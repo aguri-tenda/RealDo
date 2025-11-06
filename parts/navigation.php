@@ -21,40 +21,40 @@
                 </div>
 
                 <div class="navbar-item">
-                    **<?php if (isset($_SESSION['user'])): ?>**
+                    <?php if (isset($_SESSION['user'])): ?>
                         <a href="./userUpdate.php">
                             <div>
                                 <div class="icon"><i class="far fa-edit"></i></div>
                                 <div>ユーザー情報更新</div>
                             </div>
                         </a>
-                    **<?php else: ?>**
+                    <?php else: ?>
                         <a href="./userInsert.php">
                             <div>
                                 <div class="icon"><i class="far fa-edit"></i></div>
                                 <div>ユーザー新規登録</div>
                             </div>
                         </a>
-                    **<?php endif; ?>**
+                    <?php endif; ?>
                 </div>
 
 
                 <div class="navbar-item">
-                    **<?php if (isset($_SESSION['user'])): ?>**
-                        <a href="./log-out.php">
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <a href="./user-logout.php">
                             <div>
                                 <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
                                 <div>ログアウト</div>
                             </div>
                         </a>
-                    **<?php else: ?>**
-                        <a href="./log-in.php">
+                    <?php else: ?>
+                        <a href="./user-login.php">
                             <div>
                                 <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
                                 <div>ログイン</div>
                             </div>
                         </a>
-                    **<?php endif; ?>**
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
