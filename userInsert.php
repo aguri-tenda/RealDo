@@ -5,7 +5,10 @@
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userInsert_complete.php"
         method="post">
         <span class="subtitle is-4" style="color:#278EDD;">新規登録</span>
-        <div class="field is-horizontal" style="margin-top: 2rem;">
+        <br><br><br>
+
+        <!-- ユーザー名 -->
+        <div class="field is-horizontal" style="margin-bottom: 1rem;">
             <div class="field-label is-normal">
                 <label style="color:#278EDD;">ユーザー名</label>
             </div>
