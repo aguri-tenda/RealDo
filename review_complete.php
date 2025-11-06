@@ -26,7 +26,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <textarea disabled class="textarea" rows="4"  type="text" name="review" style="background-color: #fff; resize: none;"></textarea>
+                        <textarea disabled class="textarea" rows="4"  type="text" name="review" style="background-color: #fff; resize: none;"><?php echo htmlspecialchars($_POST['review']); ?></textarea>
                     </div>
                 </div>
             </div>
