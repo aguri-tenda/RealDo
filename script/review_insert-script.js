@@ -4,7 +4,7 @@ Vue.component('rating-selector', {
             <span
                 v-for="star in 5"
                 :key="star"
-                :class="{ 'star-filled': star <= currentRating }"
+                :class="{ 'star-filled': star <= currentRating % 6 }"
                 @click="setRating(star)"
                 @mouseover="hoverRating = star"
                 @mouseleave="hoverRating = 0"
@@ -26,10 +26,6 @@ Vue.component('rating-selector', {
             // 隠しフィールドに選択された評価値をセット
             document.getElementById('rating-value').value = rating;
         }
-    },
-    mounted() {
-        // 初期評価値として隠しフィールドにセット
-        document.getElementById('rating-value').value = this.currentRating;
     }
 });
 

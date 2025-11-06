@@ -14,7 +14,7 @@
                     <div id="vue-rating-app">
                         <rating-selector></rating-selector>
                     </div>
-                    <input disabled type="hidden" name="rating" id="rating-value" value="0">
+                    <input disabled type="hidden" name="rating" id="rating-value" value="<?php echo htmlspecialchars($_POST['rating']); ?>" + 6>
                 </div>
             </div>
         </div>
@@ -31,12 +31,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- hidden でデータを送る -->
-        <input type="hidden" name="username" value="<?php echo htmlspecialchars($name); ?>">
-        <input type="hidden" name="userid" value="<?php echo htmlspecialchars($id); ?>">
-        <input type="hidden" name="useraddress" value="<?php echo htmlspecialchars($address); ?>">
-        <input type="hidden" name="userpassword" value="<?php echo htmlspecialchars($password); ?>">
 
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
