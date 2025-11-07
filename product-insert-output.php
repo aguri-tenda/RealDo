@@ -22,6 +22,8 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 
+<?php require "parts/db-connect.php"; ?>
+
 <div class="has-background-light">
     <div class="container" id="app-product-insert">
         <div class="section">
