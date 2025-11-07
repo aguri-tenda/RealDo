@@ -2,6 +2,7 @@
 <?php require "parts/provider_navigation.php"; ?>
 
 <body style="background-color:#EBEBEB">
+    <br>
     <div class="level-item">
         <form class="box" style="max-width: 700px; width: 100%; text-align: center;"
             action="providerInsert_complete.php" method="post">
