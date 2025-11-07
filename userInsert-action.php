@@ -2,7 +2,7 @@
 <?php require 'dbconnect.php'; ?>
 <?php
 
-// ★ セッションからデータを取得
+// セッションからデータを取得
 $username = $_SESSION['user_input']['name'] ?? '';
 $userid = $_SESSION['user_input']['user_id'] ?? '';
 $useraddress = $_SESSION['user_input']['address'] ?? '';
