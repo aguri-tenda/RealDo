@@ -19,7 +19,12 @@ $password = $_SESSION['user']['userpassword'] ?? '';
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
+    <style>
+        body {
+            padding-bottom: 70px;
+            /* フッター高さ分の余白 */
+        }
+    </style>
     <title>RealDo</title>
 </head>
 
