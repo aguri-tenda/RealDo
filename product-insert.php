@@ -9,7 +9,7 @@
                     <h3 class="level-item" style="color:#278EDD;">商品登録フォーム</h3>
                 </div>
 
-                <form action="product-insert-output.php?id=<?= $id; ?>" method="post">
+                <form action="product-insert-output.php" method="post" enctype="multipart/form-data">
                     
                     <div class="level">
                         <div class="level-left">
@@ -63,7 +63,7 @@
                                         <div class="level-right">
                                             <div>
                                                 <div>
-                                                    <input type="text" v-model="addressNum" name="address-number" placeholder="000-0000" size="8" required>
+                                                    <input type="text" v-model="addressNum" name="post-code" placeholder="000-0000" size="8" required>
                                                     <input type="text" v-model="address" name="address" required>
                                                 </div>
                                                 <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
@@ -104,7 +104,7 @@
                                         </div>
                                         <div class="level-right">
                                             <div>
-                                                <input type="file" name="image_pass" required>
+                                                <input type="file" name="file" required>
                                                 <?php if(isset($_GET['failed'])) : ?>
                                                     <p class="help"><font color="red">ファイルはpng、またはjpegを指定してください</font></p>
                                                 <?php endif; ?>
@@ -134,7 +134,6 @@
                            
                             <button :disabled="isFullInput" class="button is-info level-item">登録</button>
 
-                            <?php $id = uniqid(); ?>
                             <input type="hidden" name="provider_id" value="---提供者ID---">
                         </div>
                     </div>
