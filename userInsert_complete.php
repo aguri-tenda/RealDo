@@ -3,7 +3,7 @@
 <?php require "parts/db-connect.php"; ?>
 
 <?php
-    // 入力データを受け取り、セッションに保存
+    // 入力データを受け取る
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['username'] ?? '';
             $user_id = $_POST['userid'] ?? '';
