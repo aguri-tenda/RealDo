@@ -1,7 +1,7 @@
 <div>
     <div class="navbar" id="app-navigation">
         <div class="navbar-brand">
-            <a href="index.php">
+            <a href="provider-index.php">
                 <div class="image" style="width: 170px; height: auto;">
                     <img src="img/logo.png" alt="RealDo">
                 </div>
