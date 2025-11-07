@@ -3,7 +3,7 @@ session_start();
 
 // セッションから値を取得
 $name = $_SESSION['user']['username'] ?? '';
-$id = $_SESSION['user']['userid'] ?? '';
+$user_id = $_SESSION['user']['userid'] ?? '';
 $address = $_SESSION['user']['useraddress'] ?? '';
 $password = $_SESSION['user']['userpassword'] ?? '';
 ?>
