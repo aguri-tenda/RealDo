@@ -1,20 +1,19 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
+<?php require "parts/db-connect.php"; ?>
 
 <?php
     // 入力データを受け取り、セッションに保存
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $_SESSION['user'] = [
-            'username' => $_POST['username'] ?? '',
-            'userid' => $_POST['userid'] ?? '',
-            'useraddress' => $_POST['useraddress'] ?? '',
-            'userpassword' => $_POST['userpassword'] ?? '',
-        ];
+            $name = $_POST['username'] ?? '';
+            $user_id = $_POST['userid'] ?? '';
+            $address = $_POST['useraddress'] ?? '';
+            $password = $_POST['userpassword'] ?? '';
     }
 ?>
 
 <div class="level-item">
-    <form class="box" style="width: 520px; text-align: center;" action="index.php" method="post">
+    <form class="box" style="width: 520px; text-align: center;" action="userInsert-action.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">登録内容確認</span>
         <br><br><br>
 
@@ -41,7 +40,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input disabled class="input" type="text" value="<?php echo htmlspecialchars($id); ?>"
+                        <input disabled class="input" type="text" value="<?php echo htmlspecialchars($user_id); ?>"
                             style="background-color:#E3FFFF;width:80%;border:1px solid #858484ff;">
                     </div>
                 </div>
@@ -80,7 +79,7 @@
 
         <!-- hidden でデータを送る -->
         <input type="hidden" name="username" value="<?php echo htmlspecialchars($name); ?>">
-        <input type="hidden" name="userid" value="<?php echo htmlspecialchars($id); ?>">
+        <input type="hidden" name="userid" value="<?php echo htmlspecialchars($user_id); ?>">
         <input type="hidden" name="useraddress" value="<?php echo htmlspecialchars($address); ?>">
         <input type="hidden" name="userpassword" value="<?php echo htmlspecialchars($password); ?>">
 
