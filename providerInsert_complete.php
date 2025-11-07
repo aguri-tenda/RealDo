@@ -1,21 +1,28 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
+<?php require "parts/db-connect.php"; ?>
 <?php
 // 入力データを受け取り、セッションに保存
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['provider'] = [
+    $_SESSION['provider_input'] = [
         'providername' => $_POST['providername'] ?? '',
         'providerid' => $_POST['providerid'] ?? '',
         'provideraddress' => $_POST['provideraddress'] ?? '',
         'providerpassword' => $_POST['providerpassword'] ?? '',
     ];
 }
+
+// セッションから表示用のデータを取得
+$provider_name = $_SESSION['provider_input']['providername'] ?? '';
+$provider_id = $_SESSION['provider_input']['providerid'] ?? '';
+$provider_address = $_SESSION['provider_input']['provideraddress'] ?? '';
+$provider_password = $_SESSION['provider_input']['providerpassword'] ?? '';
 ?>
 
 <body style="background-color:#EBEBEB">
     <br>
     <div class="level-item">
-        <form class="box" style="width: 520px; text-align: center;" action="provider-index.php" method="post">
+        <form class="box" style="width: 520px; text-align: center;" action="providerInsert-action.php" method="post">
             <span class="subtitle is-4" style="color:#278EDD;">登録内容確認</span>
             <br><br><br>
 
