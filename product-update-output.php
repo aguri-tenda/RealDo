@@ -7,13 +7,13 @@
                 
             if(!move_uploaded_file($_FILES['file']['tmp_name'], $file))
             {
-                header('Location:product-insert.php');
+                header('Location:product-update.php');
                 exit();
             }
         }
         else
         {
-            header('Location:product-insert.php?failed="failed"');
+            header('Location:product-update.php?failed="failed"');
             exit();
         }
     }
@@ -27,7 +27,7 @@
         <div class="section">
             <div class="box has-background-white" style="color:#278EDD;">
                 <div class="content level">
-                    <h3 class="level-item" style="color:#278EDD;">商品登録完了</h3>
+                    <h3 class="level-item" style="color:#278EDD;">商品情報更新完了</h3>
                 </div>
 
                 <form action="index.php">
@@ -119,7 +119,7 @@
                                             サムネイル画像：
                                         </div>
                                         <div class="level-right">
-                                            <img src="<?= $file; ?>" width="100px">
+                                            <img src="<?= $file; ?>" width="100px"><!--要画像アップロード処理-->
                                         </div>
                                     </div>
                                     
