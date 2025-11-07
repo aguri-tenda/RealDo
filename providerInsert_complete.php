@@ -10,6 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'providerpassword' => $_POST['providerpassword'] ?? '',
     ];
 }
+$provider_name = $_SESSION['provider']['providername'] ?? '';
+$provider_id = $_SESSION['provider']['providerid'] ?? '';
+$provider_address = $_SESSION['provider']['provideraddress'] ?? '';
+$provider_password = $_SESSION['provider']['providerpassword'] ?? '';
 ?>
 
 <body style="background-color:#EBEBEB">

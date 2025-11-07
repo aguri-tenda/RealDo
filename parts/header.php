@@ -26,7 +26,7 @@ $provider_password = $_SESSION['provider']['providerpassword'] ?? '';
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
     <style>
         body {
-            padding-bottom: 70px;
+            padding-bottom: 90px;
             /* フッター高さ分の余白 */
         }
     </style>
