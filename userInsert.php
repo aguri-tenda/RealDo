@@ -1,6 +1,6 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
-
+<br>
 <div class="level-item">
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userInsert_complete.php"
         method="post">

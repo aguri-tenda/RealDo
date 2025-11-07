@@ -1,56 +1,55 @@
-<div>
-    <div class="navbar" id="app-navigation">
+<div id="app-navigation">
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a href="provider-index.php">
-                <div class="image" style="width: 170px; height: auto;">
-                    <img src="img/logo.png" alt="RealDo">
-                </div>
+            <a class="navbar-item" href="./provider-index.php">
+                <img src="img/logo.png" alt="RealDo" style="max-height: 60px;">
+            </a>
+
+            <!-- ✅ ハンバーガーメニュー -->
+            <a role="button" class="navbar-burger" :class="{ 'is-active': isMenuActive }" aria-label="menu"
+                aria-expanded="false" @click="toggleMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
             </a>
         </div>
 
-        <div class="navbar-menu app-navigation">
-
+        <!-- ✅ PHP入りメニュー部 -->
+        <div id="navbarMenu" class="navbar-menu" :class="{ 'is-active': isMenuActive }">
             <div class="navbar-end">
 
+                <!-- ユーザー登録 or 更新 -->
                 <div class="navbar-item">
-                    <?php if (isset($_SESSION['user'])): ?>
-                        <a href="./providerUpdate.php">
-                            <div>
-                                <div class="icon"><i class="far fa-edit"></i></div>
-                                <div>ユーザー情報更新</div>
-                            </div>
+                    <?php if (isset($_SESSION['provider'])): ?>
+                        <a href="./providerUpdate.php" class="is-flex is-align-items-center">
+                            <span class="icon has-text-info"><i class="far fa-edit"></i></span>
+                            <span>ユーザー情報更新</span>
                         </a>
                     <?php else: ?>
-                        <a href="./providerInsert.php">
-                            <div>
-                                <div class="icon"><i class="far fa-edit"></i></div>
-                                <div>ユーザー新規登録</div>
-                            </div>
+                        <a href="./providerInsert.php" class="is-flex is-align-items-center">
+                            <span class="icon has-text-info"><i class="far fa-edit"></i></span>
+                            <span>ユーザー新規登録</span>
                         </a>
                     <?php endif; ?>
                 </div>
 
-
+                <!-- ログイン or ログアウト -->
                 <div class="navbar-item">
-                    <?php if (isset($_SESSION['user'])): ?>
-                        <a href="./provider-logout.php">
-                            <div>
-                                <div class="icon"><i class="fas fa-sign-out-alt"></i></div>
-                                <div>ログアウト</div>
-                            </div>
+                    <?php if (isset($_SESSION['provider'])): ?>
+                        <a href="./provider-logout.php" class="is-flex is-align-items-center">
+                            <span class="icon has-text-info"><i class="fas fa-sign-out-alt"></i></span>
+                            <span>ログアウト</span>
                         </a>
                     <?php else: ?>
-                        <a href="./provider-login.php">
-                            <div>
-                                <div class="icon"><i class="fas fa-sign-in-alt"></i></div>
-                                <div>ログイン</div>
-                            </div>
+                        <a href="./provider-login.php" class="is-flex is-align-items-center">
+                            <span class="icon has-text-info"><i class="fas fa-sign-in-alt"></i></span>
+                            <span>ログイン</span>
                         </a>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="script/navigation-script.js"></script>
 </div>
-
-<hr style="border: 1px solid #C3FF9B;">

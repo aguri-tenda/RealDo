@@ -14,7 +14,7 @@
             </a>
         </div>
 
-        <!-- ✅ あなたのPHP入りメニュー部 -->
+        <!-- ✅ PHP入りメニュー部 -->
         <div id="navbarMenu" class="navbar-menu" :class="{ 'is-active': isMenuActive }">
             <div class="navbar-end">
 
@@ -57,6 +57,7 @@
                 </div>
             </div>
         </div>
-</div>
-<script src="script/navigation-script.js"></script>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="script/navigation-script.js"></script>
 </div>

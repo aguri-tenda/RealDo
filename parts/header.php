@@ -6,6 +6,11 @@ $name = $_SESSION['user']['username'] ?? '';
 $user_id = $_SESSION['user']['userid'] ?? '';
 $address = $_SESSION['user']['useraddress'] ?? '';
 $password = $_SESSION['user']['userpassword'] ?? '';
+
+$provider_name = $_SESSION['provider']['providername'] ?? '';
+$provider_id = $_SESSION['provider']['provider_id'] ?? '';
+$provider_address = $_SESSION['provider']['provideraddress'] ?? '';
+$provider_password = $_SESSION['provider']['providerpassword'] ?? '';
 ?>
 
 
@@ -19,8 +24,12 @@ $password = $_SESSION['user']['userpassword'] ?? '';
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
-
+    <style>
+        body {
+            padding-bottom: 70px;
+            /* フッター高さ分の余白 */
+        }
+    </style>
     <title>RealDo</title>
 </head>
 
