@@ -3,13 +3,22 @@
 <?php require "parts/db-connect.php"; ?>
 
 <?php
-    // 入力データを受け取る
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $name = $_POST['username'] ?? '';
-            $user_id = $_POST['userid'] ?? '';
-            $address = $_POST['useraddress'] ?? '';
-            $password = $_POST['userpassword'] ?? '';
-    }
+// 入力データを受け取る
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // POSTでデータが来た場合（＝userInsert.phpから遷移）
+    $_SESSION['user_input'] = [ // ★セッションにデータを保存
+        'name' => $_POST['username'] ?? '',
+        'user_id' => $_POST['userid'] ?? '',
+        'address' => $_POST['useraddress'] ?? '',
+        'password' => $_POST['userpassword'] ?? '',
+    ];
+}
+
+// セッションから表示用のデータを取得
+$name = $_SESSION['user_input']['name'] ?? '';
+$user_id = $_SESSION['user_input']['user_id'] ?? '';
+$address = $_SESSION['user_input']['address'] ?? '';
+$password = $_SESSION['user_input']['password'] ?? '';
 ?>
 
 <div class="level-item">
