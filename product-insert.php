@@ -63,7 +63,7 @@
                                         <div class="level-right">
                                             <div>
                                                 <div>
-                                                    <input type="text" v-model="addressNum" name="address-number" placeholder="000-0000" size="8" required>
+                                                    <input type="text" v-model="addressNum" name="post-code" placeholder="000-0000" size="8" required>
                                                     <input type="text" v-model="address" name="address" required>
                                                 </div>
                                                 <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
