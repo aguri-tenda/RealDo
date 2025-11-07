@@ -1,5 +1,5 @@
 <?php
-    if(is_uploaded_file(  $_FILES['file']['tmp_name']))
+    if(is_uploaded_file( $_FILES['file']['tmp_name']))
     {
         if( $_FILES['file']['type'] == "image/jpeg" || $_FILES['file']['type'] == "image/png" )
         {
@@ -19,6 +19,9 @@
     }
 ?>
 
+<?php require "parts/header.php"; ?>
+<?php require "parts/navigation.php"; ?>
+
 <div class="has-background-light">
     <div class="container" id="app-product-insert">
         <div class="section">
@@ -27,7 +30,7 @@
                     <h3 class="level-item" style="color:#278EDD;">商品登録フォーム</h3>
                 </div>
 
-                <form action="#">
+                <form action="index.php">
                     
                     <div class="level">
                         <div class="level-left">
@@ -106,7 +109,7 @@
                                         </div>
                                         <div class="level-right">
                                             <div>
-                                                <textarea value="<?= $_POST['detail']; ?>" cols="25" rows="5" max="1000" disabled></textarea>
+                                                <textarea cols="25" rows="5" max="1000" disabled><?= $_POST['detail']; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +119,7 @@
                                             サムネイル画像：
                                         </div>
                                         <div class="level-right">
-                                            <img src="<?= $file; ?>" height="100px"><!--要画像アップロード処理-->
+                                            <img src="<?= $file; ?>" width="100px">
                                         </div>
                                     </div>
                                     
@@ -146,9 +149,8 @@
                 </form>
             </div>
         </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
-    <script src="script/product-insert-script.js"></script>
-    
+    </div>    
 </div>
+
+<?php require "parts/provider_bottom.php"; ?>
+<?php require "parts/footer.php"; ?>
