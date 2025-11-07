@@ -1,3 +1,7 @@
+<?php require "parts/header.php"; ?>
+<?php require "parts/provider_navigation.php"; ?>
+<?php require "parts/db-connect.php"; ?>
+
 <div class="has-background-light">
     <div class="container" id="app-product-insert">
         <div class="section">
@@ -145,3 +149,6 @@
     <script src="script/product-insert-script.js"></script>
     
 </div>
+
+<?php require "parts/provider_bottom.php"; ?>
+<?php require "parts/footer.php"; ?>
