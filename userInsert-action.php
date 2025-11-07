@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php require 'dbconnect.php'; ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // POSTデータがある場合、セッションに保存
@@ -18,3 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user']['userpassword'],
     ]);
 }
+
+// index.phpへリダイレクト
+header('Location: index.php');
+exit;
+?>
