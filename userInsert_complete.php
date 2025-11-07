@@ -5,8 +5,7 @@
 <?php
 // 入力データを受け取る
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // POSTでデータが来た場合（＝userInsert.phpから遷移）
-    $_SESSION['user_input'] = [ // ★セッションにデータを保存
+    $_SESSION['user_input'] = [ // 登録用のセッションにデータを保存
         'name' => $_POST['username'] ?? '',
         'user_id' => $_POST['userid'] ?? '',
         'address' => $_POST['useraddress'] ?? '',
