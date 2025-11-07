@@ -1,7 +1,7 @@
 <div id="app-navigation">
     <nav class="navbar is-light" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="./index.php">
+            <a class="navbar-item" href="./provider-index.php">
                 <img src="img/logo.png" alt="RealDo" style="max-height: 60px;">
             </a>
 
