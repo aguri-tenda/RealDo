@@ -38,6 +38,11 @@
 
     </form>
 </div>
+<br>
+<div class="field has-text-centered">
+    <a href="user-login.php" class="button is-info is-medium"
+        style="background-color: #23c8ffff; width: 250px;">ユーザーログイン</a>
+</div>
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
