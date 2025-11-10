@@ -3,6 +3,13 @@
 <?php require 'parts/db-connect.php'; ?>
 
 <div class="level-item">
+
+    <?php
+    // 戻ってきた場合のエラーメッセージ
+    if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 1) {
+        echo '<p style="color: red; font-weight: bold;">古いパスワードが間違っています。再度入力してください。</p><br>';
+    }
+    ?>
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userUpdate_complete.php"
         method="post">
         <span class="subtitle is-4" style="color:#278EDD;">情報更新</span>
@@ -53,10 +60,25 @@
             </div>
         </div>
 
+        <!-- 古いパスワード -->
+        <div class="field is-horizontal" style="margin-bottom: 2rem;">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">古いパスワード</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="password" name="oldpassword"
+                            style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- パスワード -->
         <div class="field is-horizontal" style="margin-bottom: 2rem;">
             <div class="field-label is-normal">
-                <label style="color:#278EDD;">パスワード</label>
+                <label style="color:#278EDD;">新しいパスワード</label>
             </div>
             <div class="field-body">
                 <div class="field">
