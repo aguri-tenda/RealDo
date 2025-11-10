@@ -14,8 +14,7 @@ if ($user && password_verify($password, $user['password'])) {
     $_SESSION['user'] = [
         'username' => $user['name'],
         'userid' => $user['user_id'],
-        'useraddress' => $user['mail'],
-        'userpassword' => $user['password']
+        'useraddress' => $user['mail']
     ];
     $login_message = "ログイン成功！ようこそ、" . htmlspecialchars($user['name']) . "さん。";
 } else {

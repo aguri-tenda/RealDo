@@ -2,7 +2,7 @@
 <?php require "parts/navigation.php"; ?>
 <br>
 <div class="level-item">
-    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="user-login-output.php" method="post">
+    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="user-login-action.php" method="post">
         <h2 class="subtitle is-4" style="color: #278EDD;">ログイン</h2>
         <br><br><br>
 
