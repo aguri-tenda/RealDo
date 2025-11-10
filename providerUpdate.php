@@ -17,7 +17,7 @@
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" type="text" name="providername" value="<?= $provider_name ?>"
+                            <input class="input" type="text" name="providername" value="<?= $providername ?>"
                                 style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                 <div class="field-body">
                     <div class="field">
                         <div class="control">
-                            <input class="input" type="email" name="provideraddress" value="<?= $provider_address ?>"
+                            <input class="input" type="email" name="provideraddress" value="<?= $provideraddress ?>"
                                 style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                         </div>
                     </div>
@@ -63,7 +63,6 @@
                     <div class="field">
                         <div class="control">
                             <input class="input" type="password" name="providerpassword"
-                                value="<?= $provider_password ?>"
                                 style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                         </div>
                     </div>
