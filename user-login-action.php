@@ -16,6 +16,11 @@ if ($user && password_verify($password, $user['password'])) {
         'useraddress' => $user['mail']
     ];
     $login_message = "ログイン成功！ようこそ、" . htmlspecialchars($user['name']) . "さん。";
+
+    echo '<div class="field has-text-centered">
+        <a href="index.php" class="button is-info is-medium"
+            style="background-color: #27ea6bff; width: 250px;">278EDD</a>
+        </div>';
 } else {
     // ログイン失敗
     $login_message = "ユーザーIDまたはパスワードが間違っています。";
