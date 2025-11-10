@@ -6,12 +6,12 @@
     <div class="level-item">
         <form class="box" style="max-width: 700px; width: 100%; text-align: center;"
             action="providerInsert_complete.php" method="post">
-            <span class="subtitle is-4" style="color:#278EDD;">新規登録</span>
+            <span class="subtitle is-4" style="color:#27ea6bff;">新規登録</span>
             <br><br><br>
 
             <div class="field is-horizontal" style="margin-bottom: 1rem;">
                 <div class="field-label is-normal">
-                    <label style="color:#278EDD;">ユーザー名</label>
+                    <label style="color:#27ea6bff;">ユーザー名</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -26,7 +26,7 @@
             <!-- ユーザーID -->
             <div class="field is-horizontal" style="margin-bottom: 1rem;">
                 <div class="field-label is-normal">
-                    <label style="color:#278EDD;">ユーザーID</label>
+                    <label style="color:#27ea6bff;">ユーザーID</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -41,7 +41,7 @@
             <!-- メールアドレス -->
             <div class="field is-horizontal" style="margin-bottom: 1rem;">
                 <div class="field-label is-normal">
-                    <label style="color:#278EDD;">メールアドレス</label>
+                    <label style="color:#27ea6bff;">メールアドレス</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -56,7 +56,7 @@
             <!-- パスワード -->
             <div class="field is-horizontal" style="margin-bottom: 2rem;">
                 <div class="field-label is-normal">
-                    <label style="color:#278EDD;">パスワード</label>
+                    <label style="color:#27ea6bff;">パスワード</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
@@ -71,7 +71,7 @@
             <!-- ボタン -->
             <div class="field has-text-centered">
                 <input class="button is-info is-medium" type="submit" value="確定"
-                    style="background-color: #41C0FF; width: 300px;">
+                    style="background-color: #27ea6bff; width: 300px;">
             </div>
 
         </form>
