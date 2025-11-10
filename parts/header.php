@@ -5,12 +5,12 @@ session_start();
 $name = $_SESSION['user']['username'] ?? '';
 $user_id = $_SESSION['user']['userid'] ?? '';
 $address = $_SESSION['user']['useraddress'] ?? '';
-$password = $_SESSION['user']['userpassword'] ?? '';
+//$password = $_SESSION['user']['userpassword'] ?? '';
 
 $provider_name = $_SESSION['provider']['providername'] ?? '';
-$provider_id = $_SESSION['provider']['provider_id'] ?? '';
+$provider_id = $_SESSION['provider']['providerid'] ?? '';
 $provider_address = $_SESSION['provider']['provideraddress'] ?? '';
-$provider_password = $_SESSION['provider']['providerpassword'] ?? '';
+//$provider_password = $_SESSION['provider']['providerpassword'] ?? '';
 ?>
 
 

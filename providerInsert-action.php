@@ -28,7 +28,7 @@ if (!empty($providerid) && !empty($providerpassword_raw)) {
             'id' => $pdo->lastInsertId(),
             'name' => $providername,
             'address' => $provideraddress,
-            'provider_id' => $providerid,
+            'providerid' => $providerid,
         ];
 
         // index.phpへリダイレクト
