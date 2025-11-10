@@ -1,5 +1,6 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
+<?php require 'parts/db-connect.php'; ?>
 
 <div class="level-item">
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userInsert_complete.php"
@@ -60,7 +61,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="password" name="userpassword" value="<?= $password ?>"
+                        <input class="input" type="password" name="userpassword"
                             style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                     </div>
                 </div>
