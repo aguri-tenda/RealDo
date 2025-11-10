@@ -3,7 +3,7 @@
 <?php require 'parts/db-connect.php'; ?>
 
 <div class="level-item">
-    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userInsert_complete.php"
+    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userUpdate_complete.php"
         method="post">
         <span class="subtitle is-4" style="color:#278EDD;">情報更新</span>
         <br><br><br>
