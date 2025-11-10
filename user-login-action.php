@@ -10,13 +10,17 @@ $sql->execute([$userid]);
 $user = $sql->fetch(PDO::FETCH_ASSOC);
 if ($user && password_verify($password, $user['password'])) {
     // ログイン成功
-    session_start();
     $_SESSION['user'] = [
         'username' => $user['name'],
         'userid' => $user['user_id'],
         'useraddress' => $user['mail']
     ];
     $login_message = "ログイン成功！ようこそ、" . htmlspecialchars($user['name']) . "さん。";
+
+    echo '<div class="field has-text-centered">
+        <a href="index.php" class="button is-info is-medium"
+            style="background-color: #27ea6bff; width: 250px;">278EDD</a>
+        </div>';
 } else {
     // ログイン失敗
     $login_message = "ユーザーIDまたはパスワードが間違っています。";
