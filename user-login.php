@@ -2,7 +2,7 @@
 <?php require "parts/navigation.php"; ?>
 <br>
 <div class="level-item">
-    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="user-login-output.php" method="post">
+    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="user-login-action.php" method="post">
         <h2 class="subtitle is-4" style="color: #278EDD;">ログイン</h2>
         <br><br><br>
 
@@ -43,6 +43,11 @@
             </button>
         </div>
     </form>
+</div>
+<br>
+<div class="field has-text-centered">
+    <a href="provider-login.php" class="button is-info is-medium"
+        style="background-color: #27ea6bff; width: 250px;">提供者ログイン</a>
 </div>
 
 <?php require "parts/user_bottom.php"; ?>
