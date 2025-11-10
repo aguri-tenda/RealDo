@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php require 'db-connect.php'; ?>
+<?php require 'parts/db-connect.php'; ?>
 <?php
 
 // セッションからデータを取得
