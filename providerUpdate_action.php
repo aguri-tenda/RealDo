@@ -3,9 +3,9 @@
 <?php
 
 // セッションからデータを取得
-$name = $_SESSION['provider_update']['name'] ?? '';
-$providerid = $_SESSION['provider_update']['provider_id'] ?? '';
-$provideraddress = $_SESSION['provider_update']['address'] ?? '';
+$name = $_SESSION['provider_update']['providername'] ?? '';
+$providerid = $_SESSION['provider_update']['providerid'] ?? '';
+$provideraddress = $_SESSION['provider_update']['provideraddress'] ?? '';
 $providerpassword_raw = $_SESSION['provider_update']['password'] ?? ''; // 平文のパスワード
 
 if (!empty($providerid) && !empty($providerpassword_raw)) {
