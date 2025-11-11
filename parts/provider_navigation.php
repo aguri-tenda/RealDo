@@ -47,6 +47,12 @@
                         </a>
                     <?php endif; ?>
                 </div>
+                <div class="navbar-item">
+                    <a href="./index.php" class="is-flex is-align-items-center">
+                        <span class="icon has-text-info"><i class="fas fa-user"></i></span>
+                        <span>利用者</span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
