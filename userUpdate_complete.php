@@ -81,7 +81,7 @@ $password = $_SESSION['user_update']['password'] ?? '';
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
             <a href="userUpdate.php" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
-            <input class="button is-link is-medium" type="submit" value="登録する"
+            <input class="button is-link is-medium" type="submit" value="更新する"
                 style="background-color: #41C0FF; width: 40%;">
         </div>
     </form>

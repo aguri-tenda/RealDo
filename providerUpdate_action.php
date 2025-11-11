@@ -31,8 +31,8 @@ if (!empty($providerid) && !empty($providerpassword_raw)) {
             'providerid' => $providerid,
         ];
 
-        // index.phpへリダイレクト
-        header('Location: index.php');
+        // provider-index.phpへリダイレクト
+        header('Location: provider-index.php');
         exit;
     } else {
         // 登録失敗時のエラー処理（例: ログ出力やエラー画面への遷移）
