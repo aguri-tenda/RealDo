@@ -24,7 +24,7 @@ $password = $_SESSION['user_update']['password'] ?? '';
 
 
 <div class="level-item">
-    <form class="box" style="width: 520px; text-align: center;" action="userUpdate-action.php" method="post">
+    <form class="box" style="width: 520px; text-align: center;" action="userUpdate_action.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">登録内容確認</span>
         <br><br><br>
 
