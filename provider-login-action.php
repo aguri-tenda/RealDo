@@ -16,11 +16,6 @@ if ($user && password_verify($password, $user['password'])) {
         'provideraddress' => $user['mail']
     ];
     $login_message = "ログイン成功！ようこそ、" . htmlspecialchars($user['name']) . "さん。";
-
-    echo '<div class="field has-text-centered">
-        <a href="provider_index.php" class="button is-info is-medium"
-            style="background-color: #278EDD; width: 250px;">278EDD</a>
-        </div>';
 } else {
     // ログイン失敗
     $login_message = "ユーザーIDまたはパスワードが間違っています。";
@@ -29,6 +24,10 @@ echo '<br><div class="level-item"><div class="box" style="max-width: 700px; widt
 echo '<h2 class="subtitle is-4" style="color: #278EDD;">ログイン結果</h2><br><br><br>';
 echo '<p>' . htmlspecialchars($login_message) . '</p>';
 echo '</div></div>';
+echo '<div class="field has-text-centered">
+<a href="provider_index.php" class="button is-info is-medium"
+    style="background-color: #278EDD; width: 250px;">ホーム画面へ</a>
+</div>';
 ?>
 
 <?php require "parts/provider_bottom.php"; ?>
