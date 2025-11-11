@@ -32,6 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="level-item">
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="providerUpdate.php"
         method="post">
+        <?php if (isset($error_message)): ?>
+            <p class="has-text-danger" style="margin-bottom: 1rem; font-weight: bold;">
+                <?= htmlspecialchars($error_message) ?>
+            </p>
+        <?php endif; ?>
         <span class="subtitle is-4" style="color:#278EDD;">情報更新</span>
         <br><br><br>
 
