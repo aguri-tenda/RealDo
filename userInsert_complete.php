@@ -28,6 +28,12 @@ if ($result['count'] > 0) {
     header("Location: userInsert.php?wrong_id=1");
     exit();
 }
+
+//空の入力がある場合、入力フォームに戻る
+if (empty($name) || empty($user_id) || empty($address) || empty($password)) {
+    header("Location: userInsert.php?wrong_id=2");
+    exit();
+}
 ?>
 
 <div class="level-item">
