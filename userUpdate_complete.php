@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'name' => $_POST['username'] ?? '',
         'user_id' => $_POST['userid'] ?? '',
         'address' => $_POST['useraddress'] ?? '',
+        'oldpassword' => $_POST['oldpassword'] ?? '',
         'password' => $_POST['userpassword'] ?? '',
     ];
 }
@@ -17,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $name = $_SESSION['user_update']['name'] ?? '';
 $user_id = $_SESSION['user_update']['user_id'] ?? '';
 $address = $_SESSION['user_update']['address'] ?? '';
+$oldpassword = $_SESSION['user_update']['oldpassword'] ?? '';
 $password = $_SESSION['user_update']['password'] ?? '';
 
 //ユーザーIDが重複している場合、入力フォームに戻る
@@ -26,6 +28,22 @@ $sql->execute([$user_id]);
 $result = $sql->fetch(PDO::FETCH_ASSOC);
 if ($result['count'] > 0) {
     header("Location: userUpdate.php?wrong_id=1");
+    exit();
+}
+
+//空の入力がある場合、入力フォームに戻る
+if (empty($name) || empty($user_id) || empty($address) || empty($password)) {
+    header("Location: userUpdate.php?wrong_id=2");
+    exit();
+}
+
+//古いパスワードが間違っている場合、入力フォームに戻る
+$sql = "SELECT password FROM users WHERE user_id = ?";
+$sql = $pdo->prepare($sql);
+$sql->execute([$user_id]);
+$hasshed_password = $sql->fetchColumn();
+if (!password_verify($oldpassword, $hasshed_password)) {
+    header("Location: userUpdate.php?wrong_id=3");
     exit();
 }
 ?>
