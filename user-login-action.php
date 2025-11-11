@@ -24,7 +24,7 @@ echo '<br><div class="level-item"><div class="box" style="max-width: 700px; widt
 echo '<h2 class="subtitle is-4" style="color: #278EDD;">ログイン結果</h2><br><br><br>';
 echo '<p>' . htmlspecialchars($login_message) . '</p>';
 echo '</div></div>';
-echo '<div class="field has-text-centered">
+echo '<div class="field has-text-centered" style="margin-top: 20px; margin-bottom: 40px;">
 <a href="index.php" class="button is-info is-medium"
     style="background-color: #278EDD; width: 250px;">ホーム画面へ</a>
 </div>';
