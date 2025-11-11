@@ -30,7 +30,7 @@
             if( isset($_SESSION['provider']['id']) )
             {
                 $sql = $pdo->prepare( "SELECT * FROM providers WHERE is_active = 1 AND provider_id = ? ;" );
-                $sql->execute([ $_SESSION['provider']['id'] ]);
+                $sql->execute([ $_SESSION['provider']['providerid'] ]);
 
                 $islogin = $sql->fetchAll( PDO::FETCH_ASSOC );
             }
@@ -171,7 +171,7 @@
                            
                                     <button :disabled="isFullInput" class="button is-info level-item">登録</button>
 
-                                    <input type="hidden" name="provider_id" value=<?= $_SESSION['provider']['id']; ?>>
+                                    <input type="hidden" name="provider_id" value=<?= $_SESSION['provider']['providerid']; ?>>
                                 </div>
                             </div>
 
