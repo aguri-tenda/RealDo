@@ -12,7 +12,7 @@ if (!empty($userid) && !empty($userpassword_raw)) {
     $hashed_password = password_hash($userpassword_raw, PASSWORD_DEFAULT);
 
     // DBに登録
-    $sql = $pdo->prepare("UPDATE users SET user_id = ?, name = ?, address = ?, password = ? WHERE user_id = ?");
+    $sql = $pdo->prepare("UPDATE users SET user_id = ?, name = ?, mail = ?, password = ? WHERE user_id = ?");
     
     $success = $sql->execute([
         $userid,
@@ -37,6 +37,7 @@ if (!empty($userid) && !empty($userpassword_raw)) {
     } else {
         // 登録失敗時のエラー処理（例: ログ出力やエラー画面への遷移）
         header('Location: error.php');
+        exit;
     }
 
 } else {
