@@ -19,7 +19,7 @@ if (!empty($userid) && !empty($userpassword_raw)) {
         $username,
         $useraddress,
         $hashed_password,
-        $_SESSION['user']['user_id']
+        $_SESSION['user']['userid']
     ]);
 
     if ($success) {

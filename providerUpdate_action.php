@@ -19,7 +19,7 @@ if (!empty($providerid) && !empty($providerpassword_raw)) {
         $providername,
         $provideraddress,
         $hashed_password,
-        $_SESSION['provider']['provider_id']
+        $_SESSION['provider']['providerid']
     ]);
 
     if ($success) {
