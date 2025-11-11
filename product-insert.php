@@ -17,7 +17,7 @@
                     </li>
                     <hr>
                     <li>
-                        <a href="product-update.php" style="color: white;">商品管理</a>
+                        <a href="product-management.php" style="color: white;">商品管理</a>
                     </li>
                     <hr>
                 </ul>
@@ -27,7 +27,7 @@
         <?php
             $islogin = false;
 
-            if( isset($_SESSION['provider']['id']) )
+            if( isset($_SESSION['provider']['providerid']) )
             {
                 $sql = $pdo->prepare( "SELECT * FROM providers WHERE is_active = 1 AND provider_id = ? ;" );
                 $sql->execute([ $_SESSION['provider']['providerid'] ]);
