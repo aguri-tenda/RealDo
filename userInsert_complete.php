@@ -1,5 +1,4 @@
-<?php require "parts/header.php"; ?>
-<?php require "parts/navigation.php"; ?>
+<?php session_start(); ?>
 <?php require "parts/db-connect.php"; ?>
 
 <?php
@@ -28,13 +27,10 @@ if ($result['count'] > 0) {
     header("Location: userInsert.php?wrong_id=1");
     exit();
 }
-
-//空の入力がある場合、入力フォームに戻る
-if (empty($name) || empty($user_id) || empty($address) || empty($password)) {
-    header("Location: userInsert.php?wrong_id=2");
-    exit();
-}
 ?>
+
+<?php require "parts/header.php"; ?>
+<?php require "parts/navigation.php"; ?>
 
 <div class="level-item">
     <form class="box" style="width: 520px; text-align: center;" action="userInsert-action.php" method="post">
