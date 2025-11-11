@@ -5,9 +5,9 @@
 <?php
 
 // セッションから表示用のデータを取得
-$name = $_SESSION['provider_update']['name'] ?? '';
-$provider_id = $_SESSION['provider_update']['provider_id'] ?? '';
-$address = $_SESSION['provider_update']['address'] ?? '';
+$name = $_SESSION['provider_update']['providername'] ?? '';
+$provider_id = $_SESSION['provider_update']['providerid'] ?? '';
+$address = $_SESSION['provider_update']['provideraddress'] ?? '';
 $oldpassword = $_SESSION['provider_update']['oldpassword'] ?? '';
 $password = $_SESSION['provider_update']['password'] ?? '';
 ?>

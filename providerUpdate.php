@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($provider && password_verify($oldpassword, $provider['password'])) {
         // パスワードが正しい場合、更新内容をセッションに保存して確認ページへリダイレクト
         $_SESSION['provider_update'] = [
-            'name' => $_POST['providername'] ?? '',
-            'provider_id' => $provider_id,
-            'address' => $_POST['provideraddress'] ?? '',
+            'providername' => $_POST['providername'] ?? '',
+            'providerid' => $provider_id,
+            'provideraddress' => $_POST['provideraddress'] ?? '',
             'oldpassword' => $oldpassword,
             'password' => $_POST['providerpassword'] ?? '',
         ];
