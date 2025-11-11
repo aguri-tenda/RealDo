@@ -10,7 +10,7 @@ $sql->execute([$userid]);
 $user = $sql->fetch(PDO::FETCH_ASSOC);
 if ($user && password_verify($password, $user['password'])) {
     // ログイン成功
-    $_SESSION['user'] = [
+    $_SESSION['provider'] = [
         'providername' => $user['name'],
         'providerid' => $user['provider_id'],
         'provideraddress' => $user['mail']
