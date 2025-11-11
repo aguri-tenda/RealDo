@@ -1,9 +1,9 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
-
+<br>
 <div class="level-item">
     <form class="box" style="width: 520px; text-align: center;" action="review_complete.php" method="post">
-            <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
+        <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
         <div class="field is-horizontal" style="margin-top: 2rem;">
             <div class="field-label is-medium">
                 <label class="label" style="color:#278EDD;">評価</label>
@@ -25,7 +25,8 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <textarea class="textarea" rows="4"  type="text" name="review" style="background-color: #fff; resize: none;"></textarea>
+                        <textarea class="textarea" rows="4" type="text" name="reviewtext"
+                            style="background-color: #fff; resize: none;"></textarea>
                     </div>
                 </div>
             </div>

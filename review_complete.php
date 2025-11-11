@@ -1,8 +1,8 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
-
+<br>
 <div class="level-item">
-    <form class="box" style="width: 520px; text-align: center;" action="index.php" method="post">
+    <form class="box" style="width: 520px; text-align: center;" action="review_action.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">登録内容確認</span>
 
         <div class="field is-horizontal" style="margin-top: 2rem;">
@@ -12,12 +12,11 @@
             <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
-                        <rating-selector
-                            rating="<?php echo htmlspecialchars($_POST['rating']); ?>"
-                            disabled="true"
-                        ></rating-selector>
+                        <rating-selector rating="<?php echo htmlspecialchars($_POST['rating']); ?>"
+                            disabled="true"></rating-selector>
                     </div>
-                    <input type="hidden" name="rating" id="rating-value" value="<?php echo htmlspecialchars($_POST['rating']); ?>">
+                    <input type="hidden" name="rating" id="rating-value"
+                        value="<?php echo htmlspecialchars($_POST['rating']); ?>">
                 </div>
             </div>
         </div>
@@ -29,7 +28,8 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <textarea disabled class="textarea" rows="4"  type="text" name="review" style="background-color: #fff; resize: none;"><?php echo htmlspecialchars($_POST['review']); ?></textarea>
+                        <textarea disabled class="textarea" rows="4" type="text" name="reviewtext"
+                            style="background-color: #fff; resize: none;"><?php echo htmlspecialchars($_POST['reviewtext']); ?></textarea>
                     </div>
                 </div>
             </div>
