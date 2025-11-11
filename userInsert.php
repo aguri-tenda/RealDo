@@ -7,9 +7,6 @@
     if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 1) {
         echo '<p style="color: red; font-weight: bold;">そのユーザーIDは既に使用されています。</p><br>';
     }
-    if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 2) {
-        echo '<p style="color: red; font-weight: bold;">全ての項目を入力してください。</p><br>';
-    }
     ?>
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userInsert_complete.php"
         method="post">

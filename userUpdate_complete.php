@@ -1,5 +1,4 @@
-<?php require "parts/header.php"; ?>
-<?php require "parts/navigation.php"; ?>
+<?php session_start(); ?>
 <?php require "parts/db-connect.php"; ?>
 
 <?php
@@ -41,6 +40,9 @@ if (!password_verify($oldpassword, $hasshed_password)) {
     exit();
 }
 ?>
+
+<?php require "parts/header.php"; ?>
+<?php require "parts/navigation.php"; ?>
 
 <div class="level-item">
     <form class="box" style="width: 520px; text-align: center;" action="userUpdate-action.php" method="post">
