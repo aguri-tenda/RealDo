@@ -1,5 +1,4 @@
-<?php require "parts/header.php"; ?>
-<?php require "parts/provider_navigation.php"; ?>
+<?php session_start(); ?>
 <?php require "parts/db-connect.php"; ?>
 <?php
 // 入力データを受け取り、セッションに保存
@@ -28,6 +27,9 @@ if ($result['count'] > 0) {
     exit();
 }
 ?>
+
+<?php require "parts/header.php"; ?>
+<?php require "parts/provider_navigation.php"; ?>
 
 <body style="background-color:#EBEBEB">
     <br>
