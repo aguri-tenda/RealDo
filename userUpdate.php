@@ -7,7 +7,7 @@
     <?php
     // 戻ってきた場合のエラーメッセージ
     if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 1) {
-        echo '<p style="color: red; font-weight: bold;">古いパスワードが間違っています。再度入力してください。</p><br>';
+        echo '<p style="color:red; text-align:center;">そのユーザーIDは既に使用されています。別のユーザーIDを入力してください。</p>';
     }
     ?>
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userUpdate_complete.php"
