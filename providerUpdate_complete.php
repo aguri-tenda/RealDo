@@ -41,7 +41,7 @@ $password = $_SESSION['provider_update']['password'] ?? '';
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input disabled class="input" type="text" value="<?php echo htmlspecialchars($user_id); ?>"
+                        <input disabled class="input" type="text" value="<?php echo htmlspecialchars($provider_id); ?>"
                             style="background-color:#E3FFFF;width:80%;border:1px solid #858484ff;">
                     </div>
                 </div>
