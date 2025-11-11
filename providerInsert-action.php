@@ -25,10 +25,9 @@ if (!empty($providerid) && !empty($providerpassword_raw)) {
         // 登録が成功した場合、セッション（登録用のユーザー情報）をクリアする
         unset($_SESSION['provider_input']);
         $_SESSION['provider'] = [
-            'id' => $pdo->lastInsertId(),
             'name' => $providername,
             'address' => $provideraddress,
-            'providerid' => $providerid,
+            'providerid' => $providerid
         ];
 
         // index.phpへリダイレクト
