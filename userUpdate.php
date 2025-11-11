@@ -99,6 +99,8 @@
     </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
+<script src="script/userUpdate-script.js"></script>
 
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>

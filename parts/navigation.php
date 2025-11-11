@@ -58,6 +58,4 @@
             </div>
         </div>
     </nav>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
-    <script src="script/navigation-script.js"></script>
 </div>
