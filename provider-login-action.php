@@ -25,7 +25,7 @@ echo '<h2 class="subtitle is-4" style="color: #278EDD;">ログイン結果</h2><
 echo '<p>' . htmlspecialchars($login_message) . '</p>';
 echo '</div></div>';
 echo '<div class="field has-text-centered">
-<a href="provider_index.php" class="button is-info is-medium"
+<a href="provider-index.php" class="button is-info is-medium"
     style="background-color: #278EDD; width: 250px;">ホーム画面へ</a>
 </div>';
 ?>
