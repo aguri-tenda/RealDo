@@ -25,10 +25,9 @@ if (!empty($userid) && !empty($userpassword_raw)) {
         // 登録が成功した場合、セッション（登録用のユーザー情報）をクリアする
         unset($_SESSION['user_input']);
         $_SESSION['user'] = [
-            'id' => $pdo->lastInsertId(),
             'name' => $username,
             'address' => $useraddress,
-            'user_id' => $userid,
+            'userid' => $userid,
         ];
 
         // index.phpへリダイレクト

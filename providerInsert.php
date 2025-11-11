@@ -23,7 +23,7 @@
                     <div class="field">
                         <div class="control">
                             <input class="input" type="text" name="providername" placeholder="例）田中太郎"
-                                style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
+                                required style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                         </div>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                     <div class="field">
                         <div class="control">
                             <input class="input" type="text" name="providerid" placeholder="例）taro123"
-                                style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
+                                required style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="field">
                         <div class="control">
                             <input class="input" type="email" name="provideraddress" placeholder="example@example.com"
-                                style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
+                                 required style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                     <div class="field">
                         <div class="control">
                             <input class="input" type="password" name="providerpassword" placeholder="8文字以上"
-                                style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
+                                 required style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                         </div>
                     </div>
                 </div>
