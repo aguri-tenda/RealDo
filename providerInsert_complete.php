@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php require "parts/header.php"; ?>
+<?php require "parts/provider_navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
 <?php
 // 入力データを受け取り、セッションに保存
@@ -16,20 +17,8 @@ $provider_name = $_SESSION['provider_input']['providername'] ?? '';
 $provider_id = $_SESSION['provider_input']['providerid'] ?? '';
 $provider_address = $_SESSION['provider_input']['provideraddress'] ?? '';
 $provider_password = $_SESSION['provider_input']['providerpassword'] ?? '';
-
-//プロバイダーIDが重複している場合、入力フォームに戻る
-$sql = "SELECT COUNT(*) as count FROM providers WHERE provider_id = ?";
-$sql = $pdo->prepare($sql);
-$sql->execute([$provider_id]);
-$result = $sql->fetch(PDO::FETCH_ASSOC);
-if ($result['count'] > 0) {
-    header("Location: providerInsert.php?wrong_id=1");
-    exit();
-}
 ?>
 
-<?php require "parts/header.php"; ?>
-<?php require "parts/provider_navigation.php"; ?>
 
 <body style="background-color:#EBEBEB">
     <br>
