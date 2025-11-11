@@ -27,7 +27,7 @@
         <?php
             $islogin = false;
 
-            if( isset($_SESSION['provider']['id']) )
+            if( isset($_SESSION['provider']['providerid']) )
             {
                 $sql = $pdo->prepare( "SELECT * FROM providers WHERE is_active = 1 AND provider_id = ? ;" );
                 $sql->execute([ $_SESSION['provider']['providerid'] ]);

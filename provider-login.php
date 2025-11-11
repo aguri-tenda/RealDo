@@ -14,7 +14,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" name="userid" required placeholder="ユーザーIDを入力"
+                        <input class="input" type="text" name="userid" required placeholder="提供者IDを入力"
                             style="background-color: #D9D9D9; border: 1px solid #858484; width: 90%;">
                     </div>
                 </div>
