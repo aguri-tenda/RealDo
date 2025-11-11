@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require 'parts/db-connect.php'; ?>
 <?php
 // 古いパスワードが正しければ、userUpdate_complete.phpへリダイレクトする
@@ -9,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $sql->fetch();
     if ($user && password_verify($oldpassword, $user['password'])) {
         // パスワードが正しい場合、更新内容をセッションに保存して確認ページへリダイレクト
-        session_start();
         $_SESSION['user_update'] = [
             'name' => $_POST['username'] ?? '',
             'user_id' => $user_id,

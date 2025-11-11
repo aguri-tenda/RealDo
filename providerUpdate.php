@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php require 'parts/db-connect.php'; ?>
 <?php
 // 古いパスワードが正しければ、providerUpdate_complete.phpへリダイレクトする
@@ -9,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $provider = $sql->fetch();
     if ($provider && password_verify($oldpassword, $provider['password'])) {
         // パスワードが正しい場合、更新内容をセッションに保存して確認ページへリダイレクト
-        session_start();
         $_SESSION['provider_update'] = [
             'name' => $_POST['providername'] ?? '',
             'provider_id' => $provider_id,
