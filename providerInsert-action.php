@@ -35,6 +35,7 @@ if (!empty($providerid) && !empty($providerpassword_raw)) {
         exit;
     } else {
         // 登録失敗時のエラー処理（例: ログ出力やエラー画面への遷移）
+        header('Location: error.php');
     }
 
 } else {
