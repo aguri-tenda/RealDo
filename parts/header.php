@@ -29,6 +29,24 @@ $provider_address = $_SESSION['provider']['provideraddress'] ?? '';
             padding-bottom: 90px;
             /* フッター高さ分の余白 */
         }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            background-color: #79D159;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .menu {
+            padding: 25px;
+            width: 200px;
+        }
     </style>
     <title>RealDo</title>
 </head>
