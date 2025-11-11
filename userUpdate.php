@@ -10,9 +10,6 @@
         echo '<p style="color:red; text-align:center;">そのユーザーIDは既に使用されています。別のユーザーIDを入力してください。</p>';
     }
     if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 2) {
-        echo '<p style="color:red; text-align:center;">全ての項目を入力してください。</p>';
-    }
-    if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 3) {
         echo '<p style="color:red; text-align:center;">古いパスワードが間違っています。もう一度入力してください。</p>';
     }
     ?>
@@ -45,7 +42,7 @@
                 <div class="field">
                     <div class="control">
                         <input class="input" type="text" name="userid" value="<?= $user_id ?>"
-                            style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
+                            required style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                     </div>
                 </div>
             </div>
@@ -60,7 +57,7 @@
                 <div class="field">
                     <div class="control">
                         <input class="input" type="email" name="useraddress" value="<?= $address ?>"
-                            style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
+                            required style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                     </div>
                 </div>
             </div>
@@ -74,7 +71,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="password" name="oldpassword"
+                        <input class="input" type="password" name="oldpassword" required
                             style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                     </div>
                 </div>
@@ -89,7 +86,7 @@
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="password" name="userpassword"
+                        <input class="input" type="password" name="userpassword" required
                             style="background-color: #D9D9D9; width: 90%; border: 1px solid #858484ff;">
                     </div>
                 </div>
