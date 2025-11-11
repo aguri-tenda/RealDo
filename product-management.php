@@ -76,14 +76,11 @@
                                 {
                                     if( confirm( name + "の掲載を取りやめます。\nよろしいですか？" ))
                                     {
-                                        $delete = $pdo->prepare( "UPDATE product SET is_active = 0 WHERE product_id = ? ;" );
-                                        $delete->execute([ id ]);
-
-                                        location.reload();
+                                        window.location.href="product-delete-output.php?product_id=" + id;
                                     }
                                 }
                             </script>
-                            <button class="button is-danger is-rounded" click="deleteAlert(<?= $products['name'] ; ?>, <?= $products['product_id'] ; ?>)">商品を削除</button>
+                            <button class="button is-danger is-rounded" onclick="deleteAlert(<?= $products['name'] ; ?>, <?= $products['product_id'] ; ?>)">商品を削除</button>
                 
                         </div>
                     </div>
