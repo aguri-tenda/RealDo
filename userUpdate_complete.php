@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php require "parts/header.php"; ?>
+<?php require "parts/navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
 
 <?php
@@ -19,30 +20,8 @@ $user_id = $_SESSION['user_update']['user_id'] ?? '';
 $address = $_SESSION['user_update']['address'] ?? '';
 $oldpassword = $_SESSION['user_update']['oldpassword'] ?? '';
 $password = $_SESSION['user_update']['password'] ?? '';
-
-//ユーザーIDが重複している場合、入力フォームに戻る
-$sql = "SELECT COUNT(*) as count FROM users WHERE user_id = ? AND user_id != ?";
-$sql = $pdo->prepare($sql);
-$sql->execute([$user_id, $_SESSION['user']['user_id']]);
-$result = $sql->fetch(PDO::FETCH_ASSOC);
-if ($result['count'] > 0) {
-    header("Location: userUpdate.php?wrong_id=1");
-    exit();
-}
-
-//古いパスワードが間違っている場合、入力フォームに戻る
-$sql = "SELECT password FROM users WHERE user_id = ?";
-$sql = $pdo->prepare($sql);
-$sql->execute([$_SESSION['user']['user_id']]);
-$hasshed_password = $sql->fetchColumn();
-if (!password_verify($oldpassword, $hasshed_password)) {
-    header("Location: userUpdate.php?wrong_id=2");
-    exit();
-}
 ?>
 
-<?php require "parts/header.php"; ?>
-<?php require "parts/navigation.php"; ?>
 
 <div class="level-item">
     <form class="box" style="width: 520px; text-align: center;" action="userUpdate-action.php" method="post">
