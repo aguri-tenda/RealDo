@@ -65,6 +65,3 @@ $products = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
-
-<?php require "parts/provider_bottom.php"; ?>
-<?php require "parts/footer.php"; ?>
