@@ -1,9 +1,36 @@
+<?php require 'parts/db-connect.php'; ?>
+<?php
+// 古いパスワードが正しければ、providerUpdate_complete.phpへリダイレクトする
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $provider_id = $_SESSION['provider']['providerid'] ?? '';
+    $oldpassword = $_POST['oldpassword'] ?? '';
+    $sql = $pdo->prepare("SELECT * FROM providers WHERE provider_id = ?");
+    $sql->execute([$provider_id]);
+    $provider = $sql->fetch();
+    if ($provider && password_verify($oldpassword, $provider['password'])) {
+        // パスワードが正しい場合、更新内容をセッションに保存して確認ページへリダイレクト
+        session_start();
+        $_SESSION['provider_update'] = [
+            'name' => $_POST['providername'] ?? '',
+            'provider_id' => $provider_id,
+            'address' => $_POST['provideraddress'] ?? '',
+            'oldpassword' => $oldpassword,
+            'password' => $_POST['providerpassword'] ?? '',
+        ];
+        header('Location: providerUpdate_complete.php');
+        exit;
+    } else {
+        // パスワードが間違っている場合、エラーメッセージを表示
+        $error_message = "古いパスワードが正しくありません。";
+    }
+}
+?>
+
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
-<?php require 'parts/db-connect.php'; ?>
 
 <div class="level-item">
-    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="providerUpdate_complete.php"
+    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="providerUpdate.php"
         method="post">
         <span class="subtitle is-4" style="color:#278EDD;">情報更新</span>
         <br><br><br>

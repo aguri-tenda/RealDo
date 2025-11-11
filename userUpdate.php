@@ -1,10 +1,42 @@
+<?php require 'parts/db-connect.php'; ?>
+<?php
+// 古いパスワードが正しければ、userUpdate_complete.phpへリダイレクトする
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = $_SESSION['user']['userid'] ?? '';
+    $oldpassword = $_POST['oldpassword'] ?? '';
+    $sql = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
+    $sql->execute([$user_id]);
+    $user = $sql->fetch();
+    if ($user && password_verify($oldpassword, $user['password'])) {
+        // パスワードが正しい場合、更新内容をセッションに保存して確認ページへリダイレクト
+        session_start();
+        $_SESSION['user_update'] = [
+            'name' => $_POST['username'] ?? '',
+            'user_id' => $user_id,
+            'address' => $_POST['useraddress'] ?? '',
+            'oldpassword' => $oldpassword,
+            'password' => $_POST['userpassword'] ?? '',
+        ];
+        header('Location: userUpdate_complete.php');
+        exit;
+    } else {
+        // パスワードが間違っている場合、エラーメッセージを表示
+        $error_message = "古いパスワードが正しくありません。";
+    }
+}
+?>
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
-<?php require 'parts/db-connect.php'; ?>
+
 
 <div class="level-item">
-    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userUpdate_complete.php"
+    <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userUpdate.php"
         method="post">
+        <?php if (isset($error_message)): ?>
+            <p class="has-text-danger" style="margin-bottom: 1rem; font-weight: bold;">
+                <?= htmlspecialchars($error_message) ?>
+            </p>
+        <?php endif; ?>
         <span class="subtitle is-4" style="color:#278EDD;">情報更新</span>
         <br><br><br>
 
