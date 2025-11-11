@@ -4,6 +4,12 @@
 <body style="background-color:#EBEBEB">
     <br>
     <div class="level-item">
+        <?php
+        // 戻ってきた場合のエラーメッセージ
+        if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 1) {
+            echo '<p style="color: red; font-weight: bold;">そのユーザーIDは既に使用されています。</p><br>';
+        }
+        ?>
         <form class="box" style="max-width: 700px; width: 100%; text-align: center;"
             action="providerInsert_complete.php" method="post">
             <span class="subtitle is-4" style="color:#27ea6bff;">新規登録</span>

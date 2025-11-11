@@ -18,6 +18,16 @@ $name = $_SESSION['user_input']['name'] ?? '';
 $user_id = $_SESSION['user_input']['user_id'] ?? '';
 $address = $_SESSION['user_input']['address'] ?? '';
 $password = $_SESSION['user_input']['password'] ?? '';
+
+//ユーザーIDが重複している場合、入力フォームに戻る
+$sql = "SELECT COUNT(*) as count FROM users WHERE user_id = ?";
+$sql = $pdo->prepare($sql);
+$sql->execute([$user_id]);
+$result = $sql->fetch(PDO::FETCH_ASSOC);
+if ($result['count'] > 0) {
+    header("Location: userInsert.php?wrong_id=1");
+    exit();
+}
 ?>
 
 <div class="level-item">
