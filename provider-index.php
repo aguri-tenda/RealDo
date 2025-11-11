@@ -22,7 +22,7 @@ $products = $sql->fetchAll(PDO::FETCH_ASSOC);
                 </li>
                 <hr>
                 <li>
-                    <a href="product-update.php" style="color: white;">商品管理</a>
+                    <a href="product-management.php" style="color: white;">商品管理</a>
                 </li>
                 <hr>
             </ul>
@@ -62,9 +62,6 @@ $products = $sql->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-
-<?php require "parts/provider_bottom.php"; ?>
-<?php require "parts/footer.php"; ?>
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
