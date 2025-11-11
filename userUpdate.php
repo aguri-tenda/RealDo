@@ -9,6 +9,12 @@
     if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 1) {
         echo '<p style="color:red; text-align:center;">そのユーザーIDは既に使用されています。別のユーザーIDを入力してください。</p>';
     }
+    if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 2) {
+        echo '<p style="color:red; text-align:center;">全ての項目を入力してください。</p>';
+    }
+    if (isset($_GET['wrong_id']) && $_GET['wrong_id'] == 3) {
+        echo '<p style="color:red; text-align:center;">古いパスワードが間違っています。もう一度入力してください。</p>';
+    }
     ?>
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userUpdate_complete.php"
         method="post">
@@ -98,9 +104,6 @@
 
     </form>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
-<script src="script/userUpdate-script.js"></script>
 
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
