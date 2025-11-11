@@ -1,4 +1,23 @@
-<?php session_start(); ?>
+<?php
+    if(is_uploaded_file( $_FILES['file']['tmp_name']))
+    {
+        if( $_FILES['file']['type'] == "image/jpeg" || $_FILES['file']['type'] == "image/png" )
+        {
+            $file = "product-img/". basename($_FILES['file']['name']);
+                
+            if(!move_uploaded_file($_FILES['file']['tmp_name'], $file))
+            {
+                header('Location:product-insert.php');
+                exit();
+            }
+        }
+        else
+        {
+            header('Location:product-insert.php?failed="failed"');
+            exit();
+        }
+    }
+?>
 
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
@@ -6,41 +25,32 @@
 <?php require "parts/db-connect.php"; ?>
 
 <?php
-    $islogin = false;
+    $sql = $pdo->prepare(" INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participents ) VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ); ");
 
-    if( isset($_SESSION['provider']['id']) )
-    {
-        $sql = $pdo->prepare( "SELECT * FROM providers WHERE is_active = 1 AND provider_id = ? ;" );
-        $sql->execute([ $_SESSION['provider']['id'] ]);
-
-        $islogin = $sql->fetchAll( PDO::FETCH_ASSOC );
-    }
+    $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'] ]);
 ?>
 
-<?php if( $islogin ) : ?>
-
-    <div class="has-background-light">
+<div class="has-background-light">
     <div class="container" id="app-product-insert">
         <div class="section">
             <div class="box has-background-white" style="color:#278EDD;">
                 <div class="content level">
-                    <h3 class="level-item" style="color:#278EDD;">商品登録フォーム</h3>
+                    <h3 class="level-item" style="color:#278EDD;">商品登録完了</h3>
                 </div>
 
-                <form action="product-insert-output.php" method="post" enctype="multipart/form-data">
+                <form action="index.php">
                     
                     <div class="level">
                         <div class="level-left">
                             <span>参加可能人数</span>
-                            <input type="number" v-model="max" name="max" size="3" required>
+                            <input type="number" value="<?= $_POST['max']; ?>" size="3" disabled>
                             <span>人まで</span>
                         </div>
                         <div class="level-right">
                             <span>開催日時</span>
                             <div>
-                                <input type="date" v-model="date" name="start_date" required>
-                                <input type="text" v-model="time" name="start_time" placeholder="00:00" size="5" required>～
-                                <p class="help" v-if="isTime">時間は「0:00 ~ 23:59」の間で設定してください</p>
+                                <input type="date" value="<?= $_POST['start_date']; ?>" disabled>
+                                <input type="text" value="<?= $_POST['start_time']; ?>"  size="5" disabled>～
                             </div>
                         </div>
                     </div>
@@ -61,7 +71,7 @@
                                             イベント名：
                                         </div>
                                         <div class="level-right">
-                                            <input type="text" v-model="name" name="name" required>
+                                            <input type="text" value="<?= $_POST['name']; ?>" disabled>
                                         </div>
                                     </div>
 
@@ -70,7 +80,7 @@
                                             開催地：
                                         </div>
                                         <div class="level-right">
-                                            <input type="text" v-model="location" name="location" required>
+                                            <input type="text" value="<?= $_POST['location']; ?>" disabled>
                                         </div>
                                     </div>
 
@@ -81,10 +91,9 @@
                                         <div class="level-right">
                                             <div>
                                                 <div>
-                                                    <input type="text" v-model="addressNum" name="post-code" placeholder="000-0000" size="8" required>
-                                                    <input type="text" v-model="address" name="address" required>
+                                                    <input type="text" value="<?= $_POST['post-code']; ?>" size="8" disabled>
+                                                    <input type="text" value="<?= $_POST['address']; ?>" disabled>
                                                 </div>
-                                                <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
                                             </div>
                                         </div>
                                     </div>
@@ -93,13 +102,11 @@
                                         <div class="level-left">
                                             <div>
                                                 <p>主催連絡先（TEL）：</p>
-                                                <p class="help">ハイフン不要</p>
                                             </div>
                                         </div>
                                         <div class="level-right">
                                             <div>
-                                                <input type="text" v-model="tel" name="tel" required>
-                                                <p class="help" v-if="isTel">数字で入力してください</p>
+                                                <input type="text" value="<?= $_POST['tel']; ?>" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -110,8 +117,7 @@
                                         </div>
                                         <div class="level-right">
                                             <div>
-                                                <textarea v-model="detail" name="detail" cols="25" rows="5" max="1000" placeholder="※1000文字以内で入力してください" required></textarea>
-                                                <p class="help">{{ detail.length }}/ 1000 <span v-if="isDetailOver"><font color="red">※文字数が超過しています</font></span> </p>
+                                                <textarea cols="25" rows="5" max="1000" disabled><?= $_POST['detail']; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -121,12 +127,7 @@
                                             サムネイル画像：
                                         </div>
                                         <div class="level-right">
-                                            <div>
-                                                <input type="file" name="file" required>
-                                                <?php if(isset($_GET['failed'])) : ?>
-                                                    <p class="help"><font color="red">ファイルはpng、またはjpegを指定してください</font></p>
-                                                <?php endif; ?>
-                                            </div>
+                                            <img src="<?= $file; ?>" width="100px">
                                         </div>
                                     </div>
                                     
@@ -135,7 +136,7 @@
                                             参加料：
                                         </div>
                                         <div class="level-right">
-                                            <input type="number" v-model="price" min="0" size="5" name="price" required>円
+                                            <input type="number" value="<?= $_POST['price']; ?>" disabled>円
                                         </div>
                                     </div>
                                     
@@ -149,28 +150,15 @@
 
                     <div class="container is-fluid">
                         <div class="level">
-                           
-                            <button :disabled="isFullInput" class="button is-info level-item">登録</button>
-
-                            <input type="hidden" name="provider_id" value=<?= $_SESSION['provider']['id']; ?>>
+                            <button class="button is-info level-item">ホーム画面へ</button>
                         </div>
                     </div>
 
                 </form>
             </div>
         </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
-    <script src="script/product-insert-script.js"></script>
-    
-    </div>
-
-<?php else : ?>
-
-    <p>商品の登録をするにはログインしてください。</p>
-
-<?php endif; ?>
+    </div>    
+</div>
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
