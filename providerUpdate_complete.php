@@ -3,20 +3,10 @@
 <?php require "parts/db-connect.php"; ?>
 
 <?php
-// 入力データを受け取る
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['provider_update'] = [ // 登録用のセッションにデータを保存
-        'name' => $_POST['providername'] ?? '',
-        'user_id' => $_POST['providerid'] ?? '',
-        'address' => $_POST['provideraddress'] ?? '',
-        'oldpassword' => $_POST['oldpassword'] ?? '',
-        'password' => $_POST['providerpassword'] ?? '',
-    ];
-}
 
 // セッションから表示用のデータを取得
 $name = $_SESSION['provider_update']['name'] ?? '';
-$user_id = $_SESSION['provider_update']['user_id'] ?? '';
+$provider_id = $_SESSION['provider_update']['provider_id'] ?? '';
 $address = $_SESSION['provider_update']['address'] ?? '';
 $oldpassword = $_SESSION['provider_update']['oldpassword'] ?? '';
 $password = $_SESSION['provider_update']['password'] ?? '';
