@@ -10,7 +10,7 @@ $sql->execute([$userid]);
 $user = $sql->fetch(PDO::FETCH_ASSOC);
 if ($user && password_verify($password, $user['password'])) {
     // ログイン成功
-    $_SESSION['user'] = [
+    $_SESSION['provider'] = [
         'providername' => $user['name'],
         'providerid' => $user['provider_id'],
         'provideraddress' => $user['mail']
@@ -18,7 +18,7 @@ if ($user && password_verify($password, $user['password'])) {
     $login_message = "ログイン成功！ようこそ、" . htmlspecialchars($user['name']) . "さん。";
 } else {
     // ログイン失敗
-    $login_message = "ユーザーIDまたはパスワードが間違っています。";
+    $login_message = "提供者IDまたはパスワードが間違っています。";
 }
 echo '<br><div class="level-item"><div class="box" style="max-width: 700px; width: 100%; text-align: center;">';
 echo '<h2 class="subtitle is-4" style="color: #278EDD;">ログイン結果</h2><br><br><br>';
