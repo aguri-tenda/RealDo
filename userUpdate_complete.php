@@ -5,7 +5,7 @@
 <?php
 // 入力データを受け取る
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $_SESSION['user_input'] = [ // 登録用のセッションにデータを保存
+    $_SESSION['user_update'] = [ // 登録用のセッションにデータを保存
         'name' => $_POST['username'] ?? '',
         'user_id' => $_POST['userid'] ?? '',
         'address' => $_POST['useraddress'] ?? '',
@@ -14,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // セッションから表示用のデータを取得
-$name = $_SESSION['user_input']['name'] ?? '';
-$user_id = $_SESSION['user_input']['user_id'] ?? '';
-$address = $_SESSION['user_input']['address'] ?? '';
-$password = $_SESSION['user_input']['password'] ?? '';
+$name = $_SESSION['user_update']['name'] ?? '';
+$user_id = $_SESSION['user_update']['user_id'] ?? '';
+$address = $_SESSION['user_update']['address'] ?? '';
+$password = $_SESSION['user_update']['password'] ?? '';
 
 //ユーザーIDが重複している場合、入力フォームに戻る
 $sql = "SELECT COUNT(*) as count FROM users WHERE user_id = ?";
@@ -25,19 +25,13 @@ $sql = $pdo->prepare($sql);
 $sql->execute([$user_id]);
 $result = $sql->fetch(PDO::FETCH_ASSOC);
 if ($result['count'] > 0) {
-    header("Location: userInsert.php?wrong_id=1");
-    exit();
-}
-
-//空の入力がある場合、入力フォームに戻る
-if (empty($name) || empty($user_id) || empty($address) || empty($password)) {
-    header("Location: userInsert.php?wrong_id=2");
+    header("Location: userUpdate.php?wrong_id=1");
     exit();
 }
 ?>
 
 <div class="level-item">
-    <form class="box" style="width: 520px; text-align: center;" action="userInsert-action.php" method="post">
+    <form class="box" style="width: 520px; text-align: center;" action="userUpdate-action.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">登録内容確認</span>
         <br><br><br>
 
@@ -109,7 +103,7 @@ if (empty($name) || empty($user_id) || empty($address) || empty($password)) {
 
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <a href="userInsert.php" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
+            <a href="userUpdate.php" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
             <input class="button is-link is-medium" type="submit" value="登録する"
                 style="background-color: #41C0FF; width: 40%;">
         </div>
