@@ -3,7 +3,7 @@
 <?php
 
 // セッションからデータを取得
-$name = $_SESSION['provider_update']['providername'] ?? '';
+$providername = $_SESSION['provider_update']['providername'] ?? '';
 $providerid = $_SESSION['provider_update']['providerid'] ?? '';
 $provideraddress = $_SESSION['provider_update']['provideraddress'] ?? '';
 $providerpassword_raw = $_SESSION['provider_update']['password'] ?? ''; // 平文のパスワード
