@@ -1,6 +1,13 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
 
+<?php require "parts/db-connect.php"; ?>
+
+<?php
+    $sql = $pdo->prepare(" UPDATE products SET is_active = 0 WHERE product_id = ?; ");
+    $sql->execute([ $_GET['product_id'] ]);
+?>
+
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
         <div style="text-align: center; margin-bottom: 1rem;">

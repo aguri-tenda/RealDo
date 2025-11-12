@@ -23,6 +23,7 @@
                 </ul>
             </aside>
         </div>
+    </div>
 
         <?php
             $islogin = false;
@@ -37,7 +38,6 @@
         ?>
 
         <?php if( $islogin ) : ?>
-
     
             <div class="container" id="app-product-insert">
                 <div class="section">
