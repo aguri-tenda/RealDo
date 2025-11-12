@@ -4,9 +4,12 @@
 
 <?php
 // 商品一覧を取得
-$sql = $pdo->prepare("SELECT * FROM products WHERE provider_id = ?");
-$sql->execute([$provider_id]);
-$products = $sql->fetchAll(PDO::FETCH_ASSOC);
+if( isset($_SESSION['provider']['providerid']) )
+    {
+        $sql = $pdo->prepare("SELECT * FROM products WHERE provider_id = ?");
+        $sql->execute([$_SESSION['provider']['providerid']]);
+        $products = $sql->fetchAll(PDO::FETCH_ASSOC);
+    }
 ?>
 
 <div class="columns is-gapless">

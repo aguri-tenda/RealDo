@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
 
