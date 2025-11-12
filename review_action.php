@@ -1,8 +1,9 @@
 <?php session_start(); ?>
 <?php require 'parts/db-connect.php'; ?>
 <?php
-$userid = $_SESSION['user_input']['user_id'] ?? '';
-$rating = $_SESSION['review']['rating-value'] ?? '';
+$product_id = $_SESSION['review']['product_id'] ?? '';
+$user_id = $_SESSION['user']['userid'] ?? '';
+$rating = $_SESSION['review']['rating-value'] ?? 1;
 $reviewtext = $_SESSION['review']['reviewtext'] ?? '';
 
 if (!empty($rating) && !empty($reviewtext)) {
