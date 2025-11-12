@@ -43,7 +43,7 @@ $reviewtext = $_POST['reviewtext'] ?? '';
         </div>
 
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <a href="review_insert.php" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
+            <a href="review_insert.php?product_id=<?php echo htmlspecialchars($product_id); ?>&reviewtext=<?php echo urlencode($reviewtext); ?>&rating=<?php echo urlencode($rating_value); ?>" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
             <input class="button is-link is-medium" type="submit" value="登録する"
                 style="background-color: #41C0FF; width: 40%;">
         </div>
