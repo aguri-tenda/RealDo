@@ -2,10 +2,8 @@
 <?php require "parts/navigation.php"; ?>
 <?php 
 $product_id = $_SESSION['review']['product_id'] ?? '';
-$_SESSION['review']['rating-value'] = $_POST['rating'] ?? 1;
+$_SESSION['review']['rating'] = $_POST['rating'] ?? 1;
 $_SESSION['review']['reviewtext'] = $_POST['reviewtext'] ?? '';
-$rating_value = $_POST['rating'] ?? 1;
-$reviewtext = $_POST['reviewtext'] ?? '';
 ?>
 <br>
 <div class="level-item">
@@ -19,11 +17,11 @@ $reviewtext = $_POST['reviewtext'] ?? '';
             <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
-                        <rating-selector rating="<?php echo htmlspecialchars($rating_value); ?>"
+                        <rating-selector rating="<?php echo htmlspecialchars($_SESSION['review']['rating'] ?? 1); ?>"
                             disabled="true"></rating-selector>
                     </div>
                     <input type="hidden" name="rating" id="rating-value"
-                        value="<?php echo htmlspecialchars($rating_value); ?>">
+                        value="<?php echo htmlspecialchars($_SESSION['review']['rating'] ?? 1); ?>">
                 </div>
             </div>
         </div>
@@ -36,14 +34,14 @@ $reviewtext = $_POST['reviewtext'] ?? '';
                 <div class="field">
                     <div class="control">
                         <textarea disabled class="textarea" rows="4" type="text" name="reviewtext"
-                            style="background-color: #fff; resize: none;"><?php echo htmlspecialchars($reviewtext); ?></textarea>
+                            style="background-color: #fff; resize: none;"><?php echo htmlspecialchars($_SESSION['review']['reviewtext'] ?? ''); ?></textarea>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <a href="review_insert.php?product_id=<?php echo htmlspecialchars($product_id); ?>&reviewtext=<?php echo urlencode($reviewtext); ?>&rating=<?php echo urlencode($rating_value); ?>" class="button is-light is-medium" style="margin-right: 20px;">戻る</a>
+            <a href="review_insert.php">戻る</a>
             <input class="button is-link is-medium" type="submit" value="登録する"
                 style="background-color: #41C0FF; width: 40%;">
         </div>

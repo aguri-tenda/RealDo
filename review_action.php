@@ -3,7 +3,7 @@
 <?php
 $product_id = $_SESSION['review']['product_id'] ?? '';
 $user_id = $_SESSION['user']['userid'] ?? '';
-$rating = $_SESSION['review']['rating-value'] ?? 1;
+$rating = $_SESSION['review']['rating'] ?? 1;
 $reviewtext = $_SESSION['review']['reviewtext'] ?? '';
 
 if ($product_id && $user_id && $rating >= 1 && $rating <= 5 && !empty($reviewtext)) {
