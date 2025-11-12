@@ -48,7 +48,7 @@ if( isset($_SESSION['provider']['providerid']) )
                         </p>
                     </div>
                     <div style="flex-shrink: 0; margin-left: 20px;">
-                        <img src="img/<?= htmlspecialchars($product['image_path'] ?? 'default_product.png') ?>"
+                        <img src="product-img/<?= htmlspecialchars($product['image_path'] ?? 'default_product.png') ?>"
                             alt="<?= htmlspecialchars($product['product_name']) ?>"
                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
                     </div>
