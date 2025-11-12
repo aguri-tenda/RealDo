@@ -1,14 +1,16 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
-<?php 
+<?php
 $product_id = $_GET['product_id'] ?? '';
 $sql = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
 $sql->execute([$product_id]);
 $product = $sql->fetch(PDO::FETCH_ASSOC);
 
 $_SESSION['review'] = [
-    'product_id' => $product_id
+    'product_id' => $product_id,
+    'reviewtext' => $_GET['reviewtext'] ?? '',
+    'rating' => $_GET['rating'] ?? 0,
 ];
 ?>
 
@@ -25,9 +27,9 @@ $_SESSION['review'] = [
             <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
-                        <rating-selector rating="0"></rating-selector>
+                        <rating-selector rating=<?php echo htmlspecialchars($_SESSION['review']['rating'] ?? 0); ?>></rating-selector>
                     </div>
-                    <input type="hidden" name="rating" id="rating-value" value="0">
+                    <input type="hidden" name="rating" id="rating-value" value=<?php echo htmlspecialchars($_SESSION['review']['rating'] ?? 0); ?>>
                 </div>
             </div>
         </div>
@@ -39,8 +41,8 @@ $_SESSION['review'] = [
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <textarea class="textarea" rows="4" type="text" name="reviewtext"
-                            style="background-color: #fff; resize: none;"></textarea>
+                        <textarea class="textarea" rows="4" type="text" name="reviewtext" 
+                            style="background-color: #fff; resize: none;"><?php echo htmlspecialchars($_SESSION['review']['reviewtext'] ?? ''); ?></textarea>
                     </div>
                 </div>
             </div>
