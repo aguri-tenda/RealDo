@@ -1,6 +1,20 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
+<?php require "parts/db-connect.php"; ?>
+<?php 
+$product_id = $_GET['product_id'] ?? '';
+$sql = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
+$sql->execute([$product_id]);
+$product = $sql->fetch(PDO::FETCH_ASSOC);
+
+$_SESSION['review'] = [
+    'product_id' => $product_id
+];
+?>
+
 <br>
+
+<?php if (isset($_SESSION['user'])): ?> 
 <div class="level-item">
     <form class="box" style="width: 520px; text-align: center;" action="review_complete.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
@@ -38,6 +52,12 @@
 
     </form>
 </div>
+<?php else: ?>
+    <div class="box" style="width: 520px; text-align: center; margin: auto;">
+        <p>レビューを投稿するにはログインが必要です。</p>
+        <a href="login.php" class="button is-link" style="margin-top: 15px;">ログインページへ</a>
+    </div>
+<?php endif; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
 <script src="script/review_insert-script.js"></script>
