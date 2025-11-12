@@ -28,13 +28,19 @@
                 <?php
                     $sql = $pdo->prepare( "SELECT * FROM attached_tags LEFT JOIN tags ON tags.tag_id = attached_tags.tag_id WHERE product_id = ? ;" );
                     $sql->execute([ $product['product_id'] ]);
+                    $tags = $sql->fetchAll( PDO::FETCH_ASSOC );
                 ?>
 
                 <div class="box has-background-light" style="border-radius: 20px; ">
                     <div class="media">
                         <div class="media-left">
                             <div style="text-align: left;">
-                                <span><span class="title is-h5"><?= $product['name']; ?></span><?php foreach( $tag as $tags ) : ?><button class="button is-small is-light is-rounded" disabled><?= $tags['name']; ?></button><?php endforeach; ?></span>
+                                <span>
+                                    <span class="title is-h5"><?= $product['name']; ?></span>
+                                        <?php foreach( $tags as $tag ) : ?>
+                                        <button class="button is-small is-light is-rounded" disabled><?= $tag['name']; ?></button>
+                                        <?php endforeach; ?>
+                                </span>
 
                                 <div>
                                     <p>
@@ -62,7 +68,7 @@
                             </p>
                         </div>
                         <div class="media-right">
-                            <form action="  ---#予約確認画面URL#---  " method="post">
+                            <form action="provider-reservation-info.php" method="post">
                                 <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
 
                                 <button class="button is-primary is-rounded">予約情報を見る</button>
