@@ -7,7 +7,7 @@ $sql = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
 $sql->execute([$product_id]);
 $product = $sql->fetch(PDO::FETCH_ASSOC);
 
-$_SESSION['review'][] = [
+$_SESSION['review'] = [
     'product_id' => $product_id
 ];
 ?>
@@ -39,8 +39,8 @@ $_SESSION['review'][] = [
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <textarea class="textarea" rows="4" type="text" name="reviewtext"
-                            style="background-color: #fff; resize: none;"></textarea>
+                        <textarea class="textarea" rows="4" type="text" name="reviewtext" 
+                            style="background-color: #fff; resize: none;"><?php echo htmlspecialchars($_GET['reviewtext'] ?? ''); ?></textarea>
                     </div>
                 </div>
             </div>
