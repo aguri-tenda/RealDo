@@ -19,9 +19,12 @@ new Vue({
 
             detail : "",
 
-            price:null
+            price:null,
+
+            tags:[]
         };
     },
+    
 
     computed:{
         isDetailOver()
@@ -50,9 +53,14 @@ new Vue({
             return !telReg.test(this.tel);
         },
 
+        isTags()
+        {
+            return 0 < this.tags.length && this.tags.length <= 3;
+        },
+
         isFullInput()
         {
-            return !( (this.max != null) && (this.date != null) && !(this.isTime) && (this.name != null) && (this.location!=null) && (this.address != null) && !(this.isAddressNum) && !(this.isTel) && !(this.isDetailOver) && (this.price!=null) )
+            return !( (this.max != null) && (this.date != null) && !(this.isTime) && (this.name != null) && (this.location!=null) && (this.address != null) && !(this.isAddressNum) && !(this.isTel) && !(this.isDetailOver) && (this.price!=null) && (this.isTags) )
         }
     }
 });
