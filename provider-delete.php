@@ -1,5 +1,12 @@
 <?php require "parts/header.php"; ?>
-<?php require "parts/navigation.php"; ?>
+<?php require "parts/provider_navigation.php"; ?>
+
+<?php require "parts/db-connect.php"; ?>
+
+<?php
+    $sql = $pdo->prepare(" UPDATE products SET is_active = 0 WHERE product_id = ?; ");
+    $sql->execute([ $_GET['product_id'] ]);
+?>
 
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
@@ -17,7 +24,7 @@
 
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <input class="button is-info" type="submit" value="ホーム画面へ" style="background-color: #41C0FF; width: 300px;">
+            <input class="button is-info" type="submit" value="ホーム画面へ" style="background-color: #C3FF9B; width: 300px;">
         </div>
 
     </form>

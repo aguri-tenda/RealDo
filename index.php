@@ -1,5 +1,6 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
+<?php require "parts/db-connect.php"; ?>
 
 <div class="section" id="recommend-app">
     <div class="container">

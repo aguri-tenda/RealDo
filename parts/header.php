@@ -1,3 +1,18 @@
+<?php
+session_start();
+
+// セッションから値を取得
+$name = $_SESSION['user']['username'] ?? '';
+$user_id = $_SESSION['user']['userid'] ?? '';
+$address = $_SESSION['user']['useraddress'] ?? '';
+
+$provider_name = $_SESSION['provider']['providername'] ?? '';
+$provider_id = $_SESSION['provider']['providerid'] ?? '';
+$provider_address = $_SESSION['provider']['provideraddress'] ?? '';
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -7,7 +22,30 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <style>
+        body {
+            padding-bottom: 90px;
+            /* フッター高さ分の余白 */
+        }
 
+        html,
+        body {
+            height: 100%;
+            margin: 0px;
+            padding: 0;
+        }
+
+        .sidebar {
+            background-color: #79D159;
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .menu {
+            padding: 25px;
+            width: 200px;
+        }
+    </style>
     <title>RealDo</title>
 </head>
 
