@@ -39,5 +39,5 @@
     </form>
 </div>
 
-<?php require "parts/provider_bottom.php"; ?>
+<?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>

@@ -1,6 +1,7 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 
+<form action="provider-create.php">
 <div class="level-item">
     <form class="box" style="width: 800px; text-align: center;">
         <span class="subtitle is-4" style="color:#278EDD;">ログイン</span>
@@ -35,9 +36,10 @@
         <div class="field has-text-centered" style="margin-top: 2rem;">
             <input class="button is-info" type="submit" value="確定" style="background-color: #41C0FF; width: 300px;">
         </div>
-
-    </form>
+</form>
 </div>
+</form>
+
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
