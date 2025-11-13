@@ -20,7 +20,7 @@
 
                 <!-- 検索 -->
                 <div class="navbar-item">
-                    <a id="search" class="is-flex is-align-items-center">
+                    <a id="search" class="is-flex is-align-items-center" @click="toggleSearch">
                         <span class="icon has-text-info"><i class="fas fa-search"></i></span>
                         <span>検索</span>
                     </a>
