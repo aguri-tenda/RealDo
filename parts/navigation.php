@@ -71,7 +71,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </nav>
 <!-- ✅ 検索フォーム -->
-        <div class="level-item" v-if="isSearchActive" style="width: 520px; text-align: center;">
+        <div class="level-item" v-if="isSearchActive" style="position: absolute; width: 520px; text-align: center; margin:20px auto 0;">
         <form class="box" style="width: 520px; text-align: center;" action="search.php" method="post">
             <!-- キーワード検索 -->
             <div class="columns is-gapless">
