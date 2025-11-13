@@ -69,7 +69,8 @@
         
         <div class="modal-content is-medium">
             <div class="box">
-                <h3 class="title is-4 has-text-centered">🔍 検索</h3>
+                <span class="icon has-text-info"><i class="fas fa-search"></i></span>
+                        <span>検索</span>
                 <div class="tabs is-boxed is-fullwidth">
                     <ul>
                         <li class="is-active"><a>商品名検索</a></li>
@@ -136,5 +137,5 @@
         <button class="modal-close is-large" aria-label="close" @click="toggleSearch"></button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
-    <script src="script/navigation-script.js"></script>
+    <script src="../script/navigation-script.js"></script>
 </div>
