@@ -5,8 +5,10 @@ new Vue({
         return{
             max:null,
 
-            date:"",
-            time : "",
+            start_date:"",
+            start_time : "",
+            finish_date:"",
+            finish_time : "",
 
             name:"",
 
@@ -36,7 +38,7 @@ new Vue({
         {
             const timeReg = new RegExp(/^[0-9][:][0-5][0-9]|1[0-9][:][0-5][0-9]|2[0-3][:][0-5][0-9]$/);
 
-            return !timeReg.test(this.time);
+            return !(timeReg.test(this.start_time) && timeReg.test(this.finish_time)) ;
         },
 
         isAddressNum()
@@ -60,7 +62,7 @@ new Vue({
 
         isFullInput()
         {
-            return !( (this.max != null) && (this.date != null) && !(this.isTime) && (this.name != null) && (this.location!=null) && (this.address != null) && !(this.isAddressNum) && !(this.isTel) && !(this.isDetailOver) && (this.price!=null) && (this.isTags) )
+            return !( (this.max != null) && ((this.start_date != null) && (this.finish_date != null)) && !(this.isTime) && (this.name != null) && (this.location!=null) && (this.address != null) && !(this.isAddressNum) && !(this.isTel) && !(this.isDetailOver) && (this.price!=null) && (this.isTags) )
         }
     }
 });

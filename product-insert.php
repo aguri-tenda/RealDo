@@ -57,8 +57,17 @@
                                 <div class="level-right">
                                     <span>開催日時</span>
                                     <div>
-                                        <input type="date" v-model="date" name="start_date" required>
-                                        <input type="text" v-model="time" name="start_time" placeholder="00:00" size="5" required>～
+                                        <span>
+                                            
+                                            <input type="date" v-model="start_date" name="start_date" required>
+                                            <input type="text" v-model="start_time" name="start_time" placeholder="0:00" size="5" required>～
+                                            
+                                            
+                                            <input type="date" v-model="finish_date" name="finish_date" required>
+                                            <input type="text" v-model="finish_time" name="finish_time" placeholder="0:00" size="5" required>
+                                            
+                                        </span>
+
                                         <p class="help" v-if="isTime">時間は「0:00 ~ 23:59」の間で設定してください</p>
                                     </div>
                                 </div>
