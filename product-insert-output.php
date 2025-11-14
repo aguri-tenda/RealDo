@@ -96,6 +96,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             開催地：
@@ -104,6 +106,8 @@
                                             <input type="text" value="<?= $_POST['location']; ?>" disabled>
                                         </div>
                                     </div>
+
+                                    <hr>
 
                                     <div class="level">
                                         <div class="level-left">
@@ -119,6 +123,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             <div>
@@ -132,6 +138,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             商品の詳細：
@@ -143,6 +151,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             サムネイル画像：
@@ -151,6 +161,8 @@
                                             <img src="<?= $file; ?>" width="100px">
                                         </div>
                                     </div>
+
+                                    <hr>
                                     
                                     <div class="level">
                                         <div class="level-left">
@@ -160,6 +172,8 @@
                                             <input type="number" value="<?= $_POST['price']; ?>" disabled>円
                                         </div>
                                     </div>
+
+                                    <hr>
 
                                     <div class="level">
                                         <div class="level-left">

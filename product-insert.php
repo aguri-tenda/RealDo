@@ -1,6 +1,8 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
 
+<?php require "parts/db-connect.php"; ?>
+
 <div class="has-background-light">
     <div class="columns is-gapless">
         <div class="column is-narrow" style="background-color: #79D159; min-height: 100vh; padding: 0;">
@@ -21,9 +23,9 @@
                 </ul>
             </aside>
         </div>
-    </div>
 
-        <?php
+
+            <?php
             $islogin = false;
 
             if( isset($_SESSION['provider']) )
@@ -82,6 +84,8 @@
                                                 </div>
                                             </div>
 
+                                            <hr>
+
                                             <div class="level">
                                                 <div class="level-left">
                                                     開催地：
@@ -90,6 +94,8 @@
                                                     <input type="text" v-model="location" name="location" required>
                                                 </div>
                                             </div>
+
+                                            <hr>
 
                                             <div class="level">
                                                 <div class="level-left">
@@ -106,6 +112,8 @@
                                                 </div>
                                             </div>
 
+                                            <hr>
+
                                             <div class="level">
                                                 <div class="level-left">
                                                     <div>
@@ -121,6 +129,8 @@
                                                 </div>
                                             </div>
 
+                                            <hr>
+
                                             <div class="level">
                                                 <div class="level-left">
                                                     商品の詳細：
@@ -132,6 +142,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <hr>
 
                                             <div class="level">
                                                 <div class="level-left">
@@ -146,6 +158,8 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <hr>
                                     
                                             <div class="level">
                                                 <div class="level-left">
@@ -153,6 +167,37 @@
                                                 </div>
                                                 <div class="level-right">
                                                     <input type="number" v-model="price" min="0" size="5" name="price" required>円
+                                                </div>
+                                            </div>
+
+                                            <hr>
+
+                                            <div class="level">
+                                                <div class="level-left">
+                                                    タグ：※３つまで
+                                                </div>
+                                                <div class="level-right">
+                                                    <?php 
+                                                        $tags = $pdo->query( "SELECT * FROM tags;" );
+                                                        $tagsCol = 0;
+                                                    ?>
+                                                    
+                                                    <div>
+                                                        <?php foreach( $tags as $tag ) : ?>
+                                                            
+                                                            <span>
+                                                                <input v-model="tags" type="checkbox" name="tags[]" value="<?= $tag['tag_id']; ?>"><?= $tag['name']; ?>
+                                                            </span>
+
+                                                            <?php
+                                                                $tagsCol++;
+                                                                if( $tagsCol >= 4 )
+                                                                {
+                                                                    echo "<br>";
+                                                                }
+                                                            ?>
+                                                        <?php endforeach; ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                     
@@ -178,15 +223,23 @@
                 </div>
             </div>
 
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
             <script src="script/product-insert-script.js"></script>
     
 
         <?php else : ?>
-
-            <p>商品の登録をするにはログインしてください。</p>
-
+            <div class="section">
+                <div class="container">
+                    <p>商品の登録をするにはログインしてください。</p>
+                </div>
+            </div>
         <?php endif; ?>
+
+
+        
+    </div>
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
