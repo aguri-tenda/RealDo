@@ -85,15 +85,16 @@
                             </form>
 
                             <script>
-                                function deleteAlert( name, id )
+                                function deleteAlert( event, name, id )
                                 {
+                                    event.stopPropagation();
                                     if( confirm( name + "の掲載を取りやめます。\nよろしいですか？" ))
                                     {
                                         window.location.href="product-active-flag.php?product_id=" + id;
                                     }
                                 }
                             </script>
-                            <button class="button is-danger is-rounded" onclick="deleteAlert('<?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['product_id'] ; ?>)">商品を削除</button>
+                            <button class="button is-danger is-rounded" onclick="deleteAlert('event, <?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['product_id'] ; ?>)">商品を削除</button>
                             </div>
                         </div>
                     </a>
