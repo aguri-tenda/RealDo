@@ -5,7 +5,7 @@ $sql->execute();
 $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <div id="app-navigation">
-    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation" style="position: relative;">
         <div class="navbar-brand">
             <a class="navbar-item" href="./index.php">
                 <img src="img/logo.png" alt="RealDo" style="max-height: 60px;">
@@ -71,7 +71,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </nav>
 <!-- ✅ 検索フォーム -->
-        <div class="level-item" v-if="isSearchActive" style="position: absolute; width: 520px; text-align: center; z-index: 10; background-color: white; border: 1px solid #dbdbdb; border-radius: 5px; padding: 15px; box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);">
+        <div class="level-item" v-if="isSearchActive" style="position: absolute; width: 520px; text-align: center; z-index: 24; background-color: white; border: 1px solid #dbdbdb; border-radius: 5px; padding: 15px; box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1); top: 80px; left: 50%; transform: translateX(-50%);">
         <form class="box" style="width: 520px; text-align: center;" action="search.php" method="post">
             <!-- キーワード検索 -->
             <div class="columns is-gapless">
@@ -143,6 +143,16 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
                         <option value="1週間以上">1週間以上</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="field is-grouped is-justify-content-center">
+                <div class="control">
+                    <button class="button is-info" type="submit">検索</button>
+                </div>
+                <div class="control">
+                    <button class="button is-light" type="button" @click="toggleSearch">閉じる</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
