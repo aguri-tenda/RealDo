@@ -101,7 +101,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
             
             <!-- 開催日検索 -->
             <div class="field">
-                <label class="label">開催日</label>
+                <label class="label">開催日（開始日/終了日）</label>
                 <div class="control">
                     <input class="input" type="date" name="start_date">
                 </div>
