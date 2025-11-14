@@ -84,7 +84,7 @@
                             {
                                 if( confirm( name + "の掲載を取りやめます。\nよろしいですか？" ))
                                 {
-                                    window.location.href="product-delete-output.php?product_id=" + id;
+                                    window.location.href="product-delete.php?product_id=" + id;
                                 }
                             }
                         </script>
