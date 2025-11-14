@@ -16,11 +16,38 @@
 ?>
 
 <?php foreach ($products as $product): ?>
-                
+
     <?php
         $tag = $pdo->prepare( "SELECT * FROM attached_tags JOIN tags ON attached_tags.tag_id = tags.tag_id WHERE product_id = ? ;" );
         $tag->execute([ $product['product_id'] ]);
+        $product_duration = '';
+        if ( !empty( $product['start_date'] ) && !empty( $product['end_date'] ) ) {
+            $start = new DateTime( $product['start_date'] );
+            $end = new DateTime( $product['end_date'] );
+            $interval = $start->diff( $end );
+            $days = $interval->days + 1;
+            if( $days == 1) {
+                $product_duration = '日帰り';
+            } else if( $days < 7) {
+                $product_duration = '2日以上';
+            } else if( $days >= 7) {
+                $product_duration = '1週間以上';
+            }
+        }
     ?>
+
+    <?php if (
+        (!strpos($product['name'], $serchWord) &&
+        !strpos($product['detail'], $serchWord) &&
+        !strpos($product['location'], $serchWord)) ||
+        ($event_location && $product['location'] !== $event_location) ||
+        ($event_duration && $product_duration !== $event_duration) ||
+        (!empty($start_date) && $product['start_date'] < $start_date) ||
+        (!empty($end_date) && $product['end_date'] > $end_date) ||
+        (!empty($tags) && !in_array( $tag['tag_id'], $tags ))
+        ) {
+        break;
+    } ?>
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <div style="flex-grow: 1;">
