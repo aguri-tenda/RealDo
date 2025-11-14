@@ -71,9 +71,8 @@
                                 alt="<?= htmlspecialchars($product['name']) ?>"
                                 style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
                         </div>
-                    </div>
 
-                    <div class="media-right">
+                        <div class="media-right">
                         <form action="provider-reservation-info.php" method="post">
                             <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
 
@@ -90,7 +89,7 @@
                             }
                         </script>
                         <button class="button is-danger is-rounded" onclick="deleteAlert('<?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['product_id'] ; ?>)">商品を削除</button>
-                
+                        </div>
                     </div>
                 <?php endforeach; ?>
                 <?php else : ?>
