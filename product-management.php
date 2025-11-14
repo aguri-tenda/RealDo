@@ -56,8 +56,9 @@
 
                     
                     <div class="box" style="margin: 25px; display: flex; align-items: center;">
-                        <a href="product-update.php?product_id=<?= $product['product_id']; ?>">
-                            <div style="flex-grow: 1;">
+                        
+                        <div style="flex-grow: 1;">
+                            <a href="product-update.php?product_id=<?= $product['product_id']; ?>">
                                 <p>
                                     <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
 
@@ -71,8 +72,9 @@
                                 <p><strong>参加人数:</strong>
                                     <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
                                 </p>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
+                        
                         <div style="flex-shrink: 0; margin-left: 20px;">
                             <img src="<?= htmlspecialchars($product['image_pass']) ?>"
                                 alt="<?= htmlspecialchars($product['name']) ?>"
