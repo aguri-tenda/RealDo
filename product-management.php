@@ -58,28 +58,19 @@
                     <div class="box" style="margin: 25px; display: flex; align-items: center;">
                         
                         <div style="flex-grow: 1;">
-                            <div class="media-content">
-                                <p>
-                                    <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
+                            <p>
+                                <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
 
-                                    <?php foreach( $tag as $tags ) : ?>
-                                        <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tags['name']; ?></button></span>
-                                    <?php endforeach; ?>
-                                </p>
+                                <?php foreach( $tag as $tags ) : ?>
+                                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tags['name']; ?></button></span>
+                                <?php endforeach; ?>
+                            </p>
 
-                                <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
-                                <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
-                                <p><strong>参加人数:</strong>
-                                    <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
-                                </p>
-                            </div>
-
-                            <form action="product-update.php" method="post">
-                                <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
-
-                                <button class="button is-primary is-rounded">商品情報を編集</button>
-                            </form>
-                            
+                            <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
+                            <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
+                            <p><strong>参加人数:</strong>
+                                <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
+                            </p>
                         </div>
                         
                         <div style="flex-shrink: 0; margin-left: 20px;">
@@ -88,11 +79,17 @@
                                 style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
                         </div>
 
-                        <div class="media-right">
+                        <div class="media-right" style="margin-left: 20px;">
                         <form action="provider-reservation-info.php" method="post">
                             <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
 
                             <button class="button is-primary is-rounded">予約情報を見る</button>
+                        </form>
+
+                        <form action="product-update.php" method="post">
+                            <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
+
+                            <button class="button is-primary is-rounded">商品情報を編集</button>
                         </form>
 
                         <script>
