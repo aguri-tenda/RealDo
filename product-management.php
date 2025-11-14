@@ -54,9 +54,11 @@
                         $tag->execute([ $product['product_id'] ]);
                     ?>
 
-                    <a href="product-update.php?product_id=<?= $product['product_id']; ?>">
-                        <div class="box" style="margin: 25px; display: flex; align-items: center;">
-                            <div style="flex-grow: 1;">
+                    
+                    <div class="box" style="margin: 25px; display: flex; align-items: center;">
+                        
+                        <div style="flex-grow: 1;">
+                            <a href="product-update.php?product_id=<?= $product['product_id']; ?>">
                                 <p>
                                     <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
 
@@ -70,34 +72,34 @@
                                 <p><strong>参加人数:</strong>
                                     <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
                                 </p>
-                            </div>
-                            <div style="flex-shrink: 0; margin-left: 20px;">
-                                <img src="<?= htmlspecialchars($product['image_pass']) ?>"
-                                    alt="<?= htmlspecialchars($product['name']) ?>"
-                                    style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
-                            </div>
-
-                            <div class="media-right">
-                            <form action="provider-reservation-info.php" method="post">
-                                <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
-
-                                <button class="button is-primary is-rounded">予約情報を見る</button>
-                            </form>
-
-                            <script>
-                                function deleteAlert( event, name, id )
-                                {
-                                    event.stopPropagation();
-                                    if( confirm( name + "の掲載を取りやめます。\nよろしいですか？" ))
-                                    {
-                                        window.location.href="product-active-flag.php?product_id=" + id;
-                                    }
-                                }
-                            </script>
-                            <button class="button is-danger is-rounded" onclick="deleteAlert('event, <?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['product_id'] ; ?>)">商品を削除</button>
-                            </div>
+                            </a>
                         </div>
-                    </a>
+                        
+                        <div style="flex-shrink: 0; margin-left: 20px;">
+                            <img src="<?= htmlspecialchars($product['image_pass']) ?>"
+                                alt="<?= htmlspecialchars($product['name']) ?>"
+                                style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
+                        </div>
+
+                        <div class="media-right">
+                        <form action="provider-reservation-info.php" method="post">
+                            <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
+
+                            <button class="button is-primary is-rounded">予約情報を見る</button>
+                        </form>
+
+                        <script>
+                            function deactivateAlert( name, id )
+                            {
+                                if( confirm( name + "の掲載を停止します。\nよろしいですか？" ))
+                                {
+                                    window.location.href="product-active-flag.php?product_id=" + id;
+                                }
+                            }
+                        </script>
+                        <button class="button is-danger is-rounded" onclick="deactivateAlert('<?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['product_id'] ; ?>)">商品を掲載停止</button>
+                        </div>
+                    </div>
                 <?php endforeach; ?>
 
                 <hr>
