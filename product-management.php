@@ -58,7 +58,7 @@
                     <div class="box" style="margin: 25px; display: flex; align-items: center;">
                         
                         <div style="flex-grow: 1;">
-                            <a href="product-update.php?product_id=<?= $product['product_id']; ?>">
+                            <a href="product-update.php?product_id=<?= $product['product_id']; ?>" style="text-decoration: none; color: inherit;">
                                 <p>
                                     <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
 
