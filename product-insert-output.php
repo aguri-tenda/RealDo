@@ -8,9 +8,9 @@
             $file = "product-img/". basename($_FILES['file']['name']);
                 
             if(!move_uploaded_file($_FILES['file']['tmp_name'], $file))
-            {
+            {   
                 header('Location:product-insert.php');
-                exit();
+                exit();   
             }
         }
         else
@@ -30,6 +30,14 @@
     $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'] ]);
 
     $product_id = $pdo->lastInsertId();
+
+    $oldPath = $file;
+    $newPath = "product-img/". $product_id. basename($_FILES['file']['name']);
+
+    rename($oldPath, $newPath);
+
+    $sql = $pdo->prepare( "UPDATE products SET image_pass = ? WHERE product_id = ? ;" );
+    $sql->execute([ $newPath, $product_id ]);
 
     $getTag = $pdo->prepare(" SELECT * FROM tags WHERE tag_id = ?; ");
     $tagname = [];
