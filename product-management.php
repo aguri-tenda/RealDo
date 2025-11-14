@@ -137,7 +137,7 @@
                                 }
                             }
                         </script>
-                        <button class="button is-danger is-rounded" onclick="activateAlert('<?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['product_id'] ; ?>)">商品を削除</button>
+                        <button class="button is-primary is-rounded" onclick="activateAlert('<?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['product_id'] ; ?>)">商品を掲載</button>
                         </div>
                     </div>
                 <?php endforeach; ?>
