@@ -70,44 +70,54 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </nav>
-<!-- ✅ 検索フォーム -->
-        <div class="level-item" v-if="isSearchActive" style="position: absolute; width: 520px; text-align: center; z-index: 24; background-color: white; border: 1px solid #dbdbdb; border-radius: 5px; padding: 15px; box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1); top: 80px; left: 50%; transform: translateX(-50%);">
-        <form class="box" style="width: 520px; text-align: center;" action="search.php" method="post">
+    <!-- ✅ 検索フォーム -->
+    <div class="level-item" v-if="isSearchActive"
+        style="position: absolute; z-index: 24; box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1); top: 80px; left: 50%; transform: translateX(-50%);">
+        <form class="box" style="width: 500px; text-align: left;" action="search.php" method="post">
             <!-- キーワード検索 -->
             <div class="columns is-gapless">
                 <div class="column is-narrow is-flex is-align-items-center">
                     <span class="icon has-text-info"><i class="fas fa-search"></i></span>
-                    <span>検索</span>
+                    <span>検索　</span>
                 </div>
                 <div class="column">
-                    <input class="input" type="text" name="searchWord" placeholder="キーワードを入力してください">
+                    <input class="input" type="text" name="searchWord" placeholder="キーワードを入力してください"
+                        style="background-color: #E8E8E8; border-radius: 10px;">
                 </div>
             </div>
 
             <hr>
             <!-- タグ検索 -->
-            <div class="field is-grouped">
+            <div class="field is-grouped is-grouped-multiline">
                 <?php foreach ($tags as $tag): ?>
                     <div class="control">
-                        <label class="checkbox">
-                            <input type="checkbox" name="tags[]" value="<?= htmlspecialchars($tag['tagid']) ?>">
-                            <?= htmlspecialchars($tag['name']) ?>
-                        </label>
+                        <div class="tags">
+                            <label class="checkbox">
+                                <input type="checkbox" name="tags[]" value="<?= htmlspecialchars($tag['tagid']) ?>">
+                                <?= htmlspecialchars($tag['name']) ?>
+                            </label>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
 
             <hr>
-            
+
             <!-- 開催日検索 -->
             <div class="field">
                 <label class="label">開催日（開始日/終了日）</label>
-                <div class="control">
-                    <input class="input" type="date" name="start_date">
+                <div class="field is-grouped">
+                    <p class="control is-expanded">
+                        <input class="input" type="date" name="start_date"
+                            style="background-color: #E8E8E8; border-radius: 10px;">
+                    </p>
+                    <p class="control" style="padding-top:8px;">～</p>
+                    <p class="control is-expanded">
+                        <input class="input" type="date" name="end_date"
+                            style="background-color: #E8E8E8; border-radius: 10px;">
+                    </p>
                 </div>
-                <div class="control">
-                    <input class="input" type="date" name="end_date">
-                </div>
+
             </div>
 
             <hr>
@@ -116,7 +126,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
             <div class="field">
                 <label class="label">開催地</label>
                 <div class="control">
-                    <select class="input" name="event_location">
+                    <select class="input" name="event_location" style="border-radius: 10px;">
                         <option value="" selected>すべて</option>
                         <option value="北海道">北海道</option>
                         <option value="東北">東北</option>
@@ -136,7 +146,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
             <div class="field">
                 <label class="label">開催期間</label>
                 <div class="control">
-                    <select class="input" name="event_duration">
+                    <select class="input" name="event_duration" style="border-radius: 10px;">
                         <option value="" selected>すべて</option>
                         <option value="日帰り">日帰り</option>
                         <option value="2日以上">2日以上</option>
@@ -145,18 +155,26 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
 
-            <div class="field is-grouped is-justify-content-center">
+            <div class="field is-grouped is-justify-content-right" style="gap: 15px;">
                 <div class="control">
-                    <button class="button is-info" type="submit">検索</button>
+                    <button class="button is-light" type="button" @click="toggleSearch" style="border-radius: 10px;">
+                        閉じる
+                    </button>
                 </div>
+
                 <div class="control">
-                    <button class="button is-light" type="button" @click="toggleSearch">閉じる</button>
+                    <button class="button is-info" type="submit"
+                        style="background-color: #41C0FF; border-color: #0086BB; border-radius: 10px; padding: 0 30px;">
+                        検索
+                    </button>
+
                 </div>
             </div>
+
         </form>
     </div>
 </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
-    <script src="script/navigation-script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+<script src="script/navigation-script.js"></script>
 </div>
