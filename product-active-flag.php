@@ -1,6 +1,5 @@
 <?php session_start(); ?>
 <?php require "parts/db-connect.php"; ?>
-
 <?php
     if( isset( $_GET['product_id'] ) )
     {
