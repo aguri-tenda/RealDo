@@ -28,7 +28,7 @@
 
 <?php if( isset($_SESSION['provider'])) : ?>
     <?php
-        $sql = $pdo->prepare("SELECT * FROM products WHERE provider_id = ?");
+        $sql = $pdo->prepare("SELECT * FROM products WHERE provider_id = ? && is_active = 1 ;");
         $sql->execute([$_SESSION['provider']['providerid']]);
         $products = $sql->fetchAll(PDO::FETCH_ASSOC);
     ?>
