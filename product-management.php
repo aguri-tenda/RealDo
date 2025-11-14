@@ -79,7 +79,7 @@
                                 style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
                         </div>
 
-                        <div class="media-right" style="margin-left: 20px;">
+                        <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
                         <form action="provider-reservation-info.php" method="post">
                             <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
 
