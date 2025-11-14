@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <?php
     if(is_uploaded_file( $_FILES['file']['tmp_name']))
     {
@@ -19,15 +21,34 @@
     }
 ?>
 
-<?php require "parts/header.php"; ?>
-<?php require "parts/provider_navigation.php"; ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
 <?php require "parts/db-connect.php"; ?>
 
 <?php
-    $sql = $pdo->prepare(" INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participents ) VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ); ");
-
+    $sql = $pdo->prepare( "INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participants ) VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;" );
     $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'] ]);
+
+    $product_id = $pdo->lastInsertId();
+
+    $getTag = $pdo->prepare(" SELECT * FROM tags WHERE tag_id = ?; ");
+    $tagname = [];
+
+    foreach( $_POST['tags'] as $tagid )
+    {
+        $getTag->execute([ $tagid ]);//要変更
+        foreach( $getTag as $tagData )
+        {
+            array_push($tagname, $tagData['name']);
+        }
+    }
+    
+    $sql = $pdo->prepare(" INSERT INTO attached_tags(product_id, tag_id) VALUEs( ? , ? );" );
+
+    foreach( $_POST['tags'] as $tag )
+    {
+        $sql->execute([$product_id, $tag]);
+    }
 ?>
 
 <div class="has-background-light">
@@ -38,7 +59,7 @@
                     <h3 class="level-item" style="color:#278EDD;">商品登録完了</h3>
                 </div>
 
-                <form action="index.php">
+                <form action="provider-index.php">
                     
                     <div class="level">
                         <div class="level-left">
@@ -75,6 +96,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             開催地：
@@ -83,6 +106,8 @@
                                             <input type="text" value="<?= $_POST['location']; ?>" disabled>
                                         </div>
                                     </div>
+
+                                    <hr>
 
                                     <div class="level">
                                         <div class="level-left">
@@ -98,6 +123,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             <div>
@@ -111,6 +138,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             商品の詳細：
@@ -122,6 +151,8 @@
                                         </div>
                                     </div>
 
+                                    <hr>
+
                                     <div class="level">
                                         <div class="level-left">
                                             サムネイル画像：
@@ -130,6 +161,8 @@
                                             <img src="<?= $file; ?>" width="100px">
                                         </div>
                                     </div>
+
+                                    <hr>
                                     
                                     <div class="level">
                                         <div class="level-left">
@@ -137,6 +170,34 @@
                                         </div>
                                         <div class="level-right">
                                             <input type="number" value="<?= $_POST['price']; ?>" disabled>円
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="level">
+                                        <div class="level-left">
+                                            タグ：
+                                        </div>
+                                        <div class="level-right">
+                                                    
+                                            <div>
+
+                                            <?php
+                                                $tagsCol = 0;
+                                            ?>
+                                            <?php foreach( $tagname as $tag ) : ?>
+                                                            
+                                                <span><?= $tag;?> </span>
+                                                    <?php
+                                                        $tagsCol++;
+                                                        if( $tagsCol >= 3 )
+                                                        {
+                                                            echo "\n";
+                                                        }
+                                                    ?>
+                                                <?php endforeach; ?>
+                                            </div>
                                         </div>
                                     </div>
                                     
