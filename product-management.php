@@ -54,7 +54,7 @@
                         $tag->execute([ $product['product_id'] ]);
                     ?>
 
-                    <a heref="product-update.php?product_id=<?= $product['product_id']; ?>">
+                    <a href="product-update.php?product_id=<?= $product['product_id']; ?>">
                         <div class="box" style="margin: 25px; display: flex; align-items: center;">
                             <div style="flex-grow: 1;">
                                 <p>
