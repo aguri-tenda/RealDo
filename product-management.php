@@ -58,7 +58,7 @@
                     <div class="box" style="margin: 25px; display: flex; align-items: center;">
                         
                         <div style="flex-grow: 1;">
-                            <a href="product-update.php?product_id=<?= $product['product_id']; ?>" style="text-decoration: none; color: inherit;">
+                            <div class="media-content">
                                 <p>
                                     <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
 
@@ -72,7 +72,14 @@
                                 <p><strong>参加人数:</strong>
                                     <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
                                 </p>
-                            </a>
+                            </div>
+
+                            <form action="product-update.php" method="post">
+                                <input type="hidden" name="product_id" value="<?= $product['product_id']; ?>">
+
+                                <button class="button is-primary is-rounded">商品情報を編集</button>
+                            </form>
+                            
                         </div>
                         
                         <div style="flex-shrink: 0; margin-left: 20px;">
