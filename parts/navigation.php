@@ -164,7 +164,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="control">
                     <button class="button is-info" type="submit"
-                        style="background-color: #41C0FF; border-color: #0086BB; border-radius: 10px; padding: 0 30px;">
+                        style="background-color: #41C0FF; border-color: #00b7ffff; border-radius: 10px; padding: 0 30px;">
                         検索
                     </button>
 
