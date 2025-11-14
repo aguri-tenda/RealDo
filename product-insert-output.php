@@ -8,9 +8,9 @@
             $file = "product-img/". basename($_FILES['file']['name']);
                 
             if(!move_uploaded_file($_FILES['file']['tmp_name'], $file))
-            {   
+            {
                 header('Location:product-insert.php');
-                exit();   
+                exit();
             }
         }
         else
@@ -38,6 +38,9 @@
 
     $sql = $pdo->prepare( "UPDATE products SET image_pass = ? WHERE product_id = ? ;" );
     $sql->execute([ $newPath, $product_id ]);
+
+    $sql = $pdo->prepare(" INSERT INTO dates( product_id, start_time, finish_time ) VALUE( ?, ?, ? ); ");
+    $sql->execute([ $product_id, $_POST['start_date']. " ". $_POST['start_time'], $_POST['finish_date']. " ". $_POST['finish_time'] ]);
 
     $getTag = $pdo->prepare(" SELECT * FROM tags WHERE tag_id = ?; ");
     $tagname = [];
@@ -78,8 +81,13 @@
                         <div class="level-right">
                             <span>開催日時</span>
                             <div>
-                                <input type="date" value="<?= $_POST['start_date']; ?>" disabled>
-                                <input type="text" value="<?= $_POST['start_time']; ?>"  size="5" disabled>～
+                                <span>
+                                    <input type="date" value="<?= $_POST['start_date']; ?>" disabled>
+                                    <input type="text" value="<?= $_POST['start_time']; ?>"  size="5" disabled>～
+
+                                    <input type="date" value="<?= $_POST['finish_date']; ?>" disabled>
+                                    <input type="text" value="<?= $_POST['finish_time']; ?>"  size="5" disabled>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -104,8 +112,6 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             開催地：
@@ -114,8 +120,6 @@
                                             <input type="text" value="<?= $_POST['location']; ?>" disabled>
                                         </div>
                                     </div>
-
-                                    <hr>
 
                                     <div class="level">
                                         <div class="level-left">
@@ -131,8 +135,6 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             <div>
@@ -146,8 +148,6 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             商品の詳細：
@@ -159,18 +159,14 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             サムネイル画像：
                                         </div>
                                         <div class="level-right">
-                                            <img src="<?= $file; ?>" width="100px">
+                                            <img src="<?= $newPath; ?>" width="100px">
                                         </div>
                                     </div>
-
-                                    <hr>
                                     
                                     <div class="level">
                                         <div class="level-left">
@@ -180,8 +176,6 @@
                                             <input type="number" value="<?= $_POST['price']; ?>" disabled>円
                                         </div>
                                     </div>
-
-                                    <hr>
 
                                     <div class="level">
                                         <div class="level-left">
