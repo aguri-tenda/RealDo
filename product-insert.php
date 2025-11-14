@@ -91,17 +91,7 @@
                                                     開催地：
                                                 </div>
                                                 <div class="level-right">
-                                                    <select required v-model="location" name="location">
-                                                        <option value="" disabled selected>選択してください</option>
-                                                        <option value="北海道">北海道</option>
-                                                        <option value="東北">東北</option>
-                                                        <option value="関東">関東</option>
-                                                        <option value="中部">中部</option>
-                                                        <option value="関西">関西</option>
-                                                        <option value="中国">中国</option>
-                                                        <option value="四国">四国</option>
-                                                        <option value="九州・沖縄">九州・沖縄</option>
-                                                    </select>
+                                                    <input type="text" v-model="location" name="location" required>
                                                 </div>
                                             </div>
 
