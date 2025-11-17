@@ -16,6 +16,10 @@ $sql = "
         p.product_id,
         p.name,
         p.location,
+        p.detail,
+        p.address,
+        p.image_pass,
+        p.max_participants,
         d.start_time,
         d.finish_time
     FROM products p
@@ -140,15 +144,20 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div style="flex-grow: 1;">
             <p>
                 <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
-
-                <?php
-                    // 商品に紐づくタグ名を取得し直す
-                    $tag_names_stmt = $pdo->prepare( "SELECT tags.name FROM attached_tags JOIN tags ON attached_tags.tag_id = tags.tag_id WHERE product_id = ? ;" );
-                    $tag_names_stmt->execute([ $product['product_id'] ]);
-                    $product_tags = $tag_names_stmt->fetchAll(PDO::FETCH_ASSOC);
+                <?php 
+                $tag_sql = "
+                    SELECT t.name
+                    FROM tags t
+                    INNER JOIN attached_tags at
+                        ON t.tag_id = at.tag_id
+                    WHERE at.product_id = :product_id
+                ";
+                $tag_stmt = $pdo->prepare($tag_sql);
+                $tag_stmt->execute([':product_id' => $product['product_id']]);
+                $tags = $tag_stmt->fetchAll(PDO::FETCH_ASSOC);
                 ?>
-                <?php foreach( $product_tags as $tag_info ) : ?>
-                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag_info['name']; ?></button></span>
+                <?php foreach( $tags as $tag ) : ?>
+                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag['name']; ?></button></span>
                 <?php endforeach; ?>
             </p>
 
