@@ -144,8 +144,20 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div style="flex-grow: 1;">
             <p>
                 <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
-                <?php foreach( $product_tags as $tag_info ) : ?>
-                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag_info['name']; ?></button></span>
+                <?php 
+                $tag_sql = "
+                    SELECT t.name
+                    FROM tags t
+                    INNER JOIN attached_tags at
+                        ON t.tag_id = at.tag_id
+                    WHERE at.product_id = :product_id
+                ";
+                $tag_stmt = $pdo->prepare($tag_sql);
+                $tag_stmt->execute([':product_id' => $product['product_id']]);
+                $tags = $tag_stmt->fetchAll(PDO::FETCH_ASSOC);
+                ?>
+                <?php foreach( $tags as $tag ) : ?>
+                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag['name']; ?></button></span>
                 <?php endforeach; ?>
             </p>
 
