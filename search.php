@@ -113,7 +113,7 @@
     $products = $sql->fetchAll(PDO::FETCH_ASSOC);
 
     // デバッグ用: 組み立てられたSQLクエリの確認（必要な場合のみコメントを外してください）
-    // echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
+     echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
 
 ?>
 
