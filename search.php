@@ -3,129 +3,161 @@
 <?php require "parts/db-connect.php"; ?>
 
 <?php
-    $serchWord = $_POST['searchWord'] ?? '';
-    $selected_tags = $_POST['tags'] ?? []; // 配列
-    $start_date = $_POST['start_date'] ?? '';
-    $end_date = $_POST['end_date'] ?? '';
-    $event_location = $_POST['event_location'] ?? '';
-    $event_duration = $_POST['event_duration'] ?? '';
+$searchWord     = $_POST['searchWord']      ?? '';
+$selected_tags  = $_POST['tags']            ?? [];
+$start_date     = $_POST['start_date']      ?? '';
+$end_date       = $_POST['end_date']        ?? '';
+$event_location = $_POST['event_location']  ?? '';
+$event_duration = $_POST['event_duration']  ?? '';
 
-    // --- SQLクエリの動的な組み立て ---
-    $where_clauses = ["p.is_active = 1"]; 
-    $bind_values = []; // 名前付きプレースホルダの値 (例: ':search_word' => '%キーワード%')
-    $join_clause = "";
-    $group_having_clause = "";
+// ベースSQL
+$sql = "
+    SELECT
+        p.product_id,
+        p.name,
+        p.location,
+        p.detail,
+        p.address,
+        p.image_pass,
+        p.max_participants,
+        d.start_time,
+        d.finish_time
+    FROM products p
+    INNER JOIN dates d
+        ON p.product_id = d.product_id
+";
 
-    // 1. キーワード検索
-    if (!empty($serchWord)) {
-        $where_clauses[] = "(
-            p.name LIKE :search_word OR 
-            p.detail LIKE :search_word OR 
-            p.location LIKE :search_word
-        )";
-        $bind_values[':search_word'] = '%' . $serchWord . '%';
+$params = [];
+$where  = [];
+
+// =====================
+// キーワード（商品名）
+// =====================
+if ($searchWord !== '') {
+    $where[] = 'p.name LIKE :searchWord';
+    $params[':searchWord'] = '%' . $searchWord . '%';
+}
+
+// =========
+// 開催地
+// =========
+if ($event_location !== '') {
+    $where[] = 'p.location = :location';
+    $params[':location'] = $event_location;
+}
+
+// ====================
+// 開催日（開始・終了）
+// ====================
+if ($start_date !== '') {
+    $where[] = 'd.start_time >= :start_date';
+    $params[':start_date'] = $start_date . ' 00:00:00';
+}
+
+if ($end_date !== '') {
+    $where[] = 'd.finish_time <= :end_date';
+    $params[':end_date'] = $end_date . ' 23:59:59';
+}
+
+// =====================
+// 開催期間カテゴリ
+// =====================
+switch ($event_duration) {
+    case 'oneday':
+        // 24時間未満
+        $where[] = 'TIMESTAMPDIFF(HOUR, d.start_time, d.finish_time) < 24';
+        break;
+
+    case 'multiday':
+        // 24時間以上 AND 24*7時間未満
+        $where[] = 'TIMESTAMPDIFF(HOUR, d.start_time, d.finish_time) >= 24';
+        $where[] = 'TIMESTAMPDIFF(HOUR, d.start_time, d.finish_time) < 24 * 7';
+        break;
+
+    case 'long':
+        // 24*7時間以上
+        $where[] = 'TIMESTAMPDIFF(HOUR, d.start_time, d.finish_time) >= 24 * 7';
+        break;
+
+    default:
+        // 未選択 → 条件なし
+        break;
+}
+
+// =====================
+// タグ AND 条件
+// =====================
+$groupByHaving = '';
+
+if (!empty($selected_tags)) {
+    // tags/attached_tags を JOIN
+    $sql .= "
+        INNER JOIN attached_tags at
+            ON p.product_id = at.product_id
+    ";
+
+    // IN (...) 用プレースホルダ
+    $placeholders = [];
+    foreach ($selected_tags as $i => $tag_id) {
+        $ph = ':tag' . $i;
+        $placeholders[] = $ph;
+        $params[$ph] = (int)$tag_id;
     }
 
-    // 2. 場所の検索
-    if (!empty($event_location)) {
-        $where_clauses[] = "p.location = :location";
-        $bind_values[':location'] = $event_location;
-    }
+    // WHERE に at.tag_id IN (...)
+    $where[] = 'at.tag_id IN (' . implode(',', $placeholders) . ')';
 
-    // 3. 日付の範囲検索
-    if (!empty($start_date)) {
-        $where_clauses[] = "p.start_date >= :start_date";
-        $bind_values[':start_date'] = $start_date;
-    }
+    // GROUP BY / HAVING で「選択したタグ数と一致」
+    $groupByHaving = "
+        GROUP BY p.product_id
+        HAVING COUNT(DISTINCT at.tag_id) = :tag_count
+    ";
+    $params[':tag_count'] = count($selected_tags);
+}
 
-    if (!empty($end_date)) {
-        $where_clauses[] = "p.end_date <= :end_date";
-        $bind_values[':end_date'] = $end_date;
-    }
+// =====================
+// WHERE句の結合
+// =====================
+if (!empty($where)) {
+    $sql .= ' WHERE ' . implode(' AND ', $where);
+}
 
-    // 4. 期間の検索 (変更なし)
-    if (!empty($event_duration)) {
-        $duration_condition = '';
-        if ($event_duration === '日帰り') {
-            $duration_condition = "DATEDIFF(p.end_date, p.start_date) = 0";
-        } elseif ($event_duration === '2日以上') {
-            $duration_condition = "DATEDIFF(p.end_date, p.start_date) >= 1 AND DATEDIFF(p.end_date, p.start_date) < 6";
-        } elseif ($event_duration === '1週間以上') {
-            $duration_condition = "DATEDIFF(p.end_date, p.start_date) >= 6";
-        }
-        
-        if (!empty($duration_condition)) {
-            $where_clauses[] = "(" . $duration_condition . ")";
-        }
-    }
+// GROUP BY / HAVING（タグ AND のときだけ中身あり）
+$sql .= $groupByHaving;
 
+// 並び順（開始時刻が近い順）
+$sql .= ' ORDER BY d.start_time ASC';
 
-    // 5. タグの検索 (変更点: 名前付きプレースホルダに統一)
-    if (!empty($selected_tags)) {
-        $join_clause = "INNER JOIN attached_tags AS at ON p.product_id = at.product_id";
-        
-        // 選択されたタグIDの数だけ名前付きプレースホルダを作成し、bind_valuesに追加
-        $tag_placeholders = [];
-        $i = 0;
-        foreach ($selected_tags as $tag_id) {
-            $placeholder_name = ':tag_' . $i;
-            $tag_placeholders[] = $placeholder_name;
-            $bind_values[$placeholder_name] = (int)$tag_id; 
-            $i++;
-        }
-        $tag_placeholders_sql = implode(',', $tag_placeholders);
+// デバッグ確認用
+// var_dump($sql, $params);
 
-        $where_clauses[] = "at.tag_id IN (" . $tag_placeholders_sql . ")";
-        
-        $group_having_clause = " GROUP BY p.product_id HAVING COUNT(at.tag_id) = " . count($selected_tags);
-    }
-    
-    // 全てのWHERE句を ' AND ' で結合
-    $where_sql = implode(" AND ", $where_clauses);
-    
-    // 最終的なSQLクエリ
-    $sql_query = "
-        SELECT 
-            p.* FROM 
-            products AS p
-        " . $join_clause . "
-        WHERE 
-            " . $where_sql . "
-        " . $group_having_clause;
-
-
-    // プリペアドステートメントの実行
-    $sql = $pdo->prepare($sql_query);
-    
-
-    // 実行パラメータは名前付きプレースホルダの値のみを使用
-    $sql->execute($bind_values);
-    $products = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-
-    // デバッグ用: 組み立てられたSQLクエリの確認（必要な場合のみコメントを外してください）
-    // echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
-    // echo "<p><strong>Params:</strong> " . htmlspecialchars(print_r($bind_values, true)) . "</p>";
-
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
 
-<?php foreach ($products as $product): ?>
+<?php foreach ($results as $product): ?>
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <div style="flex-grow: 1;">
             <p>
                 <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
-
-                <?php
-                    // 商品に紐づくタグ名を取得し直す
-                    $tag_names_stmt = $pdo->prepare( "SELECT tags.name FROM attached_tags JOIN tags ON attached_tags.tag_id = tags.tag_id WHERE product_id = ? ;" );
-                    $tag_names_stmt->execute([ $product['product_id'] ]);
-                    $product_tags = $tag_names_stmt->fetchAll(PDO::FETCH_ASSOC);
+                <?php 
+                $tag_sql = "
+                    SELECT t.name
+                    FROM tags t
+                    INNER JOIN attached_tags at
+                        ON t.tag_id = at.tag_id
+                    WHERE at.product_id = :product_id
+                ";
+                $tag_stmt = $pdo->prepare($tag_sql);
+                $tag_stmt->execute([':product_id' => $product['product_id']]);
+                $tags = $tag_stmt->fetchAll(PDO::FETCH_ASSOC);
                 ?>
-                <?php foreach( $product_tags as $tag_info ) : ?>
-                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag_info['name']; ?></button></span>
+                <?php foreach( $tags as $tag ) : ?>
+                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag['name']; ?></button></span>
                 <?php endforeach; ?>
             </p>
 
