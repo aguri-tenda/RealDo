@@ -13,7 +13,6 @@
     // --- SQLクエリの動的な組み立て ---
     $where_clauses = ["p.is_active = 1"]; 
     $bind_values = []; // 名前付きプレースホルダの値 (例: ':search_word' => '%キーワード%')
-    $tag_bind_values = []; // タグ検索用の疑問符プレースホルダの値 (例: 1, 2, 3)
     $join_clause = "";
     $group_having_clause = "";
 
@@ -44,7 +43,7 @@
         $bind_values[':end_date'] = $end_date;
     }
 
-    // 4. 期間の検索
+    // 4. 期間の検索 (変更なし)
     if (!empty($event_duration)) {
         $duration_condition = '';
         if ($event_duration === '日帰り') {
@@ -61,23 +60,23 @@
     }
 
 
-    // 5. タグの検索
+    // 5. タグの検索 (変更点: 名前付きプレースホルダに統一)
     if (!empty($selected_tags)) {
-        // attached_tagsテーブルとのINNER JOINを設定
         $join_clause = "INNER JOIN attached_tags AS at ON p.product_id = at.product_id";
         
-        // 選択されたタグIDの数だけプレースホルダ(?)を作成
-        $tag_placeholders = implode(',', array_fill(0, count($selected_tags), '?'));
-        
-        // WHERE句で、選択されたタグIDに絞り込む
-        $where_clauses[] = "at.tag_id IN (" . $tag_placeholders . ")";
-        
-        // タグIDを数値としてバインド配列に追加
+        // 選択されたタグIDの数だけ名前付きプレースホルダを作成し、bind_valuesに追加
+        $tag_placeholders = [];
+        $i = 0;
         foreach ($selected_tags as $tag_id) {
-            $tag_bind_values[] = (int)$tag_id;
+            $placeholder_name = ':tag_' . $i;
+            $tag_placeholders[] = $placeholder_name;
+            $bind_values[$placeholder_name] = (int)$tag_id; 
+            $i++;
         }
+        $tag_placeholders_sql = implode(',', $tag_placeholders);
 
-        // GROUP BYで商品IDごとに集計し、HAVINGで紐づくタグの数が選択されたタグの数と一致するか確認
+        $where_clauses[] = "at.tag_id IN (" . $tag_placeholders_sql . ")";
+        
         $group_having_clause = " GROUP BY p.product_id HAVING COUNT(at.tag_id) = " . count($selected_tags);
     }
     
@@ -99,21 +98,14 @@
     $sql = $pdo->prepare($sql_query);
     
 
-    // 1. 疑問符プレースホルダ（タグID）の値をexecute配列の先頭に追加
-    $execute_params = $tag_bind_values;
-    
-    // 2. 名前付きプレースホルダの値をexecute配列に追加
-    foreach ($bind_values as $key => $value) {
-        $execute_params[$key] = $value;
-    }
-
-
-    $sql->execute($execute_params);
+    // 実行パラメータは名前付きプレースホルダの値のみを使用
+    $sql->execute($bind_values);
     $products = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
     // デバッグ用: 組み立てられたSQLクエリの確認（必要な場合のみコメントを外してください）
-     echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
+    // echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
+    // echo "<p><strong>Params:</strong> " . htmlspecialchars(print_r($bind_values, true)) . "</p>";
 
 ?>
 
