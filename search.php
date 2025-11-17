@@ -12,8 +12,8 @@
 
     // --- SQLクエリの動的な組み立て ---
     $where_clauses = ["p.is_active = 1"]; 
-    $bind_values = [];
-    $tag_bind_values = []; // タグ検索用のバインド値（クエスチョンマーク(?)用）
+    $bind_values = []; // 名前付きプレースホルダの値 (例: ':search_word' => '%キーワード%')
+    $tag_bind_values = []; // タグ検索用の疑問符プレースホルダの値 (例: 1, 2, 3)
     $join_clause = "";
     $group_having_clause = "";
 
@@ -94,23 +94,23 @@
             " . $where_sql . "
         " . $group_having_clause;
 
+
     // プリペアドステートメントの実行
     $sql = $pdo->prepare($sql_query);
     
-    // バインドする値の準備
-    $execute_params = [];
-    
-    // 名前付きプレースホルダ（:search_wordなど）に値をバインド
-    foreach ($bind_values as $key => $value) {
-        $sql->bindValue($key, $value);
-    }
 
-    // タグ用のクエスチョンマーク(?)プレースホルダの値を execute()の配列に追加
+    // 1. 疑問符プレースホルダ（タグID）の値をexecute配列の先頭に追加
     $execute_params = $tag_bind_values;
     
-    // execute
+    // 2. 名前付きプレースホルダの値をexecute配列に追加
+    foreach ($bind_values as $key => $value) {
+        $execute_params[$key] = $value;
+    }
+
+
     $sql->execute($execute_params);
     $products = $sql->fetchAll(PDO::FETCH_ASSOC);
+
 
     // デバッグ用: 組み立てられたSQLクエリの確認（必要な場合のみコメントを外してください）
      echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
