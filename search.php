@@ -117,12 +117,9 @@
 
 ?>
 
+<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
+
 <?php foreach ($products as $product): ?>
-
-    <?php
-    ?>
-
-    <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <div style="flex-grow: 1;">
