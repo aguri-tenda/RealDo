@@ -62,10 +62,17 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <?php endif; ?>
                 </div>
                 <div class="navbar-item">
-                    <a href="./provider-index.php" class="is-flex is-align-items-center">
-                        <span class="icon has-text-info"><i class="fas fa-user-cog"></i></span>
-                        <span>提供者</span>
-                    </a>
+                    <?php if (isset($_SESSION['provider'])): ?>
+                        <a href="./provider-login.php" class="is-flex is-align-items-center">
+                            <span class="icon has-text-info"><i class="fas fa-user-cog"></i></span>
+                            <span>提供者</span>
+                        </a>
+                    <?php else: ?>
+                        <a href="./provider-index.php" class="is-flex is-align-items-center">
+                            <span class="icon has-text-info"><i class="fas fa-user-cog"></i></span>
+                            <span>提供者</span>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
