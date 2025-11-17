@@ -184,20 +184,9 @@
                                         <div class="level-right">
                                                     
                                             <div>
-
-                                            <?php
-                                                $tagsCol = 0;
-                                            ?>
-                                            <?php foreach( $tagname as $tag ) : ?>
+                                                <?php foreach( $tagname as $tag ) : ?>
                                                             
-                                                <span><?= $tag;?> </span>
-                                                    <?php
-                                                        $tagsCol++;
-                                                        if( $tagsCol >= 3 )
-                                                        {
-                                                            echo "\n";
-                                                        }
-                                                    ?>
+                                                    <span><?= $tag;?> </span>
                                                 <?php endforeach; ?>
                                             </div>
                                         </div>
