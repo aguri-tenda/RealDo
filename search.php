@@ -11,10 +11,11 @@
     $event_duration = $_POST['event_duration'] ?? '';
 
     // --- SQLクエリの動的な組み立て ---
-    $where_clauses = ["p.is_active = 1"]; // 常にアクティブな商品のみ
-
-    // プレースホルダにバインドする値の配列
+    $where_clauses = ["p.is_active = 1"]; 
     $bind_values = [];
+    $tag_bind_values = []; // タグ検索用のバインド値（クエスチョンマーク(?)用）
+    $join_clause = "";
+    $group_having_clause = "";
 
     // 1. キーワード検索
     if (!empty($serchWord)) {
@@ -23,7 +24,6 @@
             p.detail LIKE :search_word OR 
             p.location LIKE :search_word
         )";
-        // LIKE検索用にワイルドカードを追加
         $bind_values[':search_word'] = '%' . $serchWord . '%';
     }
 
@@ -33,7 +33,7 @@
         $bind_values[':location'] = $event_location;
     }
 
-    // 3. 日付の範囲検索 (開始日と終了日)
+    // 3. 日付の範囲検索
     if (!empty($start_date)) {
         $where_clauses[] = "p.start_date >= :start_date";
         $bind_values[':start_date'] = $start_date;
@@ -44,10 +44,8 @@
         $bind_values[':end_date'] = $end_date;
     }
 
-    // 4. 期間の検索 
+    // 4. 期間の検索
     if (!empty($event_duration)) {
-    
-        
         $duration_condition = '';
         if ($event_duration === '日帰り') {
             $duration_condition = "DATEDIFF(p.end_date, p.start_date) = 0";
@@ -64,22 +62,23 @@
 
 
     // 5. タグの検索
-    // `$selected_tags`がある場合のみ、JOINとIN句で絞り込む
-    $join_clause = "";
     if (!empty($selected_tags)) {
-        // attached_tagsテーブルとのINNER JOINで、選択されたタグに紐づく商品のみに絞り込む
+        // attached_tagsテーブルとのINNER JOINを設定
         $join_clause = "INNER JOIN attached_tags AS at ON p.product_id = at.product_id";
         
-        // 選択されたタグIDの数だけプレースホルダを作成
+        // 選択されたタグIDの数だけプレースホルダ(?)を作成
         $tag_placeholders = implode(',', array_fill(0, count($selected_tags), '?'));
         
-        // WHERE句にタグのIN条件を追加
+        // WHERE句で、選択されたタグIDに絞り込む
         $where_clauses[] = "at.tag_id IN (" . $tag_placeholders . ")";
         
-        // $bind_valuesにタグIDを数値として追加（PDOのexecuteに直接渡す形）
+        // タグIDを数値としてバインド配列に追加
         foreach ($selected_tags as $tag_id) {
-            $bind_values[] = (int)$tag_id;
+            $tag_bind_values[] = (int)$tag_id;
         }
+
+        // GROUP BYで商品IDごとに集計し、HAVINGで紐づくタグの数が選択されたタグの数と一致するか確認
+        $group_having_clause = " GROUP BY p.product_id HAVING COUNT(at.tag_id) = " . count($selected_tags);
     }
     
     // 全てのWHERE句を ' AND ' で結合
@@ -93,33 +92,27 @@
         " . $join_clause . "
         WHERE 
             " . $where_sql . "
-    ";
-    
-    // タグ検索がある場合、同じ商品が複数回取得されるのを防ぐために GROUP BY を追加
-    if (!empty($selected_tags)) {
-        $sql_query .= " GROUP BY p.product_id";
-    }
+        " . $group_having_clause;
 
     // プリペアドステートメントの実行
     $sql = $pdo->prepare($sql_query);
     
-    // bind_valuesの準備：名前付きプレースホルダ（:search_word, :location, :start_date, :end_date）と
-    // クエスチョンマーク(?)プレースホルダ（タグID）が混在するため、実行方法を調整
-    
+    // バインドする値の準備
     $execute_params = [];
-    foreach ($bind_values as $key => $value) {
-        if (is_string($key) && $key[0] === ':') {
-            $sql->bindValue($key, $value);
-        } else {
-            // タグIDは execute() の配列に追加
-            $execute_params[] = $value;
-        }
-    }
     
+    // 名前付きプレースホルダ（:search_wordなど）に値をバインド
+    foreach ($bind_values as $key => $value) {
+        $sql->bindValue($key, $value);
+    }
+
+    // タグ用のクエスチョンマーク(?)プレースホルダの値を execute()の配列に追加
+    $execute_params = $tag_bind_values;
+    
+    // execute
     $sql->execute($execute_params);
     $products = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    // デバッグ用: 組み立てられたSQLクエリの確認
+    // デバッグ用: 組み立てられたSQLクエリの確認（必要な場合のみコメントを外してください）
     // echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
 
 ?>
@@ -127,13 +120,6 @@
 <?php foreach ($products as $product): ?>
 
     <?php
-        $product_duration = '';
-        if ( !empty( $product['start_date'] ) && !empty( $product['end_date'] ) ) {
-            $start = new DateTime( $product['start_date'] );
-            $end = new DateTime( $product['end_date'] );
-            $interval = $start->diff( $end );
-            $days = $interval->days + 1;
-        }
     ?>
 
     <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
