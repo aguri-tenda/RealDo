@@ -10,7 +10,7 @@
     $event_location = $_POST['event_location'] ?? '';
     $event_duration = $_POST['event_duration'] ?? '';
 
-    $sql = $pdo->prepare("SELECT * FROM products;");
+    $sql = $pdo->prepare("SELECT * FROM products WHERE is_active = 1;");
     $sql->execute();
     $products = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
