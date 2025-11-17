@@ -160,7 +160,7 @@
                                                 </div>
                                                 <div class="level-right">
                                                     <div>
-                                                        <input type="file" name="file" required>
+                                                        <input type="file" name="file" accept="image/*" required>
                                                         <?php if(isset($_GET['failed'])) : ?>
                                                             <p class="help"><font color="red">ファイルはpng、またはjpegを指定してください</font></p>
                                                         <?php endif; ?>
