@@ -16,7 +16,7 @@ $sql = "
         p.product_id,
         p.name,
         p.location,
-        p,detail,
+        p.detail,
         p.address,
         p.image_pass,
         p.max_participants,
