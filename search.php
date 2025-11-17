@@ -4,83 +4,135 @@
 
 <?php
     $serchWord = $_POST['searchWord'] ?? '';
-    $selected_tags = $_POST['tags'] ?? [];
+    $selected_tags = $_POST['tags'] ?? []; // 配列
     $start_date = $_POST['start_date'] ?? '';
     $end_date = $_POST['end_date'] ?? '';
     $event_location = $_POST['event_location'] ?? '';
     $event_duration = $_POST['event_duration'] ?? '';
 
-    $sql = $pdo->prepare("SELECT * FROM products WHERE is_active = 1;");
-    $sql->execute();
+    // --- SQLクエリの動的な組み立て ---
+    $where_clauses = ["p.is_active = 1"]; // 常にアクティブな商品のみ
+
+    // プレースホルダにバインドする値の配列
+    $bind_values = [];
+
+    // 1. キーワード検索
+    if (!empty($serchWord)) {
+        $where_clauses[] = "(
+            p.name LIKE :search_word OR 
+            p.detail LIKE :search_word OR 
+            p.location LIKE :search_word
+        )";
+        // LIKE検索用にワイルドカードを追加
+        $bind_values[':search_word'] = '%' . $serchWord . '%';
+    }
+
+    // 2. 場所の検索
+    if (!empty($event_location)) {
+        $where_clauses[] = "p.location = :location";
+        $bind_values[':location'] = $event_location;
+    }
+
+    // 3. 日付の範囲検索 (開始日と終了日)
+    if (!empty($start_date)) {
+        $where_clauses[] = "p.start_date >= :start_date";
+        $bind_values[':start_date'] = $start_date;
+    }
+
+    if (!empty($end_date)) {
+        $where_clauses[] = "p.end_date <= :end_date";
+        $bind_values[':end_date'] = $end_date;
+    }
+
+    // 4. 期間の検索 
+    if (!empty($event_duration)) {
+    
+        
+        $duration_condition = '';
+        if ($event_duration === '日帰り') {
+            $duration_condition = "DATEDIFF(p.end_date, p.start_date) = 0";
+        } elseif ($event_duration === '2日以上') {
+            $duration_condition = "DATEDIFF(p.end_date, p.start_date) >= 1 AND DATEDIFF(p.end_date, p.start_date) < 6";
+        } elseif ($event_duration === '1週間以上') {
+            $duration_condition = "DATEDIFF(p.end_date, p.start_date) >= 6";
+        }
+        
+        if (!empty($duration_condition)) {
+            $where_clauses[] = "(" . $duration_condition . ")";
+        }
+    }
+
+
+    // 5. タグの検索
+    // `$selected_tags`がある場合のみ、JOINとIN句で絞り込む
+    $join_clause = "";
+    if (!empty($selected_tags)) {
+        // attached_tagsテーブルとのINNER JOINで、選択されたタグに紐づく商品のみに絞り込む
+        $join_clause = "INNER JOIN attached_tags AS at ON p.product_id = at.product_id";
+        
+        // 選択されたタグIDの数だけプレースホルダを作成
+        $tag_placeholders = implode(',', array_fill(0, count($selected_tags), '?'));
+        
+        // WHERE句にタグのIN条件を追加
+        $where_clauses[] = "at.tag_id IN (" . $tag_placeholders . ")";
+        
+        // $bind_valuesにタグIDを数値として追加（PDOのexecuteに直接渡す形）
+        foreach ($selected_tags as $tag_id) {
+            $bind_values[] = (int)$tag_id;
+        }
+    }
+    
+    // 全てのWHERE句を ' AND ' で結合
+    $where_sql = implode(" AND ", $where_clauses);
+    
+    // 最終的なSQLクエリ
+    $sql_query = "
+        SELECT 
+            p.* FROM 
+            products AS p
+        " . $join_clause . "
+        WHERE 
+            " . $where_sql . "
+    ";
+    
+    // タグ検索がある場合、同じ商品が複数回取得されるのを防ぐために GROUP BY を追加
+    if (!empty($selected_tags)) {
+        $sql_query .= " GROUP BY p.product_id";
+    }
+
+    // プリペアドステートメントの実行
+    $sql = $pdo->prepare($sql_query);
+    
+    // bind_valuesの準備：名前付きプレースホルダ（:search_word, :location, :start_date, :end_date）と
+    // クエスチョンマーク(?)プレースホルダ（タグID）が混在するため、実行方法を調整
+    
+    $execute_params = [];
+    foreach ($bind_values as $key => $value) {
+        if (is_string($key) && $key[0] === ':') {
+            $sql->bindValue($key, $value);
+        } else {
+            // タグIDは execute() の配列に追加
+            $execute_params[] = $value;
+        }
+    }
+    
+    $sql->execute($execute_params);
     $products = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    // デバッグ用: 組み立てられたSQLクエリの確認
+    // echo "<p><strong>SQL:</strong> " . htmlspecialchars($sql_query) . "</p>";
+
 ?>
 
 <?php foreach ($products as $product): ?>
 
     <?php
-        // 商品に紐づくタグ情報を取得し、タグIDの配列を作成する
-        $tag_stmt = $pdo->prepare( "SELECT tag_id FROM attached_tags WHERE product_id = ? ;" );
-        $tag_stmt->execute([ $product['product_id'] ]);
-        $product_tag_ids = $tag_stmt->fetchAll(PDO::FETCH_COLUMN);
-
         $product_duration = '';
         if ( !empty( $product['start_date'] ) && !empty( $product['end_date'] ) ) {
             $start = new DateTime( $product['start_date'] );
             $end = new DateTime( $product['end_date'] );
             $interval = $start->diff( $end );
             $days = $interval->days + 1;
-            if( $days == 1) {
-                $product_duration = '日帰り';
-            } else if( $days < 7) {
-                $product_duration = '2日以上';
-            } else if( $days >= 7) {
-                $product_duration = '1週間以上';
-            }
-        }
-
-        function check_tags_match($selected_tags, $product_tag_ids) {
-            // 選択されたタグがない場合は、タグによる絞り込みは行わない（すべてOK）
-            if (empty($selected_tags)) {
-                return true;
-            }
-            // 選択されたタグのいずれか一つでも商品に紐づいていればOK
-            foreach ($selected_tags as $selected_tag_id) {
-                if (in_array($selected_tag_id, $product_tag_ids)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        // 絞り込み条件をチェック
-
-        // キーワード検索
-        $keyword_match = (
-            empty($serchWord) ||
-            (strpos($product['name'], $serchWord) !== false) ||
-            (strpos($product['detail'], $serchWord) !== false) ||
-            (strpos($product['location'], $serchWord) !== false)
-        );
-
-        // 場所、期間、日付の検索
-        $location_match = (empty($event_location) || $product['location'] === $event_location);
-        $duration_match = (empty($event_duration) || $product_duration === $event_duration);
-        $start_date_match = (empty($start_date) || $product['start_date'] >= $start_date);
-        $end_date_match = (empty($end_date) || $product['end_date'] <= $end_date);
-
-        // タグの検索
-        $tags_match = check_tags_match($selected_tags, $product_tag_ids);
-
-        // どれか一つでも合わない条件があれば、その商品をスキップ
-        if (
-            !$keyword_match ||
-            !$location_match ||
-            !$duration_match ||
-            !$start_date_match ||
-            !$end_date_match ||
-            !$tags_match
-        ) {
-            continue;
         }
     ?>
 
