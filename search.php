@@ -1,19 +1,6 @@
 <?php require "parts/header.php"; ?>
-<?php require "parts/provider_navigation.php"; ?>
+<?php require "parts/navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
-
-<?php
-    $serchWord = $_POST['searchWord'] ?? '';
-    $tags[] = $_POST['tags'] ?? [];
-    $start_date = $_POST['start_date'] ?? '';
-    $end_date = $_POST['end_date'] ?? '';
-    $event_location = $_POST['event_location'] ?? '';
-    $event_duration = $_POST['event_duration'] ?? '';
-
-    $sql = $pdo->prepare("SELECT * FROM products;");
-    $sql->execute();
-    $products = $sql->fetchAll(PDO::FETCH_ASSOC);
-?>
 
 <?php
     $serchWord = $_POST['searchWord'] ?? '';
@@ -97,6 +84,8 @@
         }
     ?>
 
+    <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
+
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <div style="flex-grow: 1;">
             <p>
@@ -129,7 +118,7 @@
     </div>
 <?php endforeach; ?>
 
-
+<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果は以上です</h2>
 
 
 <?php require "parts/user_bottom.php"; ?>
