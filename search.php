@@ -16,6 +16,10 @@ $sql = "
         p.product_id,
         p.name,
         p.location,
+        p,detail,
+        p.address,
+        p.image_pass,
+        p.max_participants,
         d.start_time,
         d.finish_time
     FROM products p
@@ -140,13 +144,6 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div style="flex-grow: 1;">
             <p>
                 <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
-
-                <?php
-                    // 商品に紐づくタグ名を取得し直す
-                    $tag_names_stmt = $pdo->prepare( "SELECT tags.name FROM attached_tags JOIN tags ON attached_tags.tag_id = tags.tag_id WHERE product_id = ? ;" );
-                    $tag_names_stmt->execute([ $product['product_id'] ]);
-                    $product_tags = $tag_names_stmt->fetchAll(PDO::FETCH_ASSOC);
-                ?>
                 <?php foreach( $product_tags as $tag_info ) : ?>
                     <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag_info['name']; ?></button></span>
                 <?php endforeach; ?>
