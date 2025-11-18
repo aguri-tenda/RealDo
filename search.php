@@ -305,8 +305,8 @@ foreach ($results as $product) {
 
             <!-- ⭐ 詳細ボタン（左側下部） -->
             <div style="margin-top: 15px;">
-                <a href="detail.php?product_id=<?= htmlspecialchars($product_id) ?>" class="button is-link"
-                    style="border-radius: 8px; padding: 8px 20px;">
+                <a href="detail.php?product_id=<?= htmlspecialchars($product_id) ?>" class="button"
+                    style="border-radius: 8px; padding: 8px 20px; background-color: #41C0FF; color: white; text-decoration: none;">
                     詳細を見る
                 </a>
             </div>
