@@ -20,12 +20,12 @@
 
         <?php
             $products = $pdo->prepare(" SELECT * FROM products WHERE product_id = ?; ");
-            $products->execute([ $_GET['product_id'] ]);
+            $products->execute([ $_POST['product_id'] ]);
 
             if(isset($_POST['addDate']) && isset($_POST['new_start_date']) && isset($_POST['new_start_time']) && isset($_POST['new_finish_date']) && isset($_POST['new_finish_time']))
             {
                 $sql = $pdo->prepare(" INSERT INTO dates( product_id, start_time, finish_time ) VALUE( ?, ?, ? );");
-                $sql->execute([ $_GET['product_id'], $_POST['new_start_date']. " ". $_POST['new_start_time'], $_POST['new_finish_date']. " ". $_POST['new_finish_time'] ]);
+                $sql->execute([ $_POST['product_id'], $_POST['new_start_date']. " ". $_POST['new_start_time'], $_POST['new_finish_date']. " ". $_POST['new_finish_time'] ]);
             }
 
             if(isset($_POST['deleteDate']) && isset($_POST['delete_start_date']) && isset($_POST['delete_start_time']) && isset($_POST['delete_finish_date']) && isset($_POST['delete_finish_time']))
@@ -45,11 +45,11 @@
                     $complementFinishTime = "0". $complementFinishTime;
                 }
 
-                $sql->execute([ $_GET['product_id'], $_POST['delete_start_date']. " ". $complementStartTime, $_POST['delete_finish_date']. " ". $complementFinishTime ]);
+                $sql->execute([ $_POST['product_id'], $_POST['delete_start_date']. " ". $complementStartTime, $_POST['delete_finish_date']. " ". $complementFinishTime ]);
             }
 
             $datetimes = $pdo->prepare(" SELECT * FROM dates WHERE product_id = ? ; ");
-            $datetimes->execute([ $_GET['product_id'] ]);
+            $datetimes->execute([ $_POST['product_id'] ]);
 
             $start_date = [];
             $start_time = [];
@@ -142,7 +142,7 @@
                         </div>
 
                         <div v-else>
-                            <form action="product-update-output.php?product_id=<?= $_GET['product_id']; ?>" method="post" enctype="multipart/form-data">
+                            <form action="product-update-output.php?product_id=<?= $_POST['product_id']; ?>" method="post" enctype="multipart/form-data">
                     
                                 <?php foreach($products as $product) : ?>
                                 <div class="level">
