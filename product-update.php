@@ -105,7 +105,7 @@
                                     
                                 <div>
                                     <span>
-                                        <form action="#" method="post">
+                                        <form action="?product_id=<?= $_GET['product_id']; ?>" method="post">
                                             
                                             <input type="date" value="<?= $start_date[$index]; ?>" name="delete_start_date" readonly>
                                             <input type="text" value="<?= $start_time[$index]; ?>" name="delete_start_time" size="5" readonly>～
