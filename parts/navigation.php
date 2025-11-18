@@ -100,7 +100,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <div class="control">
                         <div class="tags">
                             <label class="checkbox">
-                                <input type="checkbox" name="tags[]" value="<?= htmlspecialchars($tag['tagid']) ?>">
+                                <input type="checkbox" name="tags[]" value="<?= htmlspecialchars($tag['tag_id']) ?>">
                                 <?= htmlspecialchars($tag['name']) ?>
                             </label>
                         </div>
