@@ -136,7 +136,7 @@
                                         $price = intval($product['price']);
                                         
 
-                                        if( isset($_POST['max']) )
+                                        if( $_POST['max'] != null )
                                         {
                                             $max = $_POST['max'];
                                         }
@@ -180,7 +180,7 @@
                                             $image_pass = $newPath;
                                         }
 
-                                        if( isset($_POST['price']) )
+                                        if( $_POST['price'] != null )
                                         {
                                             $price = $_POST['price'];
                                         }
