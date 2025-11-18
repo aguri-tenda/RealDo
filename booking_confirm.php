@@ -7,47 +7,79 @@ $date = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
 $date->add(new DateInterval('P1D')); // 明日
 ?>
 
-<link rel="stylesheet" href="parts/style.css">
-
 <div class="container">
-    <h1>予約フォーム</h1>
+    <h1 class="title is-3 has-text-centered">予約フォーム</h1>
 
-    <form method="post" action="booking_confirm.php">
+    <form method="post" action="booking_complete.php">
 
-        <div>
-            <label>参加人数</label>
-            <input type="number" name="people" value="1" min="1">
-        </div>
-
-        <div>
-            <label>参加日時</label>
-            <div class="datetime-box">
-                <input type="date" name="date" value="<?php echo $date->format('Y-m-d'); ?>">
-                <select name="time">
-                    <option value="">時間を選択</option>
-                    <?php
-                    for ($h = 0; $h < 24; $h++) {
-                        foreach ([0, 30] as $m) {
-                            $value = sprintf('%02d:%02d', $h, $m);
-                            $label = sprintf('%02d時%02d分', $h, $m);
-                            echo "<option value='{$value}'>{$label}</option>";
-                        }
-                    }
-                    ?>
-                </select>
+        <!-- 参加人数 -->
+        <div class="field">
+            <label class="label">参加人数</label>
+            <div class="control">
+                <input class="input" type="number" name="people" value="1" min="1">
             </div>
         </div>
 
-        <div>
-            <label>参加者情報</label>
-            <input type="text" name="last_name" placeholder="姓（例：田中）">
-            <input type="text" name="kana_last" placeholder="フリガナ（例：タナカ）">
-            <input type="text" name="first_name" placeholder="名（例：太郎）">
-            <input type="text" name="kana_first" placeholder="フリガナ（例：タロウ）">
-            <input type="text" name="tel" placeholder="電話番号（例：000-0000-0000）">
+        <!-- 参加日時 -->
+        <div class="field">
+            <label class="label">参加日時</label>
+            <div class="datetime-box">
+
+                <!-- 日付 -->
+                <div class="control" style="flex:1;">
+                    <input class="input" type="date" name="date" value="<?php echo $date->format('Y-m-d'); ?>">
+                </div>
+
+                <!-- 時間 -->
+                <div class="control" style="flex:1;">
+                    <div class="select is-fullwidth">
+                        <select name="time">
+                            <option value="">時間を選択</option>
+                            <?php
+                            for ($h = 0; $h < 24; $h++) {
+                                foreach ([0, 30] as $m) {
+                                    $value = sprintf('%02d:%02d', $h, $m);
+                                    $label = sprintf('%02d時%02d分', $h, $m);
+                                    echo "<option value='{$value}'>{$label}</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <button type="submit">確定</button>
+        <!-- 参加者情報 -->
+        <div class="field">
+            <label class="label">参加者情報</label>
+
+            <div class="control mb-2">
+                <input class="input" type="text" name="last_name" placeholder="姓（例：田中）">
+            </div>
+
+            <div class="control mb-2">
+                <input class="input" type="text" name="kana_last" placeholder="フリガナ（例：タナカ）">
+            </div>
+
+            <div class="control mb-2">
+                <input class="input" type="text" name="first_name" placeholder="名（例：太郎）">
+            </div>
+
+            <div class="control mb-2">
+                <input class="input" type="text" name="kana_first" placeholder="フリガナ（例：タロウ）">
+            </div>
+
+            <div class="control">
+                <input class="input" type="text" name="tel" placeholder="電話番号（例：000-0000-0000）">
+            </div>
+        </div>
+
+        <!-- ボタン -->
+        <div class="field has-text-centered">
+            <button class="button is-info is-medium" type="submit">確定</button>
+        </div>
     </form>
 </div>
 
