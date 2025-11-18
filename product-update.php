@@ -105,7 +105,8 @@
                                     
                                 <div>
                                     <span>
-                                        <form action="?product_id=<?= $_GET['product_id']; ?>" method="post">
+                                        <form action="#" method="post">
+                                            <input type="hidden" value="<?= $_POST['product_id']; ?>" name="product_id">
                                             
                                             <input type="date" value="<?= $start_date[$index]; ?>" name="delete_start_date" readonly>
                                             <input type="text" value="<?= $start_time[$index]; ?>" name="delete_start_time" size="5" readonly>～
@@ -128,6 +129,7 @@
                             <hr>
 
                             <form action="#" method="post">
+                                <input type="hidden" value="<?= $_POST['product_id']; ?>" name="product_id">
 
                                 <input type="date" v-model="start_date" name="new_start_date">
                                 <input type="text" v-model="start_time" name="new_start_time" placeholder="0:00" size="5">～

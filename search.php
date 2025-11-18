@@ -173,7 +173,7 @@ if (!empty($where)) {
 $sql .= ' ORDER BY d.start_time ASC';
 
 // デバッグ確認用
- var_dump($sql, $params);
+// var_dump($sql, $params);
 
 $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
