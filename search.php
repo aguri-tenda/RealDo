@@ -92,8 +92,8 @@ $groupByHaving = '';
 if (!empty($selected_tags)) {
     // tags/attached_tags を JOIN
     $sql .= "
-        INNER JOIN attached_tags at
-            ON p.product_id = at.product_id
+        INNER JOIN attached_tags att
+            ON p.product_id = att.product_id
     ";
 
     // IN (...) 用プレースホルダ
@@ -104,13 +104,13 @@ if (!empty($selected_tags)) {
         $params[$ph] = (int)$tag_id;
     }
 
-    // WHERE に at.tag_id IN (...)
-    $where[] = 'at.tag_id IN (' . implode(',', $placeholders) . ')';
+    // WHERE に att.tag_id IN (...)
+    $where[] = 'att.tag_id IN (' . implode(',', $placeholders) . ')';
 
     // GROUP BY / HAVING で「選択したタグ数と一致」
     $groupByHaving = "
         GROUP BY p.product_id
-        HAVING COUNT(DISTINCT at.tag_id) = :tag_count
+        HAVING COUNT(DISTINCT att.tag_id) = :tag_count
     ";
     $params[':tag_count'] = count($selected_tags);
 }
