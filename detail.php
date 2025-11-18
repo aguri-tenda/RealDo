@@ -26,13 +26,11 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<div class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
-    <div class="box" style="padding: 2rem;">
-        <div class="column is-one-third">
-            <figure class="image is-4by3">
-                <img src="<?= htmlspecialchars($product['image_pass']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-            </figure>
-        </div>
+<div class="container has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <div class="field is-horizontal" style="padding: 2rem;">
+        <figure class="image is-4by3">
+            <img src="<?= htmlspecialchars($product['image_pass']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+        </figure>
     </div>
 </div>
 
