@@ -284,7 +284,7 @@
 
                                                                 <?php 
                                                                     $attached = $pdo->prepare(" SELECT * FROM attached_tags WHERE product_id = ? AND tag_id = ?; ");
-                                                                    $attached->execute([ $_GET['product_id'], $tag['tag_id'] ]);
+                                                                    $attached->execute([ $_POST['product_id'], $tag['tag_id'] ]);
 
                                                                     $isAttached = $attached->fetchAll( PDO::FETCH_ASSOC );
                                                                 ?>
