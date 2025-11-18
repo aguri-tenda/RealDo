@@ -244,7 +244,7 @@ foreach ($results as $product) {
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <a href="detail.php?product_id=<?= htmlspecialchars($product_id) ?>" 
-            style="text-decoration: none; color: inherit; display: flex; flex-grow: 1; align-items: center;">
+            style="text-decoration: none; color: #278EDD; display: flex; flex-grow: 1; align-items: center;">
             <div style="flex-grow: 1;">
                 <p>
                     <span class="title is-4"><?= htmlspecialchars($product_data['product_info']['name']) ?></span>
