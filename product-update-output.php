@@ -171,7 +171,7 @@
                                             $detail = $_POST['detail'];
                                         }
 
-                                        if( is_uploaded_file( $_FILES['file']['tmp_name']) )
+                                        if( isset($file) )
                                         {
                                             $oldPath = $file;
                                             $newPath = "product-img/". $_GET['product_id']. basename($_FILES['file']['name']);
