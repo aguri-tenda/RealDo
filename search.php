@@ -218,35 +218,63 @@ if (!empty($product_ids)) {
         $product_tags[$product_id][] = ['name' => $tag['name']];
     }
 }
+
+// =====================
+// 商品IDでグルーピング
+// =====================
+$grouped_results = [];
+foreach ($results as $product) {
+    $product_id = $product['product_id'];
+    if (!isset($grouped_results[$product_id])) {
+        // 初めての商品の場合、基本情報を格納
+        $grouped_results[$product_id] = [
+            'product_info' => $product, // 商品名、場所などの情報
+            'dates'        => [],      // 合致した日程リスト
+        ];
+    }
+    // 日程情報を追加
+    $grouped_results[$product_id]['dates'][] = [
+        'start_time'  => $product['start_time'],
+        'finish_time' => $product['finish_time'],
+    ];
+}
 ?>
 
 <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
 
-<?php foreach ($results as $product): ?>
+<?php foreach ($grouped_results as $product_id => $product_data): ?>
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <div style="flex-grow: 1;">
             <p>
-                <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
+                <span class="title is-4"><?= htmlspecialchars($product_data['product_info']['name']) ?></span>
                 <?php 
-                $tags = $product_tags[$product['product_id']] ?? []; 
+                $tags = $product_tags[$product_id] ?? []; 
                 ?>
                 <?php foreach( $tags as $tag ) : ?>
                     <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= htmlspecialchars($tag['name']); ?></button></span>
                 <?php endforeach; ?>
             </p>
 
-            <p style="max-height: 300px;"><?= htmlspecialchars($product['detail']) ?></p>
+            <p style="max-height: 300px;"><?= htmlspecialchars($product_data['product_info']['detail']) ?></p>
 
-            <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?>
-                <strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?>
+            <p><strong>場所:</strong> <?= htmlspecialchars($product_data['product_info']['location']) ?>
+                <strong>所在地:</strong> <?= htmlspecialchars($product_data['product_info']['address']) ?>
                 <strong>参加人数:</strong>
-                <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
+                <?= htmlspecialchars($product_data['product_info']['max_participants']) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
+                <strong>開催日程:</strong>
+                <select>
+                <?php foreach ($product_data['dates'] as $date): ?>
+                    <option>
+                        <?= htmlspecialchars($date['start_time']) ?> 〜 <?= htmlspecialchars($date['finish_time']) ?>
+                    </option>
+                <?php endforeach; ?>
+                </select>
             </p>
         </div>
         <div style="flex-shrink: 0; margin-left: 20px;">
-            <img src="<?= htmlspecialchars($product['image_pass']) ?>"
-                alt="<?= htmlspecialchars($product['name']) ?>"
+            <img src="<?= htmlspecialchars($product_data['product_info']['image_pass']) ?>"
+                alt="<?= htmlspecialchars($product_data['product_info']['name']) ?>"
                 style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
         </div>
     </div>
