@@ -100,7 +100,7 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <div class="control">
                         <div class="tags">
                             <label class="checkbox">
-                                <input type="checkbox" name="tags[]" value="<?= htmlspecialchars($tag['tagid']) ?>">
+                                <input type="checkbox" name="tags[]" value="<?= htmlspecialchars($tag['tag_id']) ?>">
                                 <?= htmlspecialchars($tag['name']) ?>
                             </label>
                         </div>
@@ -155,9 +155,9 @@ $tags = $sql->fetchAll(PDO::FETCH_ASSOC);
                 <div class="control">
                     <select class="input" name="event_duration" style="border-radius: 10px;">
                         <option value="" selected>すべて</option>
-                        <option value="日帰り">日帰り</option>
-                        <option value="2日以上">2日以上</option>
-                        <option value="1週間以上">1週間以上</option>
+                        <option value="oneday">日帰り</option>
+                        <option value="multiday">2日以上</option>
+                        <option value="long">1週間以上</option>
                     </select>
                 </div>
             </div>
