@@ -243,38 +243,41 @@ foreach ($results as $product) {
 <?php foreach ($grouped_results as $product_id => $product_data): ?>
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
-        <div style="flex-grow: 1;">
-            <p>
-                <span class="title is-4"><?= htmlspecialchars($product_data['product_info']['name']) ?></span>
-                <?php 
-                $tags = $product_tags[$product_id] ?? []; 
-                ?>
-                <?php foreach( $tags as $tag ) : ?>
-                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= htmlspecialchars($tag['name']); ?></button></span>
-                <?php endforeach; ?>
-            </p>
+        <a href="detail.php?product_id=<?= htmlspecialchars($product_id) ?>" 
+            style="text-decoration: none; color: inherit; display: flex; flex-grow: 1; align-items: center;">
+            <div style="flex-grow: 1;">
+                <p>
+                    <span class="title is-4"><?= htmlspecialchars($product_data['product_info']['name']) ?></span>
+                    <?php 
+                    $tags = $product_tags[$product_id] ?? []; 
+                    ?>
+                    <?php foreach( $tags as $tag ) : ?>
+                        <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= htmlspecialchars($tag['name']); ?></button></span>
+                    <?php endforeach; ?>
+                </p>
 
-            <p style="max-height: 300px;"><?= htmlspecialchars($product_data['product_info']['detail']) ?></p>
+                <p style="max-height: 300px;"><?= htmlspecialchars($product_data['product_info']['detail']) ?></p>
 
-            <p><strong>場所:</strong> <?= htmlspecialchars($product_data['product_info']['location']) ?>
-                <strong>所在地:</strong> <?= htmlspecialchars($product_data['product_info']['address']) ?>
-                <strong>参加人数:</strong>
-                <?= htmlspecialchars($product_data['product_info']['max_participants']) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
-                <strong>開催日程:</strong>
-                <select>
-                <?php foreach ($product_data['dates'] as $date): ?>
-                    <option>
-                        <?= htmlspecialchars($date['start_time']) ?> 〜 <?= htmlspecialchars($date['finish_time']) ?>
-                    </option>
-                <?php endforeach; ?>
-                </select>
-            </p>
-        </div>
-        <div style="flex-shrink: 0; margin-left: 20px;">
-            <img src="<?= htmlspecialchars($product_data['product_info']['image_pass']) ?>"
-                alt="<?= htmlspecialchars($product_data['product_info']['name']) ?>"
-                style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
-        </div>
+                <p><strong>場所:</strong> <?= htmlspecialchars($product_data['product_info']['location']) ?>
+                    <strong>所在地:</strong> <?= htmlspecialchars($product_data['product_info']['address']) ?>
+                    <strong>参加人数:</strong>
+                    <?= htmlspecialchars($product_data['product_info']['max_participants']) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
+                    <strong>開催日程:</strong>
+                    <select>
+                    <?php foreach ($product_data['dates'] as $date): ?>
+                        <option>
+                            <?= htmlspecialchars($date['start_time']) ?> 〜 <?= htmlspecialchars($date['finish_time']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
+                </p>
+            </div>
+            <div style="flex-shrink: 0; margin-left: 20px;">
+                <img src="<?= htmlspecialchars($product_data['product_info']['image_pass']) ?>"
+                    alt="<?= htmlspecialchars($product_data['product_info']['name']) ?>"
+                    style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
+            </div>
+        </a>
     </div>
 <?php endforeach; ?>
 
