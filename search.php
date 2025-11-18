@@ -31,7 +31,6 @@ if (!empty($selected_tags)) {
             d.finish_time
         FROM dates d
         INNER JOIN (
-            -- サブクエリ t1: タグ条件を満たす商品のみを抽出
             SELECT
                 p.product_id,
                 p.name,
