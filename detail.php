@@ -38,12 +38,12 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
             <p>
                 <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
 
-                <?php foreach( $tag as $tags ) : ?>
-                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tags['name']; ?></button></span>
+                <?php foreach( $tags as $tag ) : ?>
+                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag['tag_name']; ?></button></span>
                 <?php endforeach; ?>
             </p>
 
-            <p><<?= nl2br(htmlspecialchars($product['description'])) ?></p>
+            <p><<?= nl2br(htmlspecialchars($product['detail'])) ?></p>
 
             <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
             <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
