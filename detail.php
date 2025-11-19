@@ -12,7 +12,7 @@ $sql = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
 $sql->execute([$product_id]);
 $product = $sql->fetch(PDO::FETCH_ASSOC);
 $tags_sql = $pdo->prepare(
-    "SELECT t.tag_name
+    "SELECT t.name
     FROM attached_tags att
     INNER JOIN tags t
         ON att.tag_id = t.tag_id
