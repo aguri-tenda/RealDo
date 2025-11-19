@@ -20,7 +20,7 @@ $tags_sql = $pdo->prepare(
 );
 $tags_sql->execute([$product_id]);
 $tags = $tags_sql->fetchAll(PDO::FETCH_ASSOC);
-$dates_sql = $pdo->prepare("SELECT * FROM dates WHERE product_id = ? ORDER BY date ASC");
+$dates_sql = $pdo->prepare("SELECT * FROM dates WHERE product_id = ? ORDER BY start_time ASC");
 $dates_sql->execute([$product_id]);
 $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
