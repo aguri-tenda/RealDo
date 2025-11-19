@@ -43,11 +43,18 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             </p>
 
+            <p><<?= nl2br(htmlspecialchars($product['description'])) ?></p>
+
             <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
             <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
             <p><strong>参加人数:</strong>
                 <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
             </p>
+        </div>
+
+        <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
+            <span class="title is-6">￥<?= htmlspecialchars($product['price']) ?></span>
+            <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button" style="background-color:#27ea6bff; color: white;">予約</a>
         </div>
     </div>
 </div>
