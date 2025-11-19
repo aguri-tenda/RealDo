@@ -39,7 +39,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
                 <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
 
                 <?php foreach( $tags as $tag ) : ?>
-                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag['tag_name']; ?></button></span>
+                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag['name']; ?></button></span>
                 <?php endforeach; ?>
             </p>
 
