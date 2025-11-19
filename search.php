@@ -84,8 +84,8 @@ if ($searchWord !== '') {
 // 開催地
 // =========
 if ($event_location !== '') {
-    $where[] = (!empty($selected_tags) ? 't1.location' : 'p.location') . ' = :location';
-    $params[':location'] = $event_location;
+    $where[] = (!empty($selected_tags) ? 't1.area' : 'p.area') . ' = :area';
+    $params[':area'] = $event_location;
 }
 
 // ====================
