@@ -24,10 +24,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
 <?php require "parts/db-connect.php"; ?>
+<?php require "parts/address.php"; ?>
 
 <?php
-    $sql = $pdo->prepare( "INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participants ) VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;" );
-    $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'] ]);
+    $sql = $pdo->prepare(
+        "INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participants, area )
+        VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;"
+    );
+    $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'], $area ]);
 
     $product_id = $pdo->lastInsertId();
 
