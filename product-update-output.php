@@ -152,9 +152,9 @@
                                             $location = $_POST['location'];
                                         }
 
-                                        if( !empty($_POST['post_code']) )
+                                        if( !empty($_POST['post-code']) )
                                         {
-                                            $post_code = $_POST['post_code'];
+                                            $post_code = $_POST['post-code'];
                                         }
 
                                         if( !empty($_POST['address']) )
