@@ -11,6 +11,11 @@ if ($product_id === null) {
 $sql = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
 $sql->execute([$product_id]);
 $product = $sql->fetch(PDO::FETCH_ASSOC);
+if (!$product) {
+    echo "<p>Product not found.</p>";
+    exit;
+}
+
 $tags_sql = $pdo->prepare(
     "SELECT t.name
     FROM attached_tags att
@@ -20,9 +25,20 @@ $tags_sql = $pdo->prepare(
 );
 $tags_sql->execute([$product_id]);
 $tags = $tags_sql->fetchAll(PDO::FETCH_ASSOC);
+
 $dates_sql = $pdo->prepare("SELECT * FROM dates WHERE product_id = ? ORDER BY start_time ASC");
 $dates_sql->execute([$product_id]);
 $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
+
+$reviews_sql = $pdo->prepare(
+    "SELECT r.rating, r.text, r.date, u.name
+    FROM reviews r
+    INNER JOIN users u
+        ON r.user_id = u.user_id
+    WHERE r.product_id = ?"
+);
+$reviews_sql->execute([$product_id]);
+$reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -81,7 +97,49 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
             </table>
         <?php endif; ?>
     </div>
-</div>
+
+    <form method="post" action="review_insert.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="box columns" style="margin: 25px;">
+        <h2 class="title is-4">レビュー一覧</h2>
+        <?php if (count($reviews) === 0) : ?>
+            <p>まだレビューはありません。</p>
+        <?php else : ?>
+            <?php $count = 0; ?>
+            <?php foreach ($reviews as $review) : ?>
+                <?php if ($count >= 5) break; ?>
+                <?php $count++; ?>
+                <div class="box column" style="margin-bottom: 15px;">
+                    <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?></p>
+                    <p>評価: <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?></p>
+                    <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
+                </div>
+                <?php if ($count < min(5, count($reviews))) : ?>
+                    <hr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <div class="field has-text-centered" style="margin-top: 2rem;">
+            <button class="button is-info" style="background-color: #27ea6bff; width: 225px; border-radius: 5px;">
+                レビューを投稿する
+            </button>
+        </div>
+    </form>
+    <form method="post" action="search.php" class="box columns" style="margin: 25px;">
+        <input type="hidden" name="searchWord" value="<?php echo htmlspecialchars($_SESSION['search_params']['searchWord'] ?? ''); ?>">
+        <input type="hidden" name="start_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['start_date'] ?? ''); ?>">
+        <input type="hidden" name="end_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['end_date'] ?? ''); ?>">
+        <input type="hidden" name="event_location" value="<?php echo htmlspecialchars($_SESSION['search_params']['event_location'] ?? ''); ?>">
+        <input type="hidden" name="event_duration" value="<?php echo htmlspecialchars($_SESSION['search_params']['event_duration'] ?? ''); ?>">
+        <?php
+            foreach ($_SESSION['search_params']['tags'] as $tag) {
+                echo '<input type="hidden" name="tags[]" value="' . htmlspecialchars($tag) . '">';
+            }
+        ?>
+        <div class="field has-text-centered" style="margin-top: 2rem;">
+            <button class="button is-info" style="background-color: #278EDD; width: 225px; border-radius: 5px;">
+                検索結果に戻る
+            </button>
+        </div>
+    </form>
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
