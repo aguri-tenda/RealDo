@@ -136,7 +136,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
                 echo '<input type="hidden" name="tags[]" value="' . htmlspecialchars($tag) . '">';
             }
         ?>
-        <div class="field has-text-centered" style="margin-top: 2rem;">
+        <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
             <button class="button is-info" style="background-color: #278EDD; width: 225px; border-radius: 5px;">
                 検索結果に戻る
             </button>
