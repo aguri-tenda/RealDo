@@ -111,7 +111,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($reviews as $review) : ?>
                     <?php if ($count >= 5) break; ?>
                     <?php $count++; ?>
-                    <div class="box column" style="margin-bottom: 15px; background-color: #b5ffadff; width: 100%;">
+                    <div class="card column" style="margin-bottom: 15px; background-color: #b5ffadff; width: 100%;">
                         <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?></p>
                         <p>評価: <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?></p>
                         <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
@@ -128,7 +128,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
             </button>
         </div>
     </form>
-    <form method="post" action="search.php" class="columns">
+    <form method="post" action="search.php" class="columns" style="justify-content: center;">
         <input type="hidden" name="searchWord" value="<?php echo htmlspecialchars($_SESSION['search_params']['searchWord'] ?? ''); ?>">
         <input type="hidden" name="start_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['start_date'] ?? ''); ?>">
         <input type="hidden" name="end_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['end_date'] ?? ''); ?>">
