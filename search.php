@@ -10,6 +10,15 @@ $end_date = $_POST['end_date'] ?? '';
 $event_location = $_POST['event_location'] ?? '';
 $event_duration = $_POST['event_duration'] ?? '';
 
+$_SESSION['search_params'] = [
+    'searchWord' => $searchWord,
+    'tags' => $selected_tags,
+    'start_date' => $start_date,
+    'end_date' => $end_date,
+    'event_location' => $event_location,
+    'event_duration' => $event_duration,
+];
+
 $params = [];
 $where = [];
 

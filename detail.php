@@ -57,6 +57,30 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
             <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button" style="background-color:#27ea6bff; color: white;">予約</a>
         </div>
     </div>
+
+    <div class="box" style="margin: 25px;">
+        <h2 class="title is-4">開催日程</h2>
+        <?php if (count($dates) === 0) : ?>
+            <p>現在、開催予定の日程はありません。</p>
+        <?php else : ?>
+            <table class="table is-fullwidth is-striped">
+                <thead>
+                    <tr>
+                        <th>開始日時</th>
+                        <th>終了日時</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($dates as $date) : ?>
+                        <tr>
+                            <td><?= htmlspecialchars($date['start_time']) ?></td>
+                            <td><?= htmlspecialchars($date['end_time']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </div>
 </div>
 
 <?php require "parts/provider_bottom.php"; ?>
