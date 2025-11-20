@@ -74,7 +74,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($dates as $date) : ?>
                         <tr>
                             <td><?= htmlspecialchars($date['start_time']) ?></td>
-                            <td><?= htmlspecialchars($date['end_time']) ?></td>
+                            <td><?= htmlspecialchars($date['finish_time']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
