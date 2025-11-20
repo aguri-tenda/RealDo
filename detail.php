@@ -117,14 +117,14 @@ if(count($reviews) > 0) {
 
         <div class="field is-horizontal column" style="margin-top: 2rem;">
             <div class="field-label is-medium">
-                <label class="label" style="color:#278EDD;">評価</label>
+                <label class="label" style="color:#278EDD;">みんなの評価</label>
             </div>
             <div class="field-body">
                 <div class="field">
                     <div id="vue-rating-app">
                         <rating-selector rating=<?= htmlspecialchars($rating_avg) ?> disabled="true"></rating-selector>
                     </div>
-                    <input type="hidden" name="rating" id="rating-value" value=<?= htmlspecialchars($rating_avg) ?>; ?>>
+                    <input type="hidden" name="rating" id="rating-value" value=<?= htmlspecialchars($rating_avg) ?>; ?>
                 </div>
             </div>
         </div>
@@ -146,8 +146,8 @@ if(count($reviews) > 0) {
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
-        <div class="field" style="margin-top: 2rem;">
-            <button class="button is-info media-right" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
+        <div class="columns" style="margin-top: 2rem;">
+            <button class="button is-info column" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
                 レビューを投稿する
             </button>
         </div>
