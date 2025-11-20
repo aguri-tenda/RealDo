@@ -70,7 +70,10 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
             <span class="title is-6">￥<?= htmlspecialchars($product['price']) ?></span>
-            <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button" style="background-color:#27ea6bff; color: white;">予約</a>
+            <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>"
+                class="button" style="background-color:#339ef0ff; color: white;">
+                予約
+            </a>
         </div>
     </div>
 
@@ -108,7 +111,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($reviews as $review) : ?>
                     <?php if ($count >= 5) break; ?>
                     <?php $count++; ?>
-                    <div class="box column" style="margin-bottom: 15px;">
+                    <div class="box column" style="margin-bottom: 15px; background-color: #b5ffadff; width: 100%;">
                         <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?></p>
                         <p>評価: <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?></p>
                         <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
@@ -120,7 +123,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
             </div>
         <?php endif; ?>
         <div class="field media-right" style="margin-top: 2rem;">
-            <button class="button is-info" style="background-color: #27ea6bff; width: 225px; border-radius: 5px;">
+            <button class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
                 レビューを投稿する
             </button>
         </div>
@@ -137,7 +140,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
             }
         ?>
         <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 4rem;">
-            <button class="button is-info" style="background-color: #278EDD; width: 225px; border-radius: 5px;">
+            <button class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
                 検索結果に戻る
             </button>
         </div>

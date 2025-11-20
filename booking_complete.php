@@ -7,7 +7,7 @@ require "parts/db-connect.php";
 <div class="container">
     <h1 class="title is-3 has-text-centered">予約完了</h1>
 
-    <form method="post" action="booking_confirm.php">
+    <form method="post" action="booking_action.php">
 
         <!-- 参加人数 -->
         <div class="field">
