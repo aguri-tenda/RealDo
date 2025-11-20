@@ -59,7 +59,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
                 <?php endforeach; ?>
             </p>
 
-            <p><<?= nl2br(htmlspecialchars($product['detail'])) ?></p>
+            <p><?= nl2br(htmlspecialchars($product['detail'])) ?></p>
 
             <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
             <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
