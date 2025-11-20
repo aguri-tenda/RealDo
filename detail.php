@@ -111,7 +111,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($reviews as $review) : ?>
                     <?php if ($count >= 5) break; ?>
                     <?php $count++; ?>
-                    <div class="card column" style="margin-bottom: 15px; background-color: #b5ffadff; width: 100%;">
+                    <div class="card column" style="margin-bottom: 15px; background-color: #d2ffcdff; width: 100%;">
                         <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?></p>
                         <p>評価: <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?></p>
                         <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
