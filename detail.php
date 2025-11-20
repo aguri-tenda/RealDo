@@ -39,6 +39,14 @@ $reviews_sql = $pdo->prepare(
 );
 $reviews_sql->execute([$product_id]);
 $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
+
+if(count($reviews) > 0) {
+    $total_rating = 0;
+    foreach ($reviews as $review) {
+        $total_rating += $review['rating'];
+    }
+    $rating_avg = $total_rating / count($reviews);
+}
 ?>
 
 
@@ -106,6 +114,22 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
         <?php if (count($reviews) === 0) : ?>
             <p>まだレビューはありません。</p>
         <?php else : ?>
+
+        <div class="field is-horizontal column" style="margin-top: 2rem;">
+            <div class="field-label is-medium">
+                <label class="label" style="color:#278EDD;">評価</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div id="vue-rating-app">
+                        <rating-selector rating=<?= htmlspecialchars($rating_avg) ?> disabled="true"></rating-selector>
+                    </div>
+                    <input type="hidden" name="rating" id="rating-value" value=<?= htmlspecialchars($rating_avg) ?>; ?>>
+                </div>
+            </div>
+        </div>
+                
+                
             <?php $count = 0; ?>
             <div class="columns is-multiline">
                 <?php foreach ($reviews as $review) : ?>
@@ -145,6 +169,11 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
             </button>
         </div>
     </form>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
+<script src="script/review_insert-script.js"></script>
 
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
