@@ -98,26 +98,28 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
         <?php endif; ?>
     </div>
 
-    <form method="post" action="review_insert.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="box columns" style="margin: 25px;">
+    <form method="post" action="review_insert.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="box" style="margin: 25px;">
         <h2 class="title is-4">レビュー一覧</h2>
         <?php if (count($reviews) === 0) : ?>
             <p>まだレビューはありません。</p>
         <?php else : ?>
             <?php $count = 0; ?>
-            <?php foreach ($reviews as $review) : ?>
-                <?php if ($count >= 5) break; ?>
-                <?php $count++; ?>
-                <div class="box column" style="margin-bottom: 15px;">
-                    <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?></p>
-                    <p>評価: <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?></p>
-                    <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
-                </div>
-                <?php if ($count < min(5, count($reviews))) : ?>
-                    <hr>
-                <?php endif; ?>
-            <?php endforeach; ?>
+            <div class="columns is-multiline">
+                <?php foreach ($reviews as $review) : ?>
+                    <?php if ($count >= 5) break; ?>
+                    <?php $count++; ?>
+                    <div class="box column" style="margin-bottom: 15px;">
+                        <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?></p>
+                        <p>評価: <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?></p>
+                        <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
+                    </div>
+                    <?php if ($count < min(5, count($reviews))) : ?>
+                        <hr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         <?php endif; ?>
-        <div class="field has-text-centered" style="margin-top: 2rem;">
+        <div class="field media-right" style="margin-top: 2rem;">
             <button class="button is-info" style="background-color: #27ea6bff; width: 225px; border-radius: 5px;">
                 レビューを投稿する
             </button>
