@@ -42,7 +42,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<div class="container has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
+<div class="container has-text-centered" style="margin-top: 2rem; margin-bottom: 60px;">
     <div class="field is-horizontal is-justify-content-center mt-5">
         <figure class="image is-128 is-inline-block">
             <img src="<?= htmlspecialchars($product['image_pass']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
