@@ -128,7 +128,7 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
             </button>
         </div>
     </form>
-    <form method="post" action="search.php" class="columns" style="justify-content: center;">
+    <form method="post" action="search.php" class="columns" style="justify-content: center; width: 100%;">
         <input type="hidden" name="searchWord" value="<?php echo htmlspecialchars($_SESSION['search_params']['searchWord'] ?? ''); ?>">
         <input type="hidden" name="start_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['start_date'] ?? ''); ?>">
         <input type="hidden" name="end_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['end_date'] ?? ''); ?>">
