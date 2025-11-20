@@ -146,8 +146,8 @@ if(count($reviews) > 0) {
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
-        <div class="field media-right" style="margin-top: 2rem;">
-            <button class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
+        <div class="field" style="margin-top: 2rem;">
+            <button class="button is-info media-right" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
                 レビューを投稿する
             </button>
         </div>
