@@ -141,5 +141,5 @@ $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </form>
 
-<?php require "parts/provider_bottom.php"; ?>
+<?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
