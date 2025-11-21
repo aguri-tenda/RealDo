@@ -17,25 +17,23 @@
     <div class="container">
         <?php if( $islogin ) : ?>
 
+            <?php unset($_SESSION['search_params']); ?>
+
             <div class="card" style="background-color: #FFFDDF;">
-                <div class="card-header">
-                    <div class="card-header-icon">
-                        <i class="fas fa-thumbs-up"></i>
-                    </div>
-                    <div class="card-header-title">
-                        <span>あなたへのおすすめ</span>
-                    </div>
-                </div>
 
                 <?php
-                    $getTagIds = $pdo->prepare(" SELECT tag_id FROM tag_count WHERE user_id = ? AND attention_level = (SELECT MAX(attention_level) FROM tag_count WHERE user_id = ? ); ");
-                    $getTagIds->execute([ $_SESSION['user']['userid'], $_SESSION['user']['userid'] ]);
+                    $getTag = $pdo->prepare(" SELECT tag_id FROM tag_count WHERE user_id = ? AND attention_level = (SELECT MAX(attention_level) FROM tag_count WHERE user_id = ? ); ");
+                    $getTag->execute([ $_SESSION['user']['userid'], $_SESSION['user']['userid'] ]);
+
+                    $getTagIds = $getTag->fetchAll(PDO::FETCH_ASSOC);
 
                     $getProducts = "";
                     $productIds = [];
                     $tagIds = [];
                 ?>
-                <?php 
+
+                <?php if($getTagIds) : ?>
+                <?php
                     foreach( $getTagIds as $getTagId ) 
                     {
                         array_push($tagIds, $getTagId['tag_id']);
@@ -106,6 +104,15 @@
 
                 ?>
 
+                <div class="card-header">
+                    <div class="card-header-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <div class="card-header-title">
+                        <span>あなたへのおすすめ</span>
+                    </div>
+                </div>
+
                 <div class="card-content">
                     <div class="columns">
 
@@ -127,7 +134,7 @@
                                         </div>
                                     </div>
                                     <div class="card-image">
-                                        <div class="image is-256x256">
+                                        <div class="image ">
                                             <img src="<?= $recommend['image_pass']; ?>" alt="<?= $recommend['name']; ?>">
                                         </div>
                                     </div>
@@ -151,6 +158,20 @@
 
                     </div>
                 </div>
+
+                <?php else : ?>
+
+                <div class="card-header">
+                    <div class="card-header-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <div class="card-header-title">
+                        <span>商品の閲覧、購入等を行うと、あなたへのおすすめを見ることができます。</span>
+                    </div>
+                </div>
+
+                <?php endif; ?>
+
             </div>
         <?php else : ?>
             <div class="card" style="background-color: #FFFDDF;">
