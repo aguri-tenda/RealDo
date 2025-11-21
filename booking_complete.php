@@ -1,47 +1,125 @@
 <?php
 require "parts/header.php";
 require "parts/navigation.php";
-require "parts/db-connect.php";
+
+// POSTデータ受け取り
+$people = $_POST['booking_people'] ?? 1;
+$datetime = $_POST['booking_datetime'] ?? '';
+$names = $_POST['booking_name'] ?? [];
+$kanas = $_POST['booking_kana'] ?? [];
+$tels = $_POST['booking_tel'] ?? [];
 ?>
 
-<div class="container">
-    <h1 class="title is-3 has-text-centered">予約完了</h1>
+<br>
 
-    <form method="post" action="booking_action.php">
+<div class="level-item">
+    <form class="box" style="width: 700px; text-align: center;" action="booking_save.php" method="post">
+        <span class="subtitle is-4" style="color:#278EDD;">予約内容確認</span>
+        <br><br>
 
         <!-- 参加人数 -->
-        <div class="field">
-            <label class="label">参加人数</label>
-            <div class="control">
-                <input class="input" type="number" name="number" value="1" min="1">
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">参加人数</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <input disabled class="input" type="text" value="<?= htmlspecialchars($people) . ' 人' ?>"
+                        style="background-color:#E3FFFF;width:80%;border:1px solid #858484ff;">
+                </div>
             </div>
         </div>
 
         <!-- 参加日時 -->
-        <div class="field">
-            <label class="label">参加日時</label>
-            <div class="control">
-                <input class="input" type="datetime-local" name="datetime" value="2022-01-01T00:00">
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">参加日時</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <input disabled class="input" type="text" value="<?= htmlspecialchars($datetime) ?>"
+                        style="background-color:#E3FFFF;width:80%;border:1px solid #858484ff;">
+                </div>
             </div>
         </div>
 
-        <!-- 参加者名 -->
-        <div class="field">
-            <label class="label">参加者氏名</label>
-            <div class="control">
-                <input class="input" type="text" name="name" value="山田太郎">
+        <br>
+        <span class="subtitle is-5" style="color:#278EDD;">参加者情報</span>
+        <br><br>
+
+        <!-- 参加者情報（人数分ループ） -->
+        <?php for ($i = 0; $i < count($names); $i++): ?>
+            <!-- 氏名 -->
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label style="color:#278EDD;">氏名 <?= ($i + 1) ?></label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <input disabled class="input" type="text" value="<?= htmlspecialchars($names[$i]) ?>"
+                            style="background-color:#E3FFFF;width:80%;border:1px solid #858484ff;">
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <!-- フリガナ -->
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label style="color:#278EDD;">フリガナ</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <input disabled class="input" type="text" value="<?= htmlspecialchars($kanas[$i]) ?>"
+                            style="background-color:#E3FFFF;width:80%;border:1px solid #858484ff;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 電話番号 -->
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label style="color:#278EDD;">電話番号</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <input disabled class="input" type="text" value="<?= htmlspecialchars($tels[$i]) ?>"
+                            style="background-color:#E3FFFF;width:80%;border:1px solid #858484ff;">
+                    </div>
+                </div>
+            </div>
+
+            <br>
+        <?php endfor; ?>
+
+        <!-- hidden で次画面にデータを送る -->
+        <input type="hidden" name="booking_people" value="<?= htmlspecialchars($people) ?>">
+        <input type="hidden" name="booking_datetime" value="<?= htmlspecialchars($datetime) ?>">
+
+        <?php foreach ($names as $n): ?>
+            <input type="hidden" name="booking_name[]" value="<?= htmlspecialchars($n) ?>">
+        <?php endforeach; ?>
+
+        <?php foreach ($kanas as $k): ?>
+            <input type="hidden" name="booking_kana[]" value="<?= htmlspecialchars($k) ?>">
+        <?php endforeach; ?>
+
+        <?php foreach ($tels as $t): ?>
+            <input type="hidden" name="booking_tel[]" value="<?= htmlspecialchars($t) ?>">
+        <?php endforeach; ?>
 
         <!-- ボタン -->
-        <div class="field has-text-centered">
-            <button class="button is-info is-medium" type="submit">確定</button>
+        <div class="field has-text-centered" style="margin-top: 2rem;">
+            <a href="product_booking.php" class="button is-light is-medium" style="margin-right: 20px;">
+                戻る
+            </a>
+
+            <button class="button is-link is-medium" style="background-color: #41C0FF; width: 40%;">
+                この内容で予約する
+            </button>
         </div>
 
     </form>
 </div>
 
-<?php
-require "parts/user_bottom.php";
-require "parts/footer.php";
-?>
+<?php require "parts/user_bottom.php"; ?>
+<?php require "parts/footer.php"; ?>
