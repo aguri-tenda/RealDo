@@ -109,7 +109,7 @@ $tels = $_POST['booking_tel'] ?? [];
 
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <a href="booking_complete.php" class="button is-light is-medium" style="margin-right: 20px;">
+            <a href="booking_confirm.php" class="button is-light is-medium" style="margin-right: 20px;">
                 戻る
             </a>
 
