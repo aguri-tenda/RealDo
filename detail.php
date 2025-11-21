@@ -47,6 +47,21 @@ if(count($reviews) > 0) {
     }
     $rating_avg = $total_rating / count($reviews);
 }
+
+//dbのタグカウントを増やす
+$viewWeight = 1; // 閲覧の重み付け（必要に応じて調整可能）
+foreach ($tags as $tag) {
+    $tag_count_sql = $pdo->prepare("
+        INSERT INTO tag_count (user_id, tag_id, attention_level)
+        VALUES (:user_id, :tag_id, :attention_level)
+        ON DUPLICATE KEY UPDATE attention_level = attention_level + :attention_level
+    ");
+    $tag_count_sql->execute([
+        ':user_id' => $user_id,
+        ':tag_id' => $tag['tag_id'],
+        ':attention_level' => $viewWeight,
+    ]);
+}
 ?>
 
 
