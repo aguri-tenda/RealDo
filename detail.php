@@ -50,7 +50,7 @@ if(count($reviews) > 0) {
 
 //dbのタグカウントを増やす
 $viewWeight = 1; // 閲覧の重み付け（必要に応じて調整可能）
-foreach ($selected_tags as $tag_id) {
+foreach ($tags as $tag) {
     $tag_count_sql = $pdo->prepare("
         INSERT INTO tag_count (user_id, tag_id, attention_level)
         VALUES (:user_id, :tag_id, :attention_level)
@@ -58,7 +58,7 @@ foreach ($selected_tags as $tag_id) {
     ");
     $tag_count_sql->execute([
         ':user_id' => $user_id,
-        ':tag_id' => $tag_id,
+        ':tag_id' => $tag['tag_id'],
         ':attention_level' => $viewWeight,
     ]);
 }
