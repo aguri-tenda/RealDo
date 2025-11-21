@@ -8,8 +8,7 @@
     if( isset($_SESSION['user']) )
     {
         $sql = $pdo->prepare( "SELECT * FROM users WHERE is_active = 1 AND user_id = ? ;" );
-        $sql->execute([ $_SESSION['user']['userid'] ]);//利用者用に変更
-
+        $sql->execute([ $_SESSION['user']['userid'] ]);
         $islogin = $sql->fetchAll( PDO::FETCH_ASSOC );
     }
 ?>
@@ -90,7 +89,6 @@
                             }
                         }
 
-                        echo json_encode($tagIds,JSON_UNESCAPED_UNICODE);
 
                         if( count($tagIds) > 1 )
                         {
@@ -100,14 +98,12 @@
                     }while( count($productIds) < 4 );
                     
 
-                    echo json_encode($productIds, JSON_UNESCAPED_UNICODE);
 
                     while( count($productIds) > 4)
                     {
                         array_pop($productIds);
                     }
 
-                    echo json_encode($productIds, JSON_UNESCAPED_UNICODE);
                 ?>
 
                 <div class="card-content">
@@ -123,7 +119,7 @@
                             ?>
                             <?php foreach($productInfo as $recommend) : ?>
                             <div class="column">
-                                <a href="#">
+                                <a href="detail.php?product_id=<?= $recommend['product_id']; ?>">
                                 <div class="card is-rounded">
                                     <div class=card-header>
                                         <div class="card-header-title">
