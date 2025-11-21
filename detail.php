@@ -147,7 +147,7 @@ if(count($reviews) > 0) {
             </div>
         <?php endif; ?>
         <div class="columns" style="margin-top: 2rem;">
-            <button class="button is-info column" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
+            <button class="button is-info column" style="background-color: #339ef0ff; border-radius: 5px;">
                 レビューを投稿する
             </button>
         </div>
