@@ -26,7 +26,8 @@ $end_date = $_POST['end_date'] ?? '';
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" style="width: 120px;" type="number" name="people" value="1" min="1">
+                        <input class="input" style="width: 120px;" type="number" name="booking_people" value="1"
+                            min="1">
                     </div>
                 </div>
 
@@ -36,9 +37,10 @@ $end_date = $_POST['end_date'] ?? '';
 
                 <div class="field">
                     <div class="control">
-                        <select class="select" style="width: 260px;">
+                        <select class="select" name="booking_datetime" style="width: 260px;">
                             <?php foreach ($product_data['dates'] as $date): ?>
-                                <option>
+                                <option
+                                    value="<?= htmlspecialchars($date['start_time']) ?>〜<?= htmlspecialchars($date['finish_time']) ?>">
                                     <?= htmlspecialchars($date['start_time']) ?>〜<?= htmlspecialchars($date['finish_time']) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -50,15 +52,11 @@ $end_date = $_POST['end_date'] ?? '';
 
         <hr style="margin: 25px 0;">
 
-        <!-- 参加者情報 label -->
         <label class="label" style="color: #278EDD; margin-bottom: 15px; font-size: 1.2rem;">
             参加者情報
         </label>
 
-        <!-- 🔽 参加者フォームをまとめるコンテナ -->
         <div id="participants-container">
-
-            <!-- 1人目の入力欄（テンプレ） -->
             <div class="participant-box">
 
                 <!-- 氏名・フリガナ -->
@@ -69,7 +67,8 @@ $end_date = $_POST['end_date'] ?? '';
 
                     <div class="field-body">
                         <div class="field">
-                            <input class="input" type="text" style="width: 250px;" name="name[]" placeholder="田中 太郎">
+                            <input class="input" type="text" style="width: 250px;" name="booking_name[]"
+                                placeholder="田中 太郎">
                         </div>
 
                         <div class="field-label is-normal" style="margin-left: 30px; width: 120px;">
@@ -77,7 +76,8 @@ $end_date = $_POST['end_date'] ?? '';
                         </div>
 
                         <div class="field">
-                            <input class="input" type="text" style="width: 300px;" name="kana[]" placeholder="タナカ タロウ">
+                            <input class="input" type="text" style="width: 300px;" name="booking_kana[]"
+                                placeholder="タナカ タロウ">
                         </div>
                     </div>
                 </div>
@@ -90,20 +90,19 @@ $end_date = $_POST['end_date'] ?? '';
 
                     <div class="field-body">
                         <div class="field">
-                            <input class="input" type="text" style="width: 250px;" name="tel[]"
+                            <input class="input" type="text" style="width: 250px;" name="booking_tel[]"
                                 placeholder="00000000000">
                         </div>
                     </div>
                 </div>
+
                 <hr style="margin: 25px 0;">
             </div>
         </div>
 
-        <!-- 🔽 参加者追加ボタン -->
+        <!-- 参加者追加ボタン -->
         <div class="field is-horizontal mb-4">
-            <div class="field-label is-normal" style="width: 150px;">
-            </div>
-
+            <div class="field-label is-normal" style="width: 150px;"></div>
             <div class="field-body">
                 <button type="button" id="add-participant-btn" class="button is-link is-light"
                     style="border-radius: 6px; padding: 0 20px;">
@@ -114,7 +113,6 @@ $end_date = $_POST['end_date'] ?? '';
 
         <hr style="margin: 25px 0;">
 
-        <!-- ボタン -->
         <div class="field has-text-centered">
             <button class="button is-info is-medium"
                 style="background-color: #41C0FF; width: 50%; height: 50px; border-radius: 8px;">
