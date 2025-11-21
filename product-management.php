@@ -70,7 +70,7 @@
                             <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
                             <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
                             <p><strong>参加人数:</strong>
-                                <?= countMembers($product['product_id'], $pdo) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
+                                <?= countMembers($pdo, $product['product_id']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
                             </p>
                         </div>
                         
