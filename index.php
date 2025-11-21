@@ -191,10 +191,15 @@
 <div class="section">
     <div class="container is-fluid">
         <div class="level">
-            <button href="booking_confirm.php" class="button is-primary level-item has-textcenterd">
+            <button href="booking_confirm.php" class="button is-large is-primary level-item has-textcenterd">
                 予約情報確認
             </button>
         </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
     </div>
 </div>
 
