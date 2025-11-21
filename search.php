@@ -1,6 +1,7 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
+<?php require "parts/count_members.php"; ?>
 
 <?php
 $searchWord = $_POST['searchWord'] ?? '';
@@ -296,7 +297,7 @@ foreach ($results as $product) {
                 <p><strong>場所:</strong> <?= htmlspecialchars($product_data['product_info']['location']) ?></p>
                 <p><strong>所在地:</strong> <?= htmlspecialchars($product_data['product_info']['address']) ?></p>
                 <p><strong>参加人数:</strong>
-                    <?= htmlspecialchars($product_data['product_info']['max_participants']) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
+                    <?= countMembers($pdo, $product_id) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
                 </p>
 
                 <!-- 日程 -->
