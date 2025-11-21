@@ -31,7 +31,7 @@
         "INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participants, area )
         VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;"
     );
-    $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'], $area ]);
+    $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'], getAreaFromPostalCode( $_POST['post-code'] ) ]);
 
     $product_id = $pdo->lastInsertId();
 

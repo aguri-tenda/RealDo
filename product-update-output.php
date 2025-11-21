@@ -206,7 +206,7 @@
                                         $sql = $pdo->prepare(
                                             "UPDATE products SET name = ?, location = ?, post_code = ?, address = ?, detail = ?, image_pass = ?, price = ?, tel = ?, max_participants = ?, area = ?
                                             WHERE product_id = ? ");
-                                        $sql->execute([ $name, $location, $post_code, $address, $detail, $image_pass, $price, $tel, $max, $area, $_GET['product_id'] ]);
+                                        $sql->execute([ $name, $location, $post_code, $address, $detail, $image_pass, $price, $tel, $max, getAreaFromPostalCode( $post_code ), $_GET['product_id'] ]);
                                     ?>
 
                                 <div class="level">
