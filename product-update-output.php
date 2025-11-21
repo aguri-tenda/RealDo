@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
 <?php require "parts/db-connect.php"; ?>
+<?php require "parts/address.php"; ?>
 
 <div class="has-background-light">
     <?php
@@ -151,9 +152,9 @@
                                             $location = $_POST['location'];
                                         }
 
-                                        if( !empty($_POST['post_code']) )
+                                        if( !empty($_POST['post-code']) )
                                         {
-                                            $post_code = $_POST['post_code'];
+                                            $post_code = $_POST['post-code'];
                                         }
 
                                         if( !empty($_POST['address']) )
@@ -202,8 +203,10 @@
                                         $gettag->execute([ $_GET['product_id'] ]);
 
 
-                                        $sql = $pdo->prepare(" UPDATE products SET name = ?, location = ?, post_code = ?, address = ?, detail = ?, image_pass = ?, price = ?, tel = ?, max_participants = ? WHERE product_id = ? ");
-                                        $sql->execute([ $name, $location, $post_code, $address, $detail, $image_pass, $price, $tel, $max, $_GET['product_id'] ]);
+                                        $sql = $pdo->prepare(
+                                            "UPDATE products SET name = ?, location = ?, post_code = ?, address = ?, detail = ?, image_pass = ?, price = ?, tel = ?, max_participants = ?, area = ?
+                                            WHERE product_id = ? ");
+                                        $sql->execute([ $name, $location, $post_code, $address, $detail, $image_pass, $price, $tel, $max, $area, $_GET['product_id'] ]);
                                     ?>
 
                                 <div class="level">

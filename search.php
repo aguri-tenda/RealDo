@@ -1,17 +1,27 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
+<?php require "parts/count_members.php"; ?>
 
 <?php
-$searchWord     = $_POST['searchWord']      ?? '';
-$selected_tags  = $_POST['tags']            ?? [];
-$start_date     = $_POST['start_date']      ?? '';
-$end_date       = $_POST['end_date']        ?? '';
-$event_location = $_POST['event_location']  ?? '';
-$event_duration = $_POST['event_duration']  ?? '';
+$searchWord = $_POST['searchWord'] ?? '';
+$selected_tags = $_POST['tags'] ?? [];
+$start_date = $_POST['start_date'] ?? '';
+$end_date = $_POST['end_date'] ?? '';
+$event_location = $_POST['event_location'] ?? '';
+$event_duration = $_POST['event_duration'] ?? '';
+
+$_SESSION['search_params'] = [
+    'searchWord' => $searchWord,
+    'tags' => $selected_tags,
+    'start_date' => $start_date,
+    'end_date' => $end_date,
+    'event_location' => $event_location,
+    'event_duration' => $event_duration,
+];
 
 $params = [];
-$where  = [];
+$where = [];
 
 $sql = ''; // SQL本体
 $sub_query_end = ''; // サブクエリの閉じとdatesとのJOIN句 (タグありの場合のみ使用)
@@ -41,7 +51,7 @@ if (!empty($selected_tags)) {
                 p.max_participants
             FROM products p
     ";
-    
+
     // サブクエリのJOIN句、WHERE句、GROUP BY/HAVING句を組み立てるための変数
     $sub_query_joins = "
         INNER JOIN attached_tags att
@@ -49,10 +59,10 @@ if (!empty($selected_tags)) {
     ";
     $sub_query_where = [];
     $sub_query_group_by_having = '';
-    
+
     // サブクエリを閉じてdatesテーブルとJOINする部分
     $sub_query_end = ' ) AS t1 ON d.product_id = t1.product_id ';
-    
+
 } else {
     // タグ検索がない場合のベースSQL (元のシンプル構造)
     $sql = "
@@ -84,8 +94,8 @@ if ($searchWord !== '') {
 // 開催地
 // =========
 if ($event_location !== '') {
-    $where[] = (!empty($selected_tags) ? 't1.location' : 'p.location') . ' = :location';
-    $params[':location'] = $event_location;
+    $where[] = (!empty($selected_tags) ? 't1.area' : 'p.area') . ' = :area';
+    $params[':area'] = $event_location;
 }
 
 // ====================
@@ -131,7 +141,7 @@ switch ($event_duration) {
 // =====================
 if (!empty($selected_tags)) {
     // タグ検索がある場合、サブクエリ(t1)を完成させる
-    
+
     // サブクエリのJOINを追加
     $sql .= $sub_query_joins;
 
@@ -140,13 +150,13 @@ if (!empty($selected_tags)) {
     foreach ($selected_tags as $i => $tag_id) {
         $ph = ':tag' . $i;
         $placeholders[] = $ph;
-        $params[$ph] = (int)$tag_id;
+        $params[$ph] = (int) $tag_id;
     }
 
     $sub_query_where[] = 'att.tag_id IN (' . implode(',', $placeholders) . ')';
 
     if (!empty($sub_query_where)) {
-        $sql .= ' WHERE ' . implode(' AND ', $sub_query_where); 
+        $sql .= ' WHERE ' . implode(' AND ', $sub_query_where);
     }
 
     // GROUP BY / HAVING で「選択したタグ数と一致」
@@ -155,11 +165,11 @@ if (!empty($selected_tags)) {
         HAVING COUNT(DISTINCT att.tag_id) = :tag_count
     ";
     $params[':tag_count'] = count($selected_tags);
-    $sql .= $sub_query_group_by_having; 
+    $sql .= $sub_query_group_by_having;
 
     // サブクエリを閉じる
     $sql .= $sub_query_end;
-} 
+}
 
 // =====================
 // WHERE句の結合
@@ -183,7 +193,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // 各商品のタグを一括取得
 // =====================
 $product_ids = array_column($results, 'product_id');
-$product_tags = []; 
+$product_tags = [];
 
 if (!empty($product_ids)) {
     $id_placeholders = [];
@@ -191,7 +201,7 @@ if (!empty($product_ids)) {
     foreach ($product_ids as $i => $id) {
         $ph = ':pid' . $i;
         $id_placeholders[] = $ph;
-        $id_params[$ph] = (int)$id;
+        $id_params[$ph] = (int) $id;
     }
 
     $tag_sql = "
@@ -227,12 +237,12 @@ foreach ($results as $product) {
         // 初めての商品の場合、基本情報を格納
         $grouped_results[$product_id] = [
             'product_info' => $product, // 商品名、場所などの情報
-            'dates'        => [],      // 合致した日程リスト
+            'dates' => [],      // 合致した日程リスト
         ];
     }
     // 日程情報を追加
     $grouped_results[$product_id]['dates'][] = [
-        'start_time'  => $product['start_time'],
+        'start_time' => $product['start_time'],
         'finish_time' => $product['finish_time'],
     ];
 }
@@ -241,48 +251,94 @@ foreach ($results as $product) {
 <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
 
 <?php foreach ($grouped_results as $product_id => $product_data): ?>
+    <div class="box" style="
+        margin: 25px;
+        padding: 25px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: #fdfdfd;
+        gap: 25px;
+        position: relative;
+        transition: box-shadow 0.2s ease rgba(0,0,0,0.15);">
 
-    <div class="box" style="margin: 25px; display: flex; align-items: center;">
-        <a href="detail.php?product_id=<?= htmlspecialchars($product_id) ?>" 
-            style="text-decoration: none; color: inherit; display: flex; flex-grow: 1; align-items: center;">
-            <div style="flex-grow: 1;">
-                <p>
-                    <span class="title is-4"><?= htmlspecialchars($product_data['product_info']['name']) ?></span>
-                    <?php 
-                    $tags = $product_tags[$product_id] ?? []; 
-                    ?>
-                    <?php foreach( $tags as $tag ) : ?>
-                        <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= htmlspecialchars($tag['name']); ?></button></span>
-                    <?php endforeach; ?>
+        <!-- 左側：テキスト情報 -->
+        <div style="flex: 1;">
+
+            <!-- タイトル + タグ -->
+            <p style="margin-bottom: 10px;">
+                <span class="title is-4">
+                    <?= htmlspecialchars($product_data['product_info']['name']) ?>
+                </span>
+
+                <!-- タグ -->
+                <?php foreach (($product_tags[$product_id] ?? []) as $tag): ?>
+                    <span class="tag is-info is-light" style="margin-left: 5px; border-radius: 20px;">
+                        <?= htmlspecialchars($tag['name']) ?>
+                    </span>
+                <?php endforeach; ?>
+            </p>
+
+            <!-- 説明文 -->
+            <p style="margin-bottom: 15px; color: #444; line-height: 1.5;">
+                <?= nl2br(htmlspecialchars($product_data['product_info']['detail'])) ?>
+            </p>
+
+            <!-- 情報一覧（グリッド） -->
+            <div style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 8px;
+                color: #333;
+                font-size: 0.95rem;
+                margin-bottom: 10px;
+            ">
+                <p><strong>場所:</strong> <?= htmlspecialchars($product_data['product_info']['location']) ?></p>
+                <p><strong>所在地:</strong> <?= htmlspecialchars($product_data['product_info']['address']) ?></p>
+                <p><strong>参加人数:</strong>
+                    <?= countMembers($pdo, $product_id) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
                 </p>
 
-                <p style="max-height: 300px;"><?= htmlspecialchars($product_data['product_info']['detail']) ?></p>
-
-                <p><strong>場所:</strong> <?= htmlspecialchars($product_data['product_info']['location']) ?>
-                    <strong>所在地:</strong> <?= htmlspecialchars($product_data['product_info']['address']) ?>
-                    <strong>参加人数:</strong>
-                    <?= htmlspecialchars($product_data['product_info']['max_participants']) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
+                <!-- 日程 -->
+                <p style="margin-top: 10px;">
                     <strong>開催日程:</strong>
-                    <select>
-                    <?php foreach ($product_data['dates'] as $date): ?>
-                        <option>
-                            <?= htmlspecialchars($date['start_time']) ?> 〜 <?= htmlspecialchars($date['finish_time']) ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <select class="select" style="margin-left: 10px;">
+                        <?php foreach ($product_data['dates'] as $date): ?>
+                            <option>
+                                <?= htmlspecialchars($date['start_time']) ?> 〜 <?= htmlspecialchars($date['finish_time']) ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </p>
             </div>
-            <div style="flex-shrink: 0; margin-left: 20px;">
-                <img src="<?= htmlspecialchars($product_data['product_info']['image_pass']) ?>"
-                    alt="<?= htmlspecialchars($product_data['product_info']['name']) ?>"
-                    style="width: 150px; height: 100px; object-fit: cover; border-radius: 5px;">
+
+            <!-- ⭐ 詳細ボタン（左側下部） -->
+            <div style="margin-top: 15px;">
+                <a href="detail.php?product_id=<?= htmlspecialchars($product_id) ?>" class="button"
+                    style="border-radius: 8px; padding: 8px 20px; background-color: #41C0FF; color: white; text-decoration: none;">
+                    詳細を見る
+                </a>
             </div>
-        </a>
+
+        </div>
+
+        <!-- 右側：写真 -->
+        <div style="flex-shrink: 0;">
+            <img src="<?= htmlspecialchars($product_data['product_info']['image_pass']) ?>"
+                alt="<?= htmlspecialchars($product_data['product_info']['name']) ?>" style="
+                    width: 220px;
+                    height: 150px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                ">
+        </div>
     </div>
 <?php endforeach; ?>
 
-<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果は以上です</h2>
-
+<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px; margin-bottom: 40px;">
+    検索結果は以上です
+</h2>
 
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
