@@ -8,8 +8,7 @@
     if( isset($_SESSION['user']) )
     {
         $sql = $pdo->prepare( "SELECT * FROM users WHERE is_active = 1 AND user_id = ? ;" );
-        $sql->execute([ $_SESSION['user']['userid'] ]);//利用者用に変更
-
+        $sql->execute([ $_SESSION['user']['userid'] ]);
         $islogin = $sql->fetchAll( PDO::FETCH_ASSOC );
     }
 ?>
@@ -18,25 +17,23 @@
     <div class="container">
         <?php if( $islogin ) : ?>
 
+            <?php unset($_SESSION['search_params']); ?>
+
             <div class="card" style="background-color: #FFFDDF;">
-                <div class="card-header">
-                    <div class="card-header-icon">
-                        <i class="fas fa-thumbs-up"></i>
-                    </div>
-                    <div class="card-header-title">
-                        <span>あなたへのおすすめ</span>
-                    </div>
-                </div>
 
                 <?php
-                    $getTagIds = $pdo->prepare(" SELECT tag_id FROM tag_count WHERE user_id = ? AND attention_level = (SELECT MAX(attention_level) FROM tag_count WHERE user_id = ? ); ");
-                    $getTagIds->execute([ $_SESSION['user']['userid'], $_SESSION['user']['userid'] ]);
+                    $getTag = $pdo->prepare(" SELECT tag_id FROM tag_count WHERE user_id = ? AND attention_level = (SELECT MAX(attention_level) FROM tag_count WHERE user_id = ? ); ");
+                    $getTag->execute([ $_SESSION['user']['userid'], $_SESSION['user']['userid'] ]);
+
+                    $getTagIds = $getTag->fetchAll(PDO::FETCH_ASSOC);
 
                     $getProducts = "";
                     $productIds = [];
                     $tagIds = [];
                 ?>
-                <?php 
+
+                <?php if($getTagIds) : ?>
+                <?php
                     foreach( $getTagIds as $getTagId ) 
                     {
                         array_push($tagIds, $getTagId['tag_id']);
@@ -90,7 +87,6 @@
                             }
                         }
 
-                        echo json_encode($tagIds,JSON_UNESCAPED_UNICODE);
 
                         if( count($tagIds) > 1 )
                         {
@@ -100,15 +96,22 @@
                     }while( count($productIds) < 4 );
                     
 
-                    echo json_encode($productIds, JSON_UNESCAPED_UNICODE);
 
                     while( count($productIds) > 4)
                     {
                         array_pop($productIds);
                     }
 
-                    echo json_encode($productIds, JSON_UNESCAPED_UNICODE);
                 ?>
+
+                <div class="card-header">
+                    <div class="card-header-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <div class="card-header-title">
+                        <span>あなたへのおすすめ</span>
+                    </div>
+                </div>
 
                 <div class="card-content">
                     <div class="columns">
@@ -123,7 +126,7 @@
                             ?>
                             <?php foreach($productInfo as $recommend) : ?>
                             <div class="column">
-                                <a href="#">
+                                <a href="detail.php?product_id=<?= $recommend['product_id']; ?>">
                                 <div class="card is-rounded">
                                     <div class=card-header>
                                         <div class="card-header-title">
@@ -131,20 +134,20 @@
                                         </div>
                                     </div>
                                     <div class="card-image">
-                                        <div class="image is-256x256">
+                                        <div class="image ">
                                             <img src="<?= $recommend['image_pass']; ?>" alt="<?= $recommend['name']; ?>">
                                         </div>
                                     </div>
 
                                     <div class="card-content">
                                         <div class="content">
-                                            
-                                            <?php foreach( $attachedTags as $tags ) :?>
-                                                <button class="button is-small is-light is-rounded" disabled><?= $tags['name']; ?></button>
-                                            <?php endforeach; ?>
-                                            
+                                            <p>
+                                                <?php foreach( $attachedTags as $tags ) :?>
+                                                    <button class="button is-small is-light is-rounded" disabled><?= $tags['name']; ?></button>
+                                                <?php endforeach; ?>
+                                            </p>
 
-                                            <p><textarea readonly cols="30" rows="3"><?= $recommend['detail']; ?></textarea></p>
+                                            <p><textarea readonly rows="4" style="width:100%; resize:none;" class="textarea is-primary"><?= $recommend['detail']; ?></textarea></p>
                                         </div>
                                     </div>
                                 </div>
@@ -155,6 +158,20 @@
 
                     </div>
                 </div>
+
+                <?php else : ?>
+
+                <div class="card-header">
+                    <div class="card-header-icon">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                    <div class="card-header-title">
+                        <span>商品の閲覧、購入等を行うと、あなたへのおすすめを見ることができます。</span>
+                    </div>
+                </div>
+
+                <?php endif; ?>
+
             </div>
         <?php else : ?>
             <div class="card" style="background-color: #FFFDDF;">
@@ -174,10 +191,15 @@
 <div class="section">
     <div class="container is-fluid">
         <div class="level">
-            <button href="booking_confirm.php" class="button is-primary level-item has-textcenterd">
+            <button href="booking_confirm.php" class="button is-large is-primary level-item has-textcenterd">
                 予約情報確認
             </button>
         </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
     </div>
 </div>
 
