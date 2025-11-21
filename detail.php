@@ -167,6 +167,7 @@ foreach ($tags as $tag) {
             </button>
         </div>
     </form>
+    <?php if (isset($_SESSION['search_params'])): ?>
     <form method="post" action="search.php" class="columns" style="justify-content: center; width: 100%;">
         <input type="hidden" name="searchWord" value="<?php echo htmlspecialchars($_SESSION['search_params']['searchWord'] ?? ''); ?>">
         <input type="hidden" name="start_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['start_date'] ?? ''); ?>">
@@ -184,6 +185,13 @@ foreach ($tags as $tag) {
             </button>
         </div>
     </form>
+    <?php else: ?>
+    <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 4rem;">
+        <a href="index.php" class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
+            ホームに戻る
+        </a>
+    </div>
+    <?php endif; ?>
 </div>
 
 
