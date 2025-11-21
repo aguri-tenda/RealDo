@@ -44,12 +44,18 @@ if (isset($_SESSION['user'])) {
         }
     }
     if (!$is_past_purchase) {
+        echo "<div class=\"box\" style=\"width: 520px; text-align: center; margin: auto;\">";
         echo "<p>この商品をまだ体験していないため、レビューを投稿できません。</p>";
+        echo '<a href="details.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="margin-top: 15px;">戻る</a>';
+        echo "</div>";
         exit;
     }
 }
 if (!$is_purchased) {
+    echo "<div class=\"box\" style=\"width: 520px; text-align: center; margin: auto;\">";
     echo "<p>この商品を購入していないため、レビューを投稿できません。</p>";
+    echo '<a href="details.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="margin-top: 15px;">戻る</a>';
+    echo "</div>";
     exit;
 }
 ?>
