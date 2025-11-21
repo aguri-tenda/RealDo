@@ -4,8 +4,17 @@ require "parts/navigation.php";
 require "parts/db-connect.php";
 ?>
 <?php
-$start_date = $_POST['start_date'] ?? '';
-$end_date = $_POST['end_date'] ?? '';
+$product_id = $_GET['product_id'] ?? '';
+$sql = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
+$sql->execute([$product_id]);
+$product = $sql->fetch(PDO::FETCH_ASSOC);
+if (!$product) {
+    echo "<p>Product not found.</p>";
+    exit;
+}
+$dates_sql = $pdo->prepare("SELECT * FROM dates WHERE product_id = ? ORDER BY start_time ASC");
+$dates_sql->execute([$product_id]);
+$dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <br>
 
@@ -37,7 +46,7 @@ $end_date = $_POST['end_date'] ?? '';
                 <div class="field">
                     <div class="control">
                         <select class="select" style="width: 260px;" name="selected_date">
-                            <?php foreach ($product_data['dates'] as $date): ?>
+                            <?php foreach ($dates as $date): ?>
                                 <option value="<?= $date['start_time'] ?>">
                                     <?= htmlspecialchars($date['start_time']) ?>〜<?= htmlspecialchars($date['finish_time']) ?>
                                 </option>
@@ -66,7 +75,7 @@ $end_date = $_POST['end_date'] ?? '';
             ></participant-box>
 
         </div>
-        
+
         <hr style="margin: 25px 0;">
 
         <!-- ボタン -->
