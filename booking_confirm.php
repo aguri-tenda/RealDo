@@ -3,15 +3,30 @@ require "parts/header.php";
 require "parts/navigation.php";
 require "parts/db-connect.php";
 
-$date = new DateTime('now', new DateTimeZone('Asia/Tokyo'));
-$date->add(new DateInterval('P1D')); // 明日
+$product_id = $_GET['product_id'] ?? null;
+if ($product_id === null) {
+    echo "<p>Product ID is missing.</p>";
+    exit;
+}
+
+$sql = $pdo->prepare("SELECT * FROM products WHERE product_id = ?");
+$sql->execute([$product_id]);
+$product = $sql->fetch(PDO::FETCH_ASSOC);
+if (!$product) {
+    echo "<p>Product not found.</p>";
+    exit;
+}
+
+$dates_sql = $pdo->prepare("SELECT * FROM dates WHERE product_id = ? ORDER BY start_time ASC");
+$dates_sql->execute([$product_id]);
+$dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="container">
     <h1 class="title is-3 has-text-centered">予約フォーム</h1>
 
-    <form method="post" action="booking_complete.php">
-
+    <form method="post" action="booking_participants.php">
+        <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['product_id']) ?>">
         <!-- 参加人数 -->
         <div class="field">
             <label class="label">参加人数</label>
@@ -23,36 +38,37 @@ $date->add(new DateInterval('P1D')); // 明日
         <!-- 参加日時 -->
         <div class="field">
             <label class="label">参加日時</label>
-            <div class="datetime-box">
-
-                <!-- 日付 -->
-                <div class="control" style="flex:1;">
-                    <input class="input" type="date" name="date" value="<?php echo $date->format('Y-m-d'); ?>">
+            <div class="control">
+                <div class="select">
+                    <select name="date_id">
+                        <?php foreach ($dates as $date): ?>
+                            <option value="<?= htmlspecialchars($date['start_time']) ?>">
+                                <?= htmlspecialchars(date('Y-m-d H:i', strtotime($date['start_time']))) ?> 〜 <?= htmlspecialchars(date('Y-m-d H:i', strtotime($date['finish_time']))) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
+            </div>
+        </div>
 
-                <!-- 時間 -->
-                <div class="control" style="flex:1;">
-                    <div class="select is-fullwidth">
-                        <select name="time">
-                            <option value="">時間を選択</option>
-                            <?php
-                            for ($h = 0; $h < 24; $h++) {
-                                foreach ([0, 30] as $m) {
-                                    $value = sprintf('%02d:%02d', $h, $m);
-                                    $label = sprintf('%02d時%02d分', $h, $m);
-                                    echo "<option value='{$value}'>{$label}</option>";
-                                }
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
+        <!-- 緊急連絡先 -->
+        <div class="field">
+            <label class="label">緊急連絡先</label>
+            <div class="control">
+                <input class="input" type="text" name="tel" placeholder="例：090-1234-5678">
+            </div>
+        </div>
 
+        <!--備考-->
+        <div class="field">
+            <label class="label">備考</label>
+            <div class="control">
+                <textarea class="textarea" name="remark" placeholder="アレルギー情報や特別な配慮が必要な事項などがあればご記入ください。"></textarea>
             </div>
         </div>
 
         <!-- 参加者情報 -->
-        <div class="field">
+        <!-- <div class="field">
             <label class="label">参加者情報</label>
 
             <div class="control mb-2">
@@ -74,7 +90,7 @@ $date->add(new DateInterval('P1D')); // 明日
             <div class="control">
                 <input class="input" type="text" name="tel" placeholder="電話番号（例：000-0000-0000）">
             </div>
-        </div>
+        </div> -->
 
         <!-- ボタン -->
         <div class="field has-text-centered">
