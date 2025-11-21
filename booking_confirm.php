@@ -9,7 +9,7 @@ $end_date = $_POST['end_date'] ?? '';
 ?>
 <br>
 
-<div class="container">
+<div class="container is-flex is-justify-content-center" id="app-booking-confirm">
     <form class="box" style="max-width: 1200px; width: 100%; padding: 40px; border-radius: 10px;" method="post"
         action="booking_complete.php">
 
@@ -26,7 +26,7 @@ $end_date = $_POST['end_date'] ?? '';
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" style="width: 120px;" type="number" name="people" value="1" min="1">
+                        <input class="input" style="width: 120px;" type="number" name="people" v-model="participants" min="1">
                     </div>
                 </div>
 
@@ -58,58 +58,8 @@ $end_date = $_POST['end_date'] ?? '';
         <!-- 🔽 参加者フォームをまとめるコンテナ -->
         <div id="participants-container">
 
-            <!-- 1人目の入力欄（テンプレ） -->
-            <div class="participant-box">
-
-                <!-- 氏名・フリガナ -->
-                <div class="field is-horizontal mb-4">
-                    <div class="field-label is-normal" style="width: 150px;">
-                        <label class="label" style="color: #278EDD;">参加者氏名</label>
-                    </div>
-
-                    <div class="field-body">
-                        <div class="field">
-                            <input class="input" type="text" style="width: 250px;" name="name[]" placeholder="田中 太郎">
-                        </div>
-
-                        <div class="field-label is-normal" style="margin-left: 30px; width: 120px;">
-                            <label class="label" style="color: #278EDD;">フリガナ</label>
-                        </div>
-
-                        <div class="field">
-                            <input class="input" type="text" style="width: 300px;" name="kana[]" placeholder="タナカ タロウ">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 電話番号 -->
-                <div class="field is-horizontal mb-4">
-                    <div class="field-label is-normal" style="width: 150px;">
-                        <label class="label" style="color: #278EDD;">電話番号（TEL）</label>
-                    </div>
-
-                    <div class="field-body">
-                        <div class="field">
-                            <input class="input" type="text" style="width: 250px;" name="tel[]"
-                                placeholder="00000000000">
-                        </div>
-                    </div>
-                </div>
-                <hr style="margin: 25px 0;">
-            </div>
-        </div> -->
-
-        <!-- 🔽 参加者追加ボタン -->
-        <div class="field is-horizontal mb-4">
-            <div class="field-label is-normal" style="width: 150px;">
-            </div>
-
-            <div class="field-body">
-                <button type="button" id="add-participant-btn" class="button is-link is-light"
-                    style="border-radius: 6px; padding: 0 20px;">
-                    ＋ 参加者を追加する
-                </button>
-            </div>
+            <!-- 参加者フォーム -->
+            {{ participantBoxes }}
         </div>
 
         <hr style="margin: 25px 0;">
@@ -124,23 +74,6 @@ $end_date = $_POST['end_date'] ?? '';
 
     </form>
 </div>
-<script>
-    document.getElementById("add-participant-btn").addEventListener("click", function () {
-        const container = document.getElementById("participants-container");
-
-        // 1人目の participant-box をそのままコピー
-        const firstBox = container.querySelector(".participant-box");
-        const newBox = firstBox.cloneNode(true);
-
-        // 入力内容を空にする
-        newBox.querySelectorAll("input").forEach(input => {
-            input.value = "";
-        });
-
-        // 参加者フォームを追加
-        container.appendChild(newBox);
-    });
-</script>
 <?php
 require "parts/user_bottom.php";
 require "parts/footer.php";
