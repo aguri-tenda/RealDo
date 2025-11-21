@@ -36,9 +36,9 @@ $end_date = $_POST['end_date'] ?? '';
 
                 <div class="field">
                     <div class="control">
-                        <select class="select" style="width: 260px;">
+                        <select class="select" style="width: 260px;" name="selected_date">
                             <?php foreach ($product_data['dates'] as $date): ?>
-                                <option>
+                                <option value="<?= $date['start_time'] ?>">
                                     <?= htmlspecialchars($date['start_time']) ?>〜<?= htmlspecialchars($date['finish_time']) ?>
                                 </option>
                             <?php endforeach; ?>
@@ -59,9 +59,14 @@ $end_date = $_POST['end_date'] ?? '';
         <div id="participants-container">
 
             <!-- 参加者フォーム -->
-            {{ participantBoxes }}
-        </div>
+            <participant-box
+                v-for="n in participants"
+                :key="n"
+                :index="n"
+            ></participant-box>
 
+        </div>
+        
         <hr style="margin: 25px 0;">
 
         <!-- ボタン -->
