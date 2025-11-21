@@ -44,17 +44,17 @@ if (isset($_SESSION['user'])) {
         }
     }
     if (!$is_past_purchase) {
-        echo "<div class=\"box\" style=\"width: 520px; text-align: center;\">";
+        echo "<div class=\"box\" style=\"width: 520px; text-align: center; margin: 2rem auto;\">";
         echo "<p>この商品をまだ体験していないため、レビューを投稿できません。</p>";
-        echo '<a href="details.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="margin-top: 15px;">戻る</a>';
+        echo '<a href="details.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="background-color: #41C0FF; margin-top: 15px;">戻る</a>';
         echo "</div>";
         exit;
     }
 }
 if (!$is_purchased) {
-    echo "<div class=\"box\" style=\"width: 520px; text-align: center;\">";
+    echo "<div class=\"box\" style=\"width: 520px; text-align: center; margin: 2rem auto;\">";
     echo "<p>この商品を購入していないため、レビューを投稿できません。</p>";
-    echo '<a href="details.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="margin-top: 15px;">戻る</a>';
+    echo '<a href="details.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="background-color: #41C0FF; margin-top: 15px;">戻る</a>';
     echo "</div>";
     exit;
 }
@@ -101,9 +101,9 @@ if (!$is_purchased) {
     </form>
 </div>
 <?php else: ?>
-    <div class="box" style="width: 520px; text-align: center;">
+    <div class="box" style="width: 520px; text-align: center; margin: 2rem auto;">
         <p>レビューを投稿するにはログインが必要です。</p>
-        <a href="login.php" class="button is-link" style="margin-top: 15px;">ログインページへ</a>
+        <a href="login.php" class="button is-link" style="background-color: #41C0FF; margin-top: 15px;">ログインページへ</a>
     </div>
 <?php endif; ?>
 
