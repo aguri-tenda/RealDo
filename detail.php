@@ -185,6 +185,12 @@ foreach ($tags as $tag) {
             </button>
         </div>
     </form>
+    <?php else: ?>]
+    <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 4rem;">
+        <a href="index.php" class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
+            ホームに戻る
+        </a>
+    </div>
     <?php endif; ?>
 </div>
 
