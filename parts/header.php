@@ -32,13 +32,13 @@ $provider_address = $_SESSION['provider']['provideraddress'] ?? '';
         body {
             height: 100%;
             margin: 0;
-            padding: 0;
+            padding: 0px;
         }
 
         .sidebar {
             background-color: #79D159;
             min-height: 100vh;
-            padding: 0;
+            padding: 0px;
         }
 
         .menu {
