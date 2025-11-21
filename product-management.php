@@ -1,6 +1,7 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
+<?php require "parts/count_members.php"; ?>
 
 <?php
     $islogin = false;
@@ -69,7 +70,7 @@
                             <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
                             <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
                             <p><strong>参加人数:</strong>
-                                <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
+                                <?= countMembers($product['product_id'], $pdo) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
                             </p>
                         </div>
                         
