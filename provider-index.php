@@ -1,6 +1,7 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
+<?php require "parts/count_members.php"; ?>
 
 <div class="columns is-gapless">
     <div class="column is-narrow" style="background-color: #79D159; min-height: 100vh; padding: 0;">
@@ -54,7 +55,7 @@
                         <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
                         <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
                         <p><strong>参加人数:</strong>
-                            <?= htmlspecialchars($product['max_participants']) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
+                            <?= countMembers($product['product_id'], $pdo) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
                         </p>
                     </div>
                     <div style="flex-shrink: 0; margin-left: 20px;">
