@@ -141,13 +141,13 @@
 
                                     <div class="card-content">
                                         <div class="content">
-                                            
-                                            <?php foreach( $attachedTags as $tags ) :?>
-                                                <button class="button is-small is-light is-rounded" disabled><?= $tags['name']; ?></button>
-                                            <?php endforeach; ?>
-                                            
+                                            <p>
+                                                <?php foreach( $attachedTags as $tags ) :?>
+                                                    <button class="button is-small is-light is-rounded" disabled><?= $tags['name']; ?></button>
+                                                <?php endforeach; ?>
+                                            </p>
 
-                                            <p><textarea readonly cols="30" rows="3"><?= $recommend['detail']; ?></textarea></p>
+                                            <p><textarea readonly rows="4" style="width:100%; resize:none;" class="textarea is-primary"><?= $recommend['detail']; ?></textarea></p>
                                         </div>
                                     </div>
                                 </div>
