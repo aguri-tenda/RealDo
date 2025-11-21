@@ -140,6 +140,21 @@ switch ($event_duration) {
 // タグ検索の組み立て
 // =====================
 if (!empty($selected_tags)) {
+    //タグ検索がある場合、dbのタグカウントを増やす
+    $searchWeight = 1; // タグ検索の重み付け（必要に応じて調整可能）
+    foreach ($selected_tags as $tag_id) {
+        $tag_count_sql = $pdo->prepare("
+            INSERT INTO tag_count (user_id, tag_id, attention_level)
+            VALUES (:user_id, :tag_id, :attention_level)
+            ON DUPLICATE KEY UPDATE attention_level = attention_level + :attention_level
+        ");
+        $tag_count_sql->execute([
+            ':user_id' => $user_id,
+            ':tag_id' => $tag_id,
+            ':attention_level' => $searchWeight,
+        ]);
+    }
+
     // タグ検索がある場合、サブクエリ(t1)を完成させる
 
     // サブクエリのJOINを追加
