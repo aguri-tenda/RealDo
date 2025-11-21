@@ -17,7 +17,7 @@ if (!$product) {
 }
 
 $tags_sql = $pdo->prepare(
-    "SELECT t.name
+    "SELECT t.name, t.tag_id
     FROM attached_tags att
     INNER JOIN tags t
         ON att.tag_id = t.tag_id
