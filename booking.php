@@ -82,7 +82,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
                 確定
             </button>
         </div>
-
+        <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id) ?>">
     </form>
 </div>
 
