@@ -78,7 +78,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="field has-text-centered">
             <button class="button is-info is-medium"
-                style="background-color: #41C0FF; width: 50%; height: 50px; border-radius: 8px;">
+                style="background-color: #41C0FF; width: 50%; height: 50px; border-radius: 8px; margin-bottom: 2rem;">
                 確定
             </button>
         </div>
