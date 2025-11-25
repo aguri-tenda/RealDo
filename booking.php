@@ -12,6 +12,10 @@ if (!$product) {
     echo "<p>Product not found.</p>";
     exit;
 }
+if (!isset($_SESSION['user'])) {
+    echo "<p>Please log in to make a booking.</p>";
+    exit;
+}
 $dates_sql = $pdo->prepare("SELECT * FROM dates WHERE product_id = ? ORDER BY start_time ASC");
 $dates_sql->execute([$product_id]);
 $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
