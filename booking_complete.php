@@ -3,6 +3,7 @@ require "parts/header.php";
 require "parts/navigation.php";
 
 // POSTデータ受け取り
+$product_id = $_POST['product_id'] ?? '';
 $people = $_POST['booking_people'] ?? 1;
 $datetime = $_POST['booking_datetime'] ?? '';
 $names = $_POST['booking_name'] ?? [];
@@ -92,6 +93,7 @@ $tels = $_POST['booking_tel'] ?? [];
         <?php endfor; ?>
 
         <!-- hidden で次画面にデータを送る -->
+        <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id) ?>">
         <input type="hidden" name="booking_people" value="<?= htmlspecialchars($people) ?>">
         <input type="hidden" name="booking_datetime" value="<?= htmlspecialchars($datetime) ?>">
 
@@ -109,7 +111,7 @@ $tels = $_POST['booking_tel'] ?? [];
 
         <!-- ボタン -->
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <a href="booking_confirm.php" class="button is-light is-medium" style="margin-right: 20px;">
+            <a href="booking.php?product_id=<?= htmlspecialchars($product_id) ?>" class="button is-light is-medium" style="margin-right: 20px;">
                 戻る
             </a>
 
