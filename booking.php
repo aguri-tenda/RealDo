@@ -85,6 +85,10 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 
     </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
+<script src="script/booking-script.js"></script>
+
 <?php
 require "parts/user_bottom.php";
 require "parts/footer.php";
