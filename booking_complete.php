@@ -4,11 +4,11 @@ require "parts/navigation.php";
 
 // POSTデータ受け取り
 $product_id = $_POST['product_id'] ?? '';
-$people = $_POST['booking_people'] ?? 1;
-$datetime = $_POST['booking_datetime'] ?? '';
-$names = $_POST['booking_name'] ?? [];
-$kanas = $_POST['booking_kana'] ?? [];
-$tels = $_POST['booking_tel'] ?? [];
+$people = $_POST['people'] ?? 1;
+$datetime = $_POST['selected_date'] ?? '';
+$names = $_POST['name'] ?? [];
+$kanas = $_POST['kana'] ?? [];
+$tels = $_POST['tel'] ?? [];
 ?>
 
 <br>
