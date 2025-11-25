@@ -76,6 +76,15 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 
         <hr style="margin: 25px 0;">
 
+        <label class="label" style="color: #278EDD; margin-bottom: 15px; font-size: 1.2rem;">
+            備考
+        </label>
+        <div class="field">
+            <div class="control">
+                <textarea class="textarea" name="remark" placeholder="何かあればご記入ください。" style="background-color:#E3FFFF; border:1px solid #858484ff; resize:none; height: 100px;"></textarea>
+            </div>
+        </div>
+
         <div class="field has-text-centered">
             <button class="button is-info is-medium"
                 style="background-color: #41C0FF; width: 50%; height: 50px; border-radius: 8px; margin-bottom: 2rem;">
