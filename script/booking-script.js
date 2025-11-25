@@ -51,7 +51,7 @@ const ParticipantBox = {
 };
 
 const App = new Vue({
-    el: "#app-booking-confirm",
+    el: "#app-booking",
 
     components: {
         'participant-box': ParticipantBox
