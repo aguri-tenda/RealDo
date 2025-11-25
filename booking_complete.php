@@ -110,7 +110,7 @@ $tels = $_POST['tel'] ?? [];
         <?php endforeach; ?>
 
         <!-- ボタン -->
-        <div class="field has-text-centered" style="margin-top: 2rem;">
+        <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
             <a href="booking.php?product_id=<?= htmlspecialchars($product_id) ?>" class="button is-light is-medium" style="margin-right: 20px;">
                 戻る
             </a>
