@@ -198,8 +198,9 @@
                                                     <div class="level-right">
                                                         <div>
                                                             <div>
-                                                                <input type="text" placeholder="<?= $product['post_code']; ?>"  v-model="addressNum" name="post-code" size="8">
-                                                                <input type="text" placeholder="<?= $product['address']; ?>"  v-model="address" name="address">
+                                                                <input type="text" placeholder="<?= $product['post_code']; ?>"  v-model="addressNum" id="zipcode" name="post-code" size="8">
+                                                                <input type="text" placeholder="<?= $product['address']; ?>"  v-model="address" id="address" name="address">
+                                                                <input type="button" id="getAddress" value="検索">
                                                             </div>
                                                             <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
                                                         </div>
@@ -327,6 +328,9 @@
                     </div>
                 </div>
             </div>
+
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="script/app.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
             <script src="script/product-update-script.js"></script>
