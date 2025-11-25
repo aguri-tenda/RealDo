@@ -13,7 +13,7 @@ $tels = $_POST['booking_tel'] ?? [];
 <br>
 
 <div class="level-item">
-    <form class="box" style="width: 700px; text-align: center;" action="booking_actioon.php" method="post">
+    <form class="box" style="width: 700px; text-align: center;" action="booking_action.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">予約内容確認</span>
         <br><br>
 
