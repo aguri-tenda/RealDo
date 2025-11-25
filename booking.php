@@ -35,7 +35,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
             <div class="field-body">
                 <div class="field">
                     <div class="control">
-                        <input class="input" style="width: 120px;" type="number" name="people" v-model. ="participants" min="1">
+                        <input class="input" style="width: 120px;" type="number" name="people" v-model.number="participants" min="1">
                     </div>
                 </div>
 
