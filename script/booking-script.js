@@ -50,7 +50,7 @@ const ParticipantBox = {
     `
 };
 
-const App = new Vue({
+const BookingApp = new Vue({
     el: "#app-booking",
 
     components: {

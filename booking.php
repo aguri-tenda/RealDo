@@ -18,7 +18,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <br>
 
-<div class="container is-flex is-justify-content-center">
+<div class="container is-flex is-justify-content-center" id="app-booking">
     <form class="box" style="max-width: 1200px; width: 100%; padding: 40px; border-radius: 10px;" method="post"
         action="booking_complete.php">
 
@@ -63,7 +63,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
             参加者情報
         </label>
 
-        <div id="app-booking">
+        <div id="participant-forms">
 
             <!-- 参加者フォーム -->
             <participant-box
