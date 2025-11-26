@@ -70,6 +70,10 @@ try
 catch( Exception $e )
 {
     $pdo->rollBack();
-    header("Location: error.php");
+    //header("Location: error.php");
+    echo '<div style="background-color: #ffeaea; border: 1px solid #c00; padding: 10px; margin-top: 15px;">';
+    echo '<strong>エラー詳細（デバッグ情報）:</strong><br>';
+    echo htmlspecialchars($e->getMessage());
+    echo '</div>';
     exit();
 }
