@@ -9,6 +9,7 @@ $datetime = $_POST['selected_date'] ?? '';
 $names = $_POST['name'] ?? [];
 $kanas = $_POST['kana'] ?? [];
 $tels = $_POST['tel'] ?? [];
+$remark = $_POST['remark'] ?? '';
 ?>
 
 <br>
@@ -91,6 +92,18 @@ $tels = $_POST['tel'] ?? [];
 
             <br>
         <?php endfor; ?>
+
+        <!-- 備考 -->
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label style="color:#278EDD;">備考</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <textarea disabled class="textarea" style="background-color:#E3FFFF; border:1px solid #858484ff; width:80%; height:100px; resize:none;"><?= htmlspecialchars($remark) ?></textarea>
+                </div>
+            </div>
+        </div>
 
         <!-- hidden で次画面にデータを送る -->
         <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id) ?>">
