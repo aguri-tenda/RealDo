@@ -1,4 +1,3 @@
-<?php session_start();?>
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 <?php require "parts/db-connect.php"; ?>
@@ -9,7 +8,7 @@
 <div class="column">
         <?php if(!empty($_SESSION['islogin'])) : ?>
             <?php
-            $sql = $pdo->prepare("SELECT * FROM products WHERE provider_id = ? AND is_active = 1 ;");
+            $sql = $pdo->prepare("SELECT * FROM products WHERE provider_id = ? && is_active = 1 ;");
             $sql->execute([$_SESSION['provider']['providerid']]);
             $products = $sql->fetchAll(PDO::FETCH_ASSOC);
             ?>
@@ -73,5 +72,5 @@
         <?php endif; ?>
     </div>
 
-<?php require "parts/user_bottom.php"; ?>
+<?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
