@@ -51,7 +51,7 @@
                             <div class="level">
                                 <div class="level-left">
                                     <span>参加可能人数</span>
-                                    <input type="number" v-model="max" name="max" size="3" required>
+                                    <input type="number" v-model="max" name="max" size="3" required @focus="address = $refs.address.value">
                                     <span>人まで</span>
                                 </div>
                                 <div class="level-right">
@@ -59,12 +59,12 @@
                                     <div>
                                         <span>
                                             
-                                            <input type="date" v-model="start_date" name="start_date" required>
-                                            <input type="text" v-model="start_time" name="start_time" placeholder="0:00" size="5" required>～
+                                            <input type="date" v-model="start_date" name="start_date" required @focus="address = $refs.address.value">
+                                            <input type="text" v-model="start_time" name="start_time" placeholder="0:00" size="5" required @focus="address = $refs.address.value">～
                                             
                                             
-                                            <input type="date" v-model="finish_date" name="finish_date" required>
-                                            <input type="text" v-model="finish_time" name="finish_time" placeholder="0:00" size="5" required>
+                                            <input type="date" v-model="finish_date" name="finish_date" required @focus="address = $refs.address.value">
+                                            <input type="text" v-model="finish_time" name="finish_time" placeholder="0:00" size="5" required @focus="address = $refs.address.value">
                                             
                                         </span>
 
@@ -89,7 +89,7 @@
                                                     イベント名：
                                                 </div>
                                                 <div class="level-right">
-                                                    <input type="text" v-model="name" name="name" required>
+                                                    <input type="text" v-model="name" name="name" required @focus="address = $refs.address.value">
                                                 </div>
                                             </div>
 
@@ -100,7 +100,7 @@
                                                     開催地：
                                                 </div>
                                                 <div class="level-right">
-                                                    <input type="text" v-model="location" name="location" required>
+                                                    <input type="text" v-model="location" name="location" required @focus="address = $refs.address.value">
                                                 </div>
                                             </div>
 
@@ -113,8 +113,8 @@
                                                 <div class="level-right">
                                                     <div>
                                                         <div>
-                                                            <input type="text" v-model="addressNum" name="post-code" id="zipcode" placeholder="000-0000" size="8" required>
-                                                            <input type="text" v-model="address" @change="address = $event.target.value" name="address" id="address" required>
+                                                            <input type="text" v-model="addressNum" name="post-code" id="zipcode" placeholder="000-0000" size="8" required  @focus="address = $refs.address.value">
+                                                            <input type="text" v-model="address" @change="address = $event.target.value" name="address" id="address" ref="address" required>
                                                             <input type="button" id="getAddress" value="検索">
                                                         </div>
                                                         <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
@@ -133,7 +133,7 @@
                                                 </div>
                                                 <div class="level-right">
                                                     <div>
-                                                        <input type="text" v-model="tel" name="tel" required>
+                                                        <input type="text" v-model="tel" name="tel" required @focus="address = $refs.address.value">
                                                         <p class="help" v-if="isTel">数字で入力してください</p>
                                                     </div>
                                                 </div>
@@ -147,7 +147,7 @@
                                                 </div>
                                                 <div class="level-right">
                                                     <div>
-                                                        <textarea v-model="detail" name="detail" cols="25" rows="5" max="1000" placeholder="※1000文字以内で入力してください" required></textarea>
+                                                        <textarea v-model="detail" name="detail" cols="25" rows="5" max="1000" placeholder="※1000文字以内で入力してください" required @focus="address = $refs.address.value"></textarea>
                                                         <p class="help">{{ detail.length }}/ 1000 <span v-if="isDetailOver"><font color="red">※文字数が超過しています</font></span> </p>
                                                     </div>
                                                 </div>
@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="level-right">
                                                     <div>
-                                                        <input type="file" name="file" accept="image/*" required>
+                                                        <input type="file" name="file" accept="image/*" required @focus="address = $refs.address.value">
                                                         <?php if(isset($_GET['failed'])) : ?>
                                                             <p class="help"><font color="red">ファイルはpng、またはjpegを指定してください</font></p>
                                                         <?php endif; ?>
@@ -176,7 +176,7 @@
                                                     参加料：
                                                 </div>
                                                 <div class="level-right">
-                                                    <input type="number" v-model="price" min="0" size="5" name="price" required>円
+                                                    <input type="number" v-model="price" min="0" size="5" name="price" required @focus="address = $refs.address.value">円
                                                 </div>
                                             </div>
 
