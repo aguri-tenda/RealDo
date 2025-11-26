@@ -113,8 +113,9 @@
                                                 <div class="level-right">
                                                     <div>
                                                         <div>
-                                                            <input type="text" v-model="addressNum" name="post-code" placeholder="000-0000" size="8" required>
-                                                            <input type="text" v-model="address" name="address" required>
+                                                            <input type="text" v-model="addressNum" name="post-code" id="zipcode" placeholder="000-0000" size="8" required>
+                                                            <input type="text" v-model="address" @change="address = $event.target.value" name="address" id="address" required>
+                                                            <input type="button" id="getAddress" value="検索">
                                                         </div>
                                                         <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
                                                     </div>
@@ -232,7 +233,8 @@
                 </div>
             </div>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="script/app.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
             <script src="script/product-insert-script.js"></script>

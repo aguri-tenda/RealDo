@@ -21,7 +21,11 @@
     }
 ?>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <title>RealDo</title>
+    </head>
 
 <?php require "parts/db-connect.php"; ?>
 <?php require "parts/address.php"; ?>
