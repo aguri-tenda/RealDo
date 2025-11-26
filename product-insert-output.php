@@ -20,16 +20,34 @@
         }
     }
 ?>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <title>RealDo</title>
+    </head>
 
 <?php require "parts/db-connect.php"; ?>
+<?php require "parts/address.php"; ?>
 
 <?php
-    $sql = $pdo->prepare( "INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participants ) VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;" );
-    $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'] ]);
+    $sql = $pdo->prepare(
+        "INSERT INTO products( name, location, post_code, address, detail, image_pass, price, tel, provider_id, max_participants, area )
+        VALUE( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;"
+    );
+    $sql->execute([ $_POST['name'], $_POST['location'], $_POST['post-code'], $_POST['address'], $_POST['detail'], $file, $_POST['price'], $_POST['tel'], $_POST['provider_id'], $_POST['max'], getAreaFromPostalCode( $_POST['post-code'] ) ]);
 
     $product_id = $pdo->lastInsertId();
+
+    $oldPath = $file;
+    $newPath = "product-img/". $product_id. basename($_FILES['file']['name']);
+
+    rename($oldPath, $newPath);
+
+    $sql = $pdo->prepare( "UPDATE products SET image_pass = ? WHERE product_id = ? ;" );
+    $sql->execute([ $newPath, $product_id ]);
+
+    $sql = $pdo->prepare(" INSERT INTO dates( product_id, start_time, finish_time ) VALUE( ?, ?, ? ); ");
+    $sql->execute([ $product_id, $_POST['start_date']. " ". $_POST['start_time'], $_POST['finish_date']. " ". $_POST['finish_time'] ]);
 
     $getTag = $pdo->prepare(" SELECT * FROM tags WHERE tag_id = ?; ");
     $tagname = [];
@@ -70,8 +88,13 @@
                         <div class="level-right">
                             <span>開催日時</span>
                             <div>
-                                <input type="date" value="<?= $_POST['start_date']; ?>" disabled>
-                                <input type="text" value="<?= $_POST['start_time']; ?>"  size="5" disabled>～
+                                <span>
+                                    <input type="date" value="<?= $_POST['start_date']; ?>" disabled>
+                                    <input type="text" value="<?= $_POST['start_time']; ?>"  size="5" disabled>～
+
+                                    <input type="date" value="<?= $_POST['finish_date']; ?>" disabled>
+                                    <input type="text" value="<?= $_POST['finish_time']; ?>"  size="5" disabled>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -96,8 +119,6 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             開催地：
@@ -106,8 +127,6 @@
                                             <input type="text" value="<?= $_POST['location']; ?>" disabled>
                                         </div>
                                     </div>
-
-                                    <hr>
 
                                     <div class="level">
                                         <div class="level-left">
@@ -123,8 +142,6 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             <div>
@@ -138,8 +155,6 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             商品の詳細：
@@ -151,18 +166,14 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             サムネイル画像：
                                         </div>
                                         <div class="level-right">
-                                            <img src="<?= $file; ?>" width="100px">
+                                            <img src="<?= $newPath; ?>" width="100px">
                                         </div>
                                     </div>
-
-                                    <hr>
                                     
                                     <div class="level">
                                         <div class="level-left">
@@ -173,8 +184,6 @@
                                         </div>
                                     </div>
 
-                                    <hr>
-
                                     <div class="level">
                                         <div class="level-left">
                                             タグ：
@@ -182,20 +191,9 @@
                                         <div class="level-right">
                                                     
                                             <div>
-
-                                            <?php
-                                                $tagsCol = 0;
-                                            ?>
-                                            <?php foreach( $tagname as $tag ) : ?>
+                                                <?php foreach( $tagname as $tag ) : ?>
                                                             
-                                                <span><?= $tag;?> </span>
-                                                    <?php
-                                                        $tagsCol++;
-                                                        if( $tagsCol >= 3 )
-                                                        {
-                                                            echo "\n";
-                                                        }
-                                                    ?>
+                                                    <span><?= $tag;?> </span>
                                                 <?php endforeach; ?>
                                             </div>
                                         </div>

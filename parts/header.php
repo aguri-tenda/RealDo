@@ -31,8 +31,8 @@ $provider_address = $_SESSION['provider']['provideraddress'] ?? '';
         html,
         body {
             height: 100%;
-            margin: 0px;
-            padding: 0;
+            margin: 0;
+            padding: 0px;
         }
 
         .sidebar {

@@ -1,4 +1,4 @@
-<footer class="footer" style="background-color:#C3FF9B; position: fixed;position: fixed;
+<footer class="footer" style="background-color:#C3FF9B; position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;

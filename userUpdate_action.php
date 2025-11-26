@@ -26,8 +26,8 @@ if (!empty($userid) && !empty($userpassword_raw)) {
         // 登録が成功した場合、セッション（登録用のユーザー情報）をクリアする
         unset($_SESSION['user_update']);
         $_SESSION['user'] = [
-            'name' => $username,
-            'address' => $useraddress,
+            'username' => $username,
+            'useraddress' => $useraddress,
             'userid' => $userid,
         ];
 

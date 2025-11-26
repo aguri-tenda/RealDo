@@ -12,11 +12,57 @@ $_SESSION['review'] = [
     'reviewtext' => $_GET['reviewtext'] ?? '',
     'rating' => $_GET['rating'] ?? 0,
 ];
+
+if (!$product) {
+    echo "<p>Product not found.</p>";
+    exit;
+}
+
+$is_purchased = false;
+$is_past_purchase = false;
+if (isset($_SESSION['user'])) {
+    $purchase_sql = $pdo->prepare(
+        "SELECT COUNT(*) FROM purchases 
+        WHERE user_id = ? AND product_id = ?"
+    );
+    $purchase_sql->execute([$user_id, $product_id]);
+    $purchase_count = $purchase_sql->fetchColumn();
+    if ($purchase_count > 0) {
+        $is_purchased = true;
+    }
+    $time_sql = $pdo->prepare(
+        "SELECT start_time FROM purchases
+        WHERE user_id = ? AND product_id = ?"
+    );
+    $time_sql->execute([$user_id, $product_id]);
+    $purchase_times = $time_sql->fetchAll(PDO::FETCH_COLUMN);
+    $current_time = date('Y-m-d H:i:s');
+    foreach ($purchase_times as $start_time) {
+        if ($start_time < $current_time) {
+            $is_past_purchase = true;
+            break;
+        }
+    }
+    if (!$is_past_purchase) {
+        echo "<div class=\"box\" style=\"width: 520px; text-align: center; margin: 2rem auto;\">";
+        echo "<p>この商品をまだ体験していないため、レビューを投稿できません。</p>";
+        echo '<a href="detail.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="background-color: #41C0FF; margin-top: 15px;">戻る</a>';
+        echo "</div>";
+        exit;
+    }
+}
+if (!$is_purchased) {
+    echo "<div class=\"box\" style=\"width: 520px; text-align: center; margin: 2rem auto;\">";
+    echo "<p>この商品を購入していないため、レビューを投稿できません。</p>";
+    echo '<a href="detail.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="background-color: #41C0FF; margin-top: 15px;">戻る</a>';
+    echo "</div>";
+    exit;
+}
 ?>
 
 <br>
 
-<?php if (isset($_SESSION['user'])): ?> 
+<?php if (isset($_SESSION['user'])): ?>
 <div class="level-item">
     <form class="box" style="width: 520px; text-align: center;" action="review_complete.php" method="post">
         <span class="subtitle is-4" style="color:#278EDD;">レビュー投稿</span>
@@ -55,9 +101,9 @@ $_SESSION['review'] = [
     </form>
 </div>
 <?php else: ?>
-    <div class="box" style="width: 520px; text-align: center; margin: auto;">
+    <div class="box" style="width: 520px; text-align: center; margin: 2rem auto;">
         <p>レビューを投稿するにはログインが必要です。</p>
-        <a href="login.php" class="button is-link" style="margin-top: 15px;">ログインページへ</a>
+        <a href="login.php" class="button is-link" style="background-color: #41C0FF; margin-top: 15px;">ログインページへ</a>
     </div>
 <?php endif; ?>
 

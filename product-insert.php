@@ -57,8 +57,17 @@
                                 <div class="level-right">
                                     <span>開催日時</span>
                                     <div>
-                                        <input type="date" v-model="date" name="start_date" required>
-                                        <input type="text" v-model="time" name="start_time" placeholder="00:00" size="5" required>～
+                                        <span>
+                                            
+                                            <input type="date" v-model="start_date" name="start_date" required>
+                                            <input type="text" v-model="start_time" name="start_time" placeholder="0:00" size="5" required>～
+                                            
+                                            
+                                            <input type="date" v-model="finish_date" name="finish_date" required>
+                                            <input type="text" v-model="finish_time" name="finish_time" placeholder="0:00" size="5" required>
+                                            
+                                        </span>
+
                                         <p class="help" v-if="isTime">時間は「0:00 ~ 23:59」の間で設定してください</p>
                                     </div>
                                 </div>
@@ -104,8 +113,9 @@
                                                 <div class="level-right">
                                                     <div>
                                                         <div>
-                                                            <input type="text" v-model="addressNum" name="post-code" placeholder="000-0000" size="8" required>
-                                                            <input type="text" v-model="address" name="address" required>
+                                                            <input type="text" v-model="addressNum" name="post-code" id="zipcode" placeholder="000-0000" size="8" required>
+                                                            <input type="text" v-model="address" @change="address = $event.target.value" name="address" id="address" required>
+                                                            <input type="button" id="getAddress" value="検索">
                                                         </div>
                                                         <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
                                                     </div>
@@ -151,7 +161,7 @@
                                                 </div>
                                                 <div class="level-right">
                                                     <div>
-                                                        <input type="file" name="file" required>
+                                                        <input type="file" name="file" accept="image/*" required>
                                                         <?php if(isset($_GET['failed'])) : ?>
                                                             <p class="help"><font color="red">ファイルはpng、またはjpegを指定してください</font></p>
                                                         <?php endif; ?>
@@ -223,7 +233,8 @@
                 </div>
             </div>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="script/app.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
             <script src="script/product-insert-script.js"></script>
