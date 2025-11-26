@@ -25,7 +25,7 @@ if( ( $date_participants['purchased_num'] + $people ) > $date_participants['max_
     exit();
 }
 
-$purchase_sql = $pdo->prepare(" INSERT INTO purchases( product_id, user_id, start_time, purchase_date, attendance, tel, remark) VALUE( ?, ?, ?, NOW(), ?, ?, ? ); ");
+$purchase_sql = $pdo->prepare(" INSERT INTO purchases( product_id, user_id, start_time, purchased_date, attendance, tel, remark) VALUE( ?, ?, ?, NOW(), ?, ?, ? ); ");
 $participants_sql = $pdo->prepare(" INSERT INTO participants( purchase_id, participant_number, name, ruby, tel ) VALUE( ?, ?, ?, ?, ? ); ");
 $dates_sql = $pdo->prepare(" UPDATE dates SET purchased_num = purchased_num + ? WHERE product_id = ? AND start_time = ? ; ");
 

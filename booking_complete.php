@@ -100,26 +100,26 @@ $remark = $_POST['remark'] ?? '';
             </div>
             <div class="field-body">
                 <div class="field">
-                    <textarea disabled class="textarea" style="background-color:#E3FFFF; border:1px solid #858484ff; width:80%; height:100px; resize:none;"><?= htmlspecialchars($remark) ?></textarea>
+                    <textarea disabled class="textarea" name="remark" style="background-color:#E3FFFF; border:1px solid #858484ff; width:80%; height:100px; resize:none;"><?= htmlspecialchars($remark) ?></textarea>
                 </div>
             </div>
         </div>
 
         <!-- hidden で次画面にデータを送る -->
         <input type="hidden" name="product_id" value="<?= htmlspecialchars($product_id) ?>">
-        <input type="hidden" name="booking_people" value="<?= htmlspecialchars($people) ?>">
-        <input type="hidden" name="booking_datetime" value="<?= htmlspecialchars($datetime) ?>">
+        <input type="hidden" name="people" value="<?= htmlspecialchars($people) ?>">
+        <input type="hidden" name="selected_date" value="<?= htmlspecialchars($datetime) ?>">
 
         <?php foreach ($names as $n): ?>
-            <input type="hidden" name="booking_name[]" value="<?= htmlspecialchars($n) ?>">
+            <input type="hidden" name="name[]" value="<?= htmlspecialchars($n) ?>">
         <?php endforeach; ?>
 
         <?php foreach ($kanas as $k): ?>
-            <input type="hidden" name="booking_kana[]" value="<?= htmlspecialchars($k) ?>">
+            <input type="hidden" name="kana[]" value="<?= htmlspecialchars($k) ?>">
         <?php endforeach; ?>
 
         <?php foreach ($tels as $t): ?>
-            <input type="hidden" name="booking_tel[]" value="<?= htmlspecialchars($t) ?>">
+            <input type="hidden" name="tel[]" value="<?= htmlspecialchars($t) ?>">
         <?php endforeach; ?>
 
         <!-- ボタン -->
