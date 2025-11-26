@@ -138,7 +138,7 @@ switch ($event_duration) {
 // =====================
 // タグ検索の組み立て
 // =====================
-if (!empty($selected_tags)) {
+if (!empty($selected_tags) && isset($_SESSION['user'])) {
     //タグ検索がある場合、dbのタグカウントを増やす
     $searchWeight = 1; // タグ検索の重み付け（必要に応じて調整可能）
     foreach ($selected_tags as $tag_id) {
