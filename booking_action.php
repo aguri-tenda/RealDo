@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <?php require "parts/db-connect.php"; ?>
 <?php
+$user_id = $_SESSION['user_id'] ?? '';
 //ポストデータ受け取り
 $product_id = $_POST['product_id'] ?? '';
 $people = $_POST['people'] ?? 1;
