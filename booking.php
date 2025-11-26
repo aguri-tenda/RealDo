@@ -49,7 +49,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="field">
                     <div class="control">
-                        <select class="select" style="width: 260px;" name="selected_date">
+                        <select class="select" style="width: 260px;" name="selected_date" required>
                             <?php foreach ($dates as $date): ?>
                                 <option value="<?= $date['start_time'] ?>" <?= (strtotime($date['start_time']) < time()) ? 'disabled' : '' ?>>
                                     <?= htmlspecialchars($date['start_time']) ?>〜<?= htmlspecialchars($date['finish_time']) ?>
