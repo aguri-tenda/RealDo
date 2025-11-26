@@ -320,7 +320,7 @@ foreach ($results as $product) {
                     <strong>開催日程:</strong>
                     <select class="select" style="margin-left: 10px;">
                         <?php foreach ($product_data['dates'] as $date): ?>
-                            <option>
+                            <option <?= (strtotime($date['start_time']) < time()) ? 'disabled' : '' ?>>
                                 <?= htmlspecialchars($date['start_time']) ?> 〜 <?= htmlspecialchars($date['finish_time']) ?>
                             </option>
                         <?php endforeach; ?>

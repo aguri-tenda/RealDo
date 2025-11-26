@@ -70,7 +70,6 @@ try
 catch( Exception $e )
 {
     $pdo->rollBack();
-    echo "<p>予約処理中にエラーが発生しました。お手数ですが、再度予約をお願いいたします。</p>";
-    echo '<a href="booking.php?product_id='. htmlspecialchars($product_id) .'">予約ページへ戻る</a>';
+    header("Location: error.php");
     exit();
 }
