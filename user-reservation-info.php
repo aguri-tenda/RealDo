@@ -1,7 +1,7 @@
 <?php session_start();?>
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
-<?php require "parts/db-connect.php"; ?>
+
 <p class="has-text-centered">
     <span class="subtitle is-4" style="color:#278EDD;">いちご狩りへの予約状況</span>
 </p>
