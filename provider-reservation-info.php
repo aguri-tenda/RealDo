@@ -9,7 +9,7 @@ $sql = $pdo->prepare("SELECT
                       FROM purchases
                       JOIN users ON purchases.user_id = users.user_id
                       WHERE product_id = ? 
-                      ORDER BY purchase_date DESC;");
+                      ORDER BY purchased_date DESC;");
 $sql->execute([$product_id]);
 $purchases = $sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -43,8 +43,8 @@ $purchases = $sql->fetchAll(PDO::FETCH_ASSOC);
                             
                     <div style="flex-grow: 1;">
                         <h2 class="title is-4"><?= htmlspecialchars($purchase['name']) ?></h2>
-                        <p>参加日時: <?= htmlspecialchars($purchase['start_date']) ?></p>
-                        <p>参加人数: <?= htmlspecialchars($purchase['attendees']) ?></p>
+                        <p>参加日時: <?= htmlspecialchars($purchase['start_time']) ?></p>
+                        <p>参加人数: <?= htmlspecialchars($purchase['attendance']) ?></p>
                         <p>連絡先: <?= htmlspecialchars($purchase['tel']) ?></p>
                         <p>購入日: <?= htmlspecialchars($purchase['purchased_date']) ?></p>
                     </div>
