@@ -49,9 +49,9 @@ $purchases = $sql->fetchAll(PDO::FETCH_ASSOC);
                         <p>購入日: <?= htmlspecialchars($purchase['purchased_date']) ?></p>
                     </div>
                     
-                    <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
+                    <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 40px;">
                         <h2 class="title is-4">備考</h2>
-                        <p><?= nl2br(htmlspecialchars($purchase['remarks'])) ?? 'なし' ?></p>
+                        <p><?= $purchase['remarks'] != '' ? nl2br(htmlspecialchars($purchase['remarks'])) : 'なし' ?></p>
                     </div>
 
                     
