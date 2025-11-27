@@ -1,6 +1,6 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
-<?php require "parts/db-connect.php"; ?>
+
 <?php require "parts/count_members.php"; ?>
 
 <?php
