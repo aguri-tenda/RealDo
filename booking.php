@@ -1,7 +1,7 @@
 <?php
 require "parts/header.php";
 require "parts/navigation.php";
-require "parts/db-connect.php";
+
 ?>
 <?php
 $product_id = $_GET['product_id'] ?? '';
