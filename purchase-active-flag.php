@@ -11,7 +11,7 @@
     }
     else
     {
-        header( "Location: booking_show.php" );
+        header( "Location: booking_show.php?user_id=". $_GET['user_id'] );
         exit();
     }
 ?>

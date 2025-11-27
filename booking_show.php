@@ -60,16 +60,16 @@
                                 <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
 
                                     <script>
-                                        function deactivateAlert( name, purchaseid )
+                                        function deactivateAlert( name, purchaseid, userid )
                                         {
                                             if( confirm( name + "への予約を取り消します。\nよろしいですか？" ))
                                             {
-                                                window.location.href="purchase-active-flag.php?purchase_id=" + purchaseid;
+                                                window.location.href="purchase-active-flag.php?purchase_id=" + purchaseid + "&user_id=" + userid;
                                             }
                                         }
                                     </script>
                                     
-                                    <button class="button is-danger is-rounded" onclick="deactivateAlert('<?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['purchase_id'] ; ?>)">予約取り消し</button>
+                                    <button class="button is-danger is-rounded" onclick="deactivateAlert('<?= htmlspecialchars($product['name'], ENT_QUOTES) ; ?>', <?= $product['purchase_id'] ; ?>, '<?= $_GET['user_id']; ?>')">予約取り消し</button>
                                 </div>
                             </div>
                         <?php endforeach; ?>
