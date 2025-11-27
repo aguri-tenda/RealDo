@@ -19,7 +19,6 @@
             <?php unset($_SESSION['search_params']); ?>
 
             <div class="card" style="background-color: #FFFDDF;">
-
                 <?php
                     $getTag = $pdo->prepare(" SELECT tag_id FROM tag_count WHERE user_id = ? AND attention_level = (SELECT MAX(attention_level) FROM tag_count WHERE user_id = ? ); ");
                     $getTag->execute([ $_SESSION['user']['userid'], $_SESSION['user']['userid'] ]);
@@ -49,12 +48,12 @@
 
                                 if($count > 1)
                                 {
-                                    $table = "(SELECT * FROM attached_tags WHERE tag_id = ". $tagId. ") AS searchedTable". $tagId;
+                                    $table = "(SELECT * FROM attached_tags WHERE tag_id = ". $tagId. ") AS searchedTable". $count;
                                     $joinedTable = $joinedTable. " JOIN ". $table. " ON searchedTable". ($count-1). ".product_id = searchedTable". $count. ".product_id";
                                 }
                                 else
                                 {
-                                    $joinedTable = "(SELECT * FROM attached_tags WHERE tag_id = ". $tagId. ") AS searchedTable". $tagId;
+                                    $joinedTable = "(SELECT * FROM attached_tags WHERE tag_id = ". $tagId. ") AS searchedTable". $count;
                                 }
                                 $count++;
                             }
@@ -172,6 +171,17 @@
                 <?php endif; ?>
 
             </div>
+
+            <div class="section">
+                <a href="booking_show.php?user_id=<?= $_SESSION['user']['userid']; ?>">
+                    <div class="container is-fluid">
+                        <div class="level">
+                            <input type="button" class="button is-large is-primary level-item has-textcenterd" value="予約情報確認">
+                        </div>
+                    </div>
+                </a>
+            </div>
+
         <?php else : ?>
             <div class="card" style="background-color: #FFFDDF;">
                 <div class="card-header">
@@ -184,16 +194,6 @@
                 </div>
             </div>
         <?php endif; ?>
-    </div>
-</div>
-
-<div class="section">
-    <div class="container is-fluid">
-        <div class="level">
-            <button href="booking_confirm.php" class="button is-large is-primary level-item has-textcenterd">
-                予約情報確認
-            </button>
-        </div>
     </div>
 </div>
 
