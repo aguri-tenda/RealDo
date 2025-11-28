@@ -11,15 +11,27 @@ $userpassword_raw = $_SESSION['user_input']['password'] ?? ''; // 平文のパ�
 if (!empty($userid) && !empty($userpassword_raw)) {
     $hashed_password = password_hash($userpassword_raw, PASSWORD_DEFAULT);
 
-    // DBに登録
-    $sql = $pdo->prepare("INSERT INTO users (user_id, name, mail, password) VALUES (?, ?, ?, ?)");
+    $searchId = $pdo->prepare(" SELECT * from users WHERE user_id = ? ;");
+    $searchId->execute([ $userid ]);
+
+    $DBhasId = $searchId->fetchAll(PDO::FETCH_ASSOC);
+    if($DBhasId)
+    {
+        header('Location: error.php');
+        exit;
+    }
+    else
+    {
+        // DBに登録
+        $sql = $pdo->prepare("INSERT INTO users (user_id, name, mail, password) VALUES (?, ?, ?, ?)");
     
-    $success = $sql->execute([
-        $userid,
-        $username,
-        $useraddress,
-        $hashed_password,
-    ]);
+        $success = $sql->execute([
+            $userid,
+            $username,
+            $useraddress,
+            $hashed_password,
+        ]);
+    }
 
     if ($success) {
         // 登録が成功した場合、セッション（登録用のユーザー情報）をクリアする

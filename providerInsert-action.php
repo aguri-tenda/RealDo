@@ -11,16 +11,27 @@ $providerpassword_raw = $_SESSION['provider_input']['providerpassword'] ?? ''; /
 if (!empty($providerid) && !empty($providerpassword_raw)) {
     $hashed_password = password_hash($providerpassword_raw, PASSWORD_DEFAULT);
 
-    // DBに登録
-    $sql = $pdo->prepare("INSERT INTO providers (provider_id, name, mail, password) VALUES (?, ?, ?, ?)");
-    
-    $success = $sql->execute([
-        $providerid,
-        $providername,
-        $provideraddress,
-        $hashed_password,
-    ]);
+    $searchId = $pdo->prepare(" SELECT * from providers WHERE provider_id = ? ;");
+    $searchId->execute([ $providerid ]);
 
+    $DBhasId = $searchId->fetchAll(PDO::FETCH_ASSOC);
+    if($DBhasId)
+    {
+        header('Location: error.php');
+        exit;
+    }
+    else
+    {
+        // DBに登録
+        $sql = $pdo->prepare("INSERT INTO providers (provider_id, name, mail, password) VALUES (?, ?, ?, ?)");
+    
+        $success = $sql->execute([
+            $providerid,
+            $providername,
+            $provideraddress,
+            $hashed_password,
+        ]);
+    }
     if ($success) {
         // 登録が成功した場合、セッション（登録用のユーザー情報）をクリアする
         unset($_SESSION['provider_input']);
