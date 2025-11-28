@@ -67,6 +67,11 @@ foreach ($tags as $tag) {
 
 
 <div class="container has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
+    <div class="field is-horizontal is-justify-content-center mt-5">
+        <figure class="image is-128">
+            <img src="<?= htmlspecialchars($product['image_pass']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+        </figure>
+    </div>
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <div style="flex-grow: 1;">
@@ -91,14 +96,13 @@ foreach ($tags as $tag) {
             <p><strong>参加人数:</strong>
                 <?= countMembers($pdo, $product_id) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
             </p>
-        </div>
-
-        <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
-            <span class="title is-4" style="color:#339ef0;">￥<?= htmlspecialchars($product['price']) ?></span>
-            <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button"
-                style="background-color:#339ef0ff; color: white;">
-                予約
-            </a>
+            <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
+                <span class="title is-4" style="color:#339ef0;">￥<?= htmlspecialchars($product['price']) ?></span>
+                <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button"
+                    style="background-color:#339ef0ff; color: white;">
+                    予約
+                </a>
+            </div>
         </div>
     </div>
 
