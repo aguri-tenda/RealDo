@@ -23,6 +23,9 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 <br>
 
 <div class="container is-flex is-justify-content-center" id="app-booking">
+    <div class="level">
+        <a href="<?= $_SERVER['HTTP_REFERER']; ?>"><input type="button" class="button is-link level-left" value="戻る"></a>
+    </div>
     <form class="box" style="max-width: 1200px; width: 100%; padding: 40px; border-radius: 10px;" method="post"
         action="booking_complete.php">
 

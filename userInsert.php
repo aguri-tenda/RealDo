@@ -1,6 +1,11 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 <br>
+
+<div class="level">
+    <a href="index.php"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
+</div>
+
 <div class="level-item">
     <?php
     // 戻ってきた場合のエラーメッセージ
@@ -8,6 +13,7 @@
         echo '<p style="color: red; font-weight: bold;">そのユーザーIDは既に使用されています。</p><br>';
     }
     ?>
+    
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userInsert_complete.php"
         method="post">
         <span class="subtitle is-4" style="color:#278EDD;">新規登録</span>
