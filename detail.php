@@ -41,7 +41,7 @@ $reviews_sql = $pdo->prepare(
 $reviews_sql->execute([$product_id]);
 $reviews = $reviews_sql->fetchAll(PDO::FETCH_ASSOC);
 
-if(count($reviews) > 0) {
+if (count($reviews) > 0) {
     $total_rating = 0;
     foreach ($reviews as $review) {
         $total_rating += $review['rating'];
@@ -75,11 +75,11 @@ foreach ($tags as $tag) {
 
     <div class="box" style="margin: 25px; display: flex; align-items: center;">
         <div style="flex-grow: 1;">
-            <p>
-                <span class="title is-4"><?= htmlspecialchars($product['name']) ?></span>
+            <p class="tags">
+                <span class="title is-3"><?= htmlspecialchars($product['name']) ?></span>
 
-                <?php foreach( $tags as $tag ) : ?>
-                    <span><button class="button is-small is-primary is-outlined is-rounded" disabled><?= $tag['name']; ?></button></span>
+                <?php foreach ($tags as $tag): ?>
+                    <span class="tag is-primary is-light"><?= htmlspecialchars($tag['name']) ?></span>
                 <?php endforeach; ?>
             </p>
 
@@ -93,9 +93,9 @@ foreach ($tags as $tag) {
         </div>
 
         <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 20px;">
-            <span class="title is-6">￥<?= htmlspecialchars($product['price']) ?></span>
-            <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>"
-                class="button" style="background-color:#339ef0ff; color: white;">
+            <span class="title is-4" style="color:#339ef0;">￥<?= htmlspecialchars($product['price']) ?></span>
+            <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button"
+                style="background-color:#339ef0ff; color: white;">
                 予約
             </a>
         </div>
@@ -103,9 +103,9 @@ foreach ($tags as $tag) {
 
     <div class="box" style="margin: 25px;">
         <h2 class="title is-4">開催日程</h2>
-        <?php if (count($dates) === 0) : ?>
+        <?php if (count($dates) === 0): ?>
             <p>現在、開催予定の日程はありません。</p>
-        <?php else : ?>
+        <?php else: ?>
             <table class="table is-fullwidth is-striped">
                 <thead>
                     <tr>
@@ -114,7 +114,7 @@ foreach ($tags as $tag) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($dates as $date) : ?>
+                    <?php foreach ($dates as $date): ?>
                         <tr>
                             <td><?= htmlspecialchars($date['start_time']) ?></td>
                             <td><?= htmlspecialchars($date['finish_time']) ?></td>
@@ -125,38 +125,41 @@ foreach ($tags as $tag) {
         <?php endif; ?>
     </div>
 
-    <form method="post" action="review_insert.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="box" style="margin: 25px;">
+    <form method="post" action="review_insert.php?product_id=<?= htmlspecialchars($product['product_id']) ?>"
+        class="box" style="margin: 25px;">
         <h2 class="title is-4">レビュー一覧</h2>
-        <?php if (count($reviews) === 0) : ?>
+        <?php if (count($reviews) === 0): ?>
             <p>まだレビューはありません。</p>
-        <?php else : ?>
+        <?php else: ?>
 
-        <div class="field is-horizontal column" style="margin-top: 2rem;">
-            <div class="field-label is-medium">
-                <label class="label" style="color:#278EDD;">みんなの評価</label>
-            </div>
-            <div class="field-body">
-                <div class="field">
-                    <div id="vue-rating-app">
-                        <rating-selector rating=<?= htmlspecialchars($rating_avg) ?> disabled="true"></rating-selector>
+            <div class="field is-horizontal column" style="margin-top: 2rem;">
+                <div class="field-label is-medium">
+                    <label class="label" style="color:#278EDD;">みんなの評価</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div id="vue-rating-app">
+                            <rating-selector rating=<?= htmlspecialchars($rating_avg) ?> disabled="true"></rating-selector>
+                        </div>
+                        <input type="hidden" name="rating" id="rating-value" value=<?= htmlspecialchars($rating_avg) ?>; ?>
                     </div>
-                    <input type="hidden" name="rating" id="rating-value" value=<?= htmlspecialchars($rating_avg) ?>; ?>
                 </div>
             </div>
-        </div>
-                
-                
+
+
             <?php $count = 0; ?>
             <div class="columns is-multiline">
-                <?php foreach ($reviews as $review) : ?>
-                    <?php if ($count >= 5) break; ?>
+                <?php foreach ($reviews as $review): ?>
+                    <?php if ($count >= 5)
+                        break; ?>
                     <?php $count++; ?>
                     <div class="card column" style="margin-bottom: 15px; background-color: #d2ffcdff; width: 100%;">
-                        <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?></p>
+                        <p><strong><?= htmlspecialchars($review['name']) ?></strong> - <?= htmlspecialchars($review['date']) ?>
+                        </p>
                         <p>評価: <?= str_repeat('★', $review['rating']) . str_repeat('☆', 5 - $review['rating']) ?></p>
                         <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
                     </div>
-                    <?php if ($count < min(5, count($reviews))) : ?>
+                    <?php if ($count < min(5, count($reviews))): ?>
                         <hr>
                     <?php endif; ?>
                 <?php endforeach; ?>
@@ -169,29 +172,34 @@ foreach ($tags as $tag) {
         </div>
     </form>
     <?php if (isset($_SESSION['search_params'])): ?>
-    <form method="post" action="search.php" class="columns" style="justify-content: center; width: 100%;">
-        <input type="hidden" name="searchWord" value="<?php echo htmlspecialchars($_SESSION['search_params']['searchWord'] ?? ''); ?>">
-        <input type="hidden" name="start_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['start_date'] ?? ''); ?>">
-        <input type="hidden" name="end_date" value="<?php echo htmlspecialchars($_SESSION['search_params']['end_date'] ?? ''); ?>">
-        <input type="hidden" name="event_location" value="<?php echo htmlspecialchars($_SESSION['search_params']['event_location'] ?? ''); ?>">
-        <input type="hidden" name="event_duration" value="<?php echo htmlspecialchars($_SESSION['search_params']['event_duration'] ?? ''); ?>">
-        <?php
+        <form method="post" action="search.php" class="columns" style="justify-content: center; width: 100%;">
+            <input type="hidden" name="searchWord"
+                value="<?php echo htmlspecialchars($_SESSION['search_params']['searchWord'] ?? ''); ?>">
+            <input type="hidden" name="start_date"
+                value="<?php echo htmlspecialchars($_SESSION['search_params']['start_date'] ?? ''); ?>">
+            <input type="hidden" name="end_date"
+                value="<?php echo htmlspecialchars($_SESSION['search_params']['end_date'] ?? ''); ?>">
+            <input type="hidden" name="event_location"
+                value="<?php echo htmlspecialchars($_SESSION['search_params']['event_location'] ?? ''); ?>">
+            <input type="hidden" name="event_duration"
+                value="<?php echo htmlspecialchars($_SESSION['search_params']['event_duration'] ?? ''); ?>">
+            <?php
             foreach ($_SESSION['search_params']['tags'] as $tag) {
                 echo '<input type="hidden" name="tags[]" value="' . htmlspecialchars($tag) . '">';
             }
-        ?>
-        <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 4rem;">
-            <button class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
-                検索結果に戻る
-            </button>
-        </div>
-    </form>
+            ?>
+            <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 4rem;">
+                <button class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
+                    検索結果に戻る
+                </button>
+            </div>
+        </form>
     <?php else: ?>
-    <div class="field has-text-centered" style="margin-top: 2rem; margin-bottom: 4rem;">
-        <a href="index.php" class="button is-info" style="background-color: #339ef0ff; width: 225px; border-radius: 5px;">
-            ホームに戻る
-        </a>
-    </div>
+        <div class="field has-text-centered" style="margin: 2rem 0;">
+            <a href="index.php" class="button is-info is-medium" style="width: 225px; max-width: 90%; border-radius: 5px;">
+                ホームに戻る
+            </a>
+        </div>
     <?php endif; ?>
 </div>
 
