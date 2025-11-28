@@ -195,6 +195,11 @@ foreach ($tags as $tag) {
     <?php endif; ?>
 </div>
 
+<div class="section">
+    <div class="container">
+    </div>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.11/dist/vue.js"></script>
 <script src="script/review_insert-script.js"></script>
