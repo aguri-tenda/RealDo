@@ -67,11 +67,6 @@ foreach ($tags as $tag) {
 
 
 <div class="container has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
-    <div class="field is-horizontal is-justify-content-center mt-5">
-        <figure class="image is-128">
-            <img src="<?= htmlspecialchars($product['image_pass']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-        </figure>
-    </div>
 
     <div class="box" style="margin: 25px; display: flex; flex-wrap: wrap; gap: 20px;">
         <!-- 左側: 商品情報 -->
