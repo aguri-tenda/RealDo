@@ -3,7 +3,7 @@
 <br>
 
 <div class="level">
-    <a href="index.php"><input type="button" class="button is-link level-left" value="戻る"></a>
+    <a href="index.php"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
 </div>
 
 <div class="level-item">
