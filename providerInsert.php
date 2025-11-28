@@ -3,6 +3,10 @@
 
 <body style="background-color:#EBEBEB">
     <br>
+    <div class="level">
+        <a href="provider-index.php"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
+    </div>
+
     <div class="level-item">
         <?php
         // 戻ってきた場合のエラーメッセージ

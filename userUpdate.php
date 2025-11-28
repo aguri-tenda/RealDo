@@ -126,5 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </div>
 
+<div class="section">
+    <div class="container"></div>
+</div>
+
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
