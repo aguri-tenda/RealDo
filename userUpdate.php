@@ -28,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php require "parts/header.php"; ?>
 <?php require "parts/navigation.php"; ?>
 
-
+<div class="level">
+    <a href="index.php"><input type="button" class="button is-link level-left" value="戻る"></a>
+</div>
 <div class="level-item">
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="userUpdate.php"
         method="post">
