@@ -101,7 +101,8 @@ foreach ($tags as $tag) {
             </div>
 
             <!-- 右側: 価格と予約ボタン -->
-            <div style="flex-basis: 200px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+            <div
+                style="flex-basis: 200px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start;margin-top: 50px">
                 <span class="title is-4" style="color:#339ef0;">￥<?= htmlspecialchars($product['price']) ?></span>
                 <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button is-info"
                     style="background-color:#339ef0ff; color: white;">
