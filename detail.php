@@ -68,39 +68,50 @@ foreach ($tags as $tag) {
 
 <div class="container has-text-centered" style="margin-top: 2rem; margin-bottom: 2rem;">
 
-    <div class="box" style="margin: 25px; display: flex; flex-wrap: wrap; gap: 20px;">
-        <!-- 左側: 商品情報 -->
-        <div style="flex: 1; min-width: 250px;">
+    <div class="box" style="margin: 25px; display: flex; flex-direction: column; gap: 20px;">
+
+        <!-- 上: 画像 -->
+        <div style="align-self: center;">
             <figure class="image is-128">
                 <img src="<?= htmlspecialchars($product['image_pass']) ?>"
                     alt="<?= htmlspecialchars($product['name']) ?>">
             </figure>
+        </div>
 
-            <p class="tags" style="margin-top: 1rem;">
-                <span class="title is-3"><?= htmlspecialchars($product['name']) ?></span>
-                <?php foreach ($tags as $tag): ?>
-                    <span class="tag is-primary is-light"><?= htmlspecialchars($tag['name']) ?></span>
-                <?php endforeach; ?>
-            </p>
-            <div>
-                <p><?= nl2br(htmlspecialchars($product['detail'])) ?></p>
-                <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
-                <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
-                <p><strong>参加人数:</strong>
-                    <?= countMembers($pdo, $product_id) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
+        <!-- 下: 商品情報と価格/予約ボタン -->
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+
+            <!-- 左側: 商品情報 -->
+            <div style="flex: 1; min-width: 250px;">
+                <p class="tags" style="margin-top: 0;">
+                    <span class="title is-3"><?= htmlspecialchars($product['name']) ?></span>
+                    <?php foreach ($tags as $tag): ?>
+                        <span class="tag is-primary is-light"><?= htmlspecialchars($tag['name']) ?></span>
+                    <?php endforeach; ?>
                 </p>
+
+                <div>
+                    <p><?= nl2br(htmlspecialchars($product['detail'])) ?></p>
+                    <p><strong>場所:</strong> <?= htmlspecialchars($product['location']) ?></p>
+                    <p><strong>所在地:</strong> <?= htmlspecialchars($product['address']) ?></p>
+                    <p><strong>参加人数:</strong>
+                        <?= countMembers($pdo, $product_id) ?>/<?= htmlspecialchars($product['max_participants']) ?>人
+                    </p>
+                </div>
+            </div>
+
+            <!-- 右側: 価格と予約ボタン -->
+            <div style="flex-basis: 200px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+                <span class="title is-4" style="color:#339ef0;">￥<?= htmlspecialchars($product['price']) ?></span>
+                <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button is-info"
+                    style="background-color:#339ef0ff; color: white;">
+                    予約
+                </a>
             </div>
         </div>
-
-        <!-- 右側: 価格と予約ボタン -->
-        <div style="flex-basis: 200px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
-            <span class="title is-4" style="color:#339ef0;">￥<?= htmlspecialchars($product['price']) ?></span>
-            <a href="booking.php?product_id=<?= htmlspecialchars($product['product_id']) ?>" class="button is-info"
-                style="background-color:#339ef0ff; color: white;">
-                予約
-            </a>
-        </div>
     </div>
+
+
 
 
     <div class="box" style="margin: 25px;">
