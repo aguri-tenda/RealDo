@@ -4,6 +4,11 @@
 <?php require "parts/db-connect.php"; ?>
 
 <div class="has-background-light">
+
+    <div class="level">
+        <a href="<?= $_SERVER['HTTP_REFERER']; ?>"><input type="button" class="button is-link level-left ml-3 mt-3" value="戻る"></a>
+    </div>
+
     <?php
         $islogin = false;
 
