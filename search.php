@@ -263,7 +263,12 @@ foreach ($results as $product) {
 }
 ?>
 
-<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
+<div class="level">
+    <div class="level-left">
+        <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
+        <a href="index.php"><input type="button" class="button is-link" value="ホームへ戻る"></a>
+    </div>
+</div>
 
 <?php foreach ($grouped_results as $product_id => $product_data): ?>
     <div class="box" style="
