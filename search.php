@@ -186,6 +186,9 @@ if (!empty($selected_tags)) {
     $sql .= $sub_query_end;
 }
 
+// is_active フラグの追加（開催中・開催予定のみ表示）
+$where[] = 'd.is_active = 1';
+
 // =====================
 // WHERE句の結合
 // =====================

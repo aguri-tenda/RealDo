@@ -70,7 +70,7 @@
                         }
                         else
                         {
-                            $getProducts = $pdo->prepare(" SELECT * FROM products JOIN attached_tags ON products.product_id = attached_tags.product_id WHERE tag_id = ? ORDER BY products.product_id DESC; ");
+                            $getProducts = $pdo->prepare(" SELECT * FROM products JOIN attached_tags ON products.product_id = attached_tags.product_id WHERE tag_id = ? AND products.is_active = 1 ORDER BY products.product_id DESC; ");
                             $getProducts->execute([ $tagIds[0] ]);
 
                             foreach( $getProducts as $product )
