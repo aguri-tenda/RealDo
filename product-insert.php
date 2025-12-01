@@ -196,7 +196,9 @@
                                                         <?php foreach( $tags as $tag ) : ?>
                                                             
                                                             <span>
-                                                                <input v-model="tags" type="checkbox" name="tags[]" value="<?= $tag['tag_id']; ?>"><?= $tag['name']; ?>
+                                                                <label>
+                                                                <input v-model="tags" type="checkbox" name="tags[]" value="<?= $tag['tag_id']; ?>">
+                                                                <?= $tag['name']; ?></label>
                                                             </span>
 
                                                             <?php
