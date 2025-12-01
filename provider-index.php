@@ -73,7 +73,11 @@
         <?php endif; ?>
 
         <?php else :?>
-    <p>商品一覧を見るにはログインしてください</p>
+            <div class="section">
+                <div class="container">
+                    <p>商品一覧を見るにはログインしてください</p>
+                </div>
+            </div>
 <?php endif; ?>
 
     </div>

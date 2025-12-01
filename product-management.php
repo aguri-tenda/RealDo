@@ -151,11 +151,19 @@
                 <?php endforeach; ?>
 
             <?php else : ?>
-                    <p>まだ商品が登録されていません。</p>
+                <div class="section">
+                    <div class="container">
+                        <p>まだ商品が登録されていません。</p>
+                    </div>
+                </div>
             <?php endif; ?>
 
         <?php else : ?>
-            <p>商品の管理をするためにはログインしてください。</p>
+            <div class="section">
+                <div class="container">
+                    <p>商品の管理をするためにはログインしてください。</p>
+                </div>
+            </div>
         <?php endif; ?>
     </div>
 </div>

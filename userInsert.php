@@ -93,5 +93,9 @@
         style="background-color: #27ea6bff; width: 250px;">提供者新規登録</a>
 </div>
 
+<div class="section">
+    <div class="container"></div>
+</div>
+
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
