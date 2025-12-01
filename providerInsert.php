@@ -91,6 +91,10 @@
         <a href="userInsert.php" class="button is-info is-medium"
             style="background-color: #23c8ffff; width: 250px;">利用者新規登録</a>
     </div>
+
+    <div class="section">
+        <div class="container"></div>
+    </div>
 </body>
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
