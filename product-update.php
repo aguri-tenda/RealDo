@@ -35,7 +35,7 @@
 
             if(isset($_POST['deleteDate']) && isset($_POST['delete_start_date']) && isset($_POST['delete_start_time']) && isset($_POST['delete_finish_date']) && isset($_POST['delete_finish_time']))
             {
-                $sql = $pdo->prepare(" DELETE FROM dates WHERE product_id = ? AND start_time = ? AND finish_time = ? ;");
+                $sql = $pdo->prepare(" DELETE FROM dates WHERE product_id = ? AND start_time = ? AND finish_time = ? AND purchased_num = 0;");
 
                 $complementStartTime = $_POST['delete_start_time']. ":00";
                 $complementFinishTime = $_POST['delete_finish_time']. ":00";
