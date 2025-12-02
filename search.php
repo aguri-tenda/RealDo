@@ -36,6 +36,7 @@ if (!empty($selected_tags)) {
             t1.address,
             t1.image_pass,
             t1.max_participants,
+            t1.area,
             d.start_time,
             d.finish_time
         FROM dates d
@@ -47,7 +48,8 @@ if (!empty($selected_tags)) {
                 p.detail,
                 p.address,
                 p.image_pass,
-                p.max_participants
+                p.max_participants,
+                p.area
             FROM products p
     ";
 
@@ -73,6 +75,7 @@ if (!empty($selected_tags)) {
             p.address,
             p.image_pass,
             p.max_participants,
+            p.area,
             d.start_time,
             d.finish_time
         FROM products p
