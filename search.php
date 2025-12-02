@@ -359,9 +359,9 @@ foreach ($results as $product) {
     </div>
 <?php endforeach; ?>
 
-<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px; margin-bottom: 100px;">
+<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px; margin-bottom: 40px;">
     検索結果は以上です
 </h2>
-
+<div style="margin-bottom: 40px;"></div>
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
