@@ -23,7 +23,7 @@ $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 <br>
 
 <div class="level">
-    <a href="<?= $_SERVER['HTTP_REFERER']; ?>"><input type="button" class="button is-link level-left" value="戻る"></a>
+    <a href="<?= $_SERVER['HTTP_REFERER']; ?>"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
 </div>
 
 <div class="container is-flex is-justify-content-center" id="app-booking">

@@ -55,5 +55,9 @@
         style="background-color: #41C0FF; width: 250px;">ユーザーログイン</a>
 </div>
 
+<div class="section">
+    <div class="container"></div>
+</div>
+
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>
