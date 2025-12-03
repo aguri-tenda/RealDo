@@ -151,7 +151,7 @@ switch ($event_duration) {
 // =====================
 if (!empty($selected_tags)) {
     //タグ検索がある場合、dbのタグカウントを増やす
-    if(isset($_SESSION['user'])) {
+    if (isset($_SESSION['user'])) {
         $searchWeight = 1; // タグ検索の重み付け（必要に応じて調整可能）
         foreach ($selected_tags as $tag_id) {
             $tag_count_sql = $pdo->prepare("
@@ -285,7 +285,12 @@ foreach ($results as $product) {
 }
 ?>
 
-<h2 class="title is-4" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
+<div class="level">
+
+    <h2 class="title is-4 level-left" style="margin-top: 30px; margin-left: 25px;">検索結果</h2>
+    <a href="index.php"><input type="button" class="button is-link level-right mr-3" value="ホームへ戻る"></a>
+
+</div>
 
 <?php foreach ($grouped_results as $product_id => $product_data): ?>
     <div class="box" style="
@@ -368,6 +373,6 @@ foreach ($results as $product) {
 <h2 class="title is-4" style="margin-top: 30px; margin-left: 25px; margin-bottom: 40px;">
     検索結果は以上です
 </h2>
-
+<div style="margin-bottom: 40px;"></div>
 <?php require "parts/user_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>

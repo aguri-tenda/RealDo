@@ -73,13 +73,19 @@
         <?php endif; ?>
 
         <?php else :?>
-    <p>商品一覧を見るにはログインしてください</p>
+            <div class="section">
+                <div class="container">
+                    <p>商品一覧を見るにはログインしてください</p>
+                </div>
+            </div>
 <?php endif; ?>
 
     </div>
 </div>
 
-
+<div class="section">
+    <div class="container"></div>
+</div>
 
 <?php require "parts/provider_bottom.php"; ?>
 <?php require "parts/footer.php"; ?>

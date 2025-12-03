@@ -35,7 +35,12 @@ $purchases = $sql->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="column">
-        <h1 class="title is-3" style="margin: 25px;">予約情報一覧</h1>
+        <div class="level">
+            <div class="level-left">
+                <a href="<?= $_SERVER['HTTP_REFERER']; ?>"><input type="button" class="button is-link ml-4" value="戻る"></a>
+                <h1 class="title is-3" style="margin: 25px;">予約情報一覧</h1>
+            </div>
+        </div>
 
         <?php if ($purchases): ?>
             <?php foreach ($purchases as $purchase): ?>

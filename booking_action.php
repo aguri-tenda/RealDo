@@ -65,7 +65,7 @@ try
     }
 
     $pdo->commit();
-    header("Location: booking_show.php");
+    header("Location: booking_show.php?user_id=". $user_id);
 }
 catch( Exception $e )
 {

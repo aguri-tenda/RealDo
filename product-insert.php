@@ -161,7 +161,7 @@
                                                 </div>
                                                 <div class="level-right">
                                                     <div>
-                                                        <input type="file" name="file" accept="image/*" required @focus="address = $refs.address.value">
+                                                        <input type="file" name="file" accept=".png,.jpg" required @focus="address = $refs.address.value">
                                                         <?php if(isset($_GET['failed'])) : ?>
                                                             <p class="help"><font color="red">ファイルはpng、またはjpegを指定してください</font></p>
                                                         <?php endif; ?>

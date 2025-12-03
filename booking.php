@@ -1,7 +1,7 @@
 <?php
 require "parts/header.php";
 require "parts/navigation.php";
-require "parts/db-connect.php";
+
 ?>
 <?php
 $product_id = $_GET['product_id'] ?? '';
@@ -21,6 +21,10 @@ $dates_sql->execute([$product_id]);
 $dates = $dates_sql->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <br>
+
+<div class="level">
+    <a href="<?= $_SERVER['HTTP_REFERER']; ?>"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
+</div>
 
 <div class="container is-flex is-justify-content-center" id="app-booking">
     <form class="box" style="max-width: 1200px; width: 100%; padding: 40px; border-radius: 10px;" method="post"

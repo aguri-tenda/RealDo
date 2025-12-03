@@ -1,6 +1,11 @@
 <?php require "parts/header.php"; ?>
 <?php require "parts/provider_navigation.php"; ?>
 <br>
+
+<div class="level">
+    <a href="provider-index.php"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
+</div>
+
 <div class="level-item">
     <form class="box" style="max-width: 700px; width: 100%; text-align: center;" action="provider-login-action.php" method="post">
         <h2 class="subtitle is-4" style="color: #27ea6bff;">ログイン</h2>
@@ -48,6 +53,10 @@
 <div class="field has-text-centered">
     <a href="user-login.php" class="button is-info is-medium"
         style="background-color: #41C0FF; width: 250px;">ユーザーログイン</a>
+</div>
+
+<div class="section">
+    <div class="container"></div>
 </div>
 
 <?php require "parts/provider_bottom.php"; ?>
