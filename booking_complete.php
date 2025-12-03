@@ -100,7 +100,7 @@ $remark = $_POST['remark'] ?? '';
             </div>
             <div class="field-body">
                 <div class="field">
-                    <textarea disabled class="textarea" name="remark" style="background-color:#E3FFFF; border:1px solid #858484ff; width:80%; height:100px; resize:none;"><?= htmlspecialchars($remark) ?></textarea>
+                    <textarea readonly class="textarea" name="remark" style="background-color:#E3FFFF; border:1px solid #858484ff; width:80%; height:100px; resize:none;"><?= htmlspecialchars($remark) ?></textarea>
                 </div>
             </div>
         </div>
