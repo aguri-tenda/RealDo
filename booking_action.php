@@ -28,7 +28,7 @@ if( ( $date_participants['purchased_num'] + $people ) > $date_participants['max_
 
 $purchase_sql = $pdo->prepare(" INSERT INTO purchases( product_id, user_id, start_time, purchased_date, attendance, tel, remark) VALUE( ?, ?, ?, NOW(), ?, ?, ? ); ");
 $participants_sql = $pdo->prepare(" INSERT INTO participants( purchase_id, participant_number, name, ruby, tel ) VALUE( ?, ?, ?, ?, ? ); ");
-$dates_sql = $pdo->prepare(" UPDATE dates SET purchased_num = purchased_num + ? WHERE product_id = ? AND start_time = ? ; ");
+$dates_sql = $pdo->prepare(" UPDATE dates SET purchased_num = ? WHERE product_id = ? AND start_time = ? ; ");
 
 $pdo->beginTransaction();
 try
@@ -44,7 +44,10 @@ try
     }
 
     //日時の購入数更新
-    $dates_sql->execute([ $people, $product_id, $datetime ]);
+    $count_sql = $pdo->prepare(" SELECT SUM( attendance ) AS total FROM purchases WHERE product_id = ? AND start_time = ? ; ");
+    $count_sql->execute([ $product_id, $datetime ]);
+    $count = $count_sql->fetch(PDO::FETCH_ASSOC);
+    $dates_sql->execute([ $count['total'], $product_id, $datetime ]);
 
     //タグカウント更新
     $tag_ids_sql = $pdo->prepare(" SELECT tag_id FROM attached_tags WHERE product_id = ? ; ");
