@@ -20,7 +20,8 @@ $_SESSION['search_params'] = [
 ];
 
 $params = [];
-$where = [];
+$where = []; // メインクエリのWHERE句用
+$sub_query_where = []; // サブクエリのWHERE句用
 
 $sql = ''; // SQL本体
 $sub_query_end = ''; // サブクエリの閉じとdatesとのJOIN句 (タグありの場合のみ使用)
@@ -53,14 +54,12 @@ if (!empty($selected_tags)) {
             FROM products p
     ";
 
-    // サブクエリのJOIN句、WHERE句、GROUP BY/HAVING句を組み立てるための変数
+    // サブクエリのJOIN句
     $sub_query_joins = "
         INNER JOIN attached_tags att
             ON p.product_id = att.product_id
     ";
-    $sub_query_where = [];
-    $sub_query_group_by_having = '';
-
+    
     // サブクエリを閉じてdatesテーブルとJOINする部分
     $sub_query_end = ' ) AS t1 ON d.product_id = t1.product_id ';
 
@@ -88,7 +87,11 @@ if (!empty($selected_tags)) {
 // キーワード（商品名）
 // =====================
 if ($searchWord !== '') {
-    $where[] = (!empty($selected_tags) ? 't1.name' : 'p.name') . ' LIKE :searchWord';
+    if (!empty($selected_tags)) {
+        $sub_query_where[] = 'p.name LIKE :searchWord';
+    } else {
+        $where[] = 'p.name LIKE :searchWord';
+    }
     $params[':searchWord'] = '%' . $searchWord . '%';
 }
 
@@ -96,13 +99,18 @@ if ($searchWord !== '') {
 // 開催地
 // =========
 if ($event_location !== '') {
-    $where[] = (!empty($selected_tags) ? 't1.area' : 'p.area') . ' = :area';
+    if (!empty($selected_tags)) {
+        $sub_query_where[] = 'p.area = :area';
+    } else {
+        $where[] = 'p.area = :area';
+    }
     $params[':area'] = $event_location;
 }
 
 // ====================
 // 開催日（開始・終了）
 // ====================
+// datesテーブルの条件は、タグの有無に関わらずメインクエリのWHERE句に追加
 if ($start_date !== '') {
     $where[] = 'd.start_time >= :start_date';
     $params[':start_date'] = $start_date . ' 00:00:00';
@@ -152,14 +160,13 @@ if (!empty($selected_tags)) {
                 ON DUPLICATE KEY UPDATE attention_level = attention_level + :attention_level
             ");
             $tag_count_sql->execute([
-                ':user_id' => $user_id,
+                ':user_id' => $user_id, 
                 ':tag_id' => $tag_id,
                 ':attention_level' => $searchWeight,
             ]);
         }
     }
-    // タグ検索がある場合、サブクエリ(t1)を完成させる
-
+    
     // サブクエリのJOINを追加
     $sql .= $sub_query_joins;
 
@@ -187,17 +194,26 @@ if (!empty($selected_tags)) {
 
     // サブクエリを閉じる
     $sql .= $sub_query_end;
+
 }
 
 // is_active フラグの追加
-$where[] = 'p.is_active = 1';
+if (!empty($selected_tags)) {
+    $sub_query_where[] = 'p.is_active = 1';
+} else {
+    $where[] = 'p.is_active = 1';
+}
 
 // =====================
 // WHERE句の結合
 // =====================
 // メインクエリのWHERE句 (開催地、日付、期間、キーワード)を結合
 if (!empty($where)) {
-    $sql .= ' WHERE ' . implode(' AND ', $where);
+    if (!empty($selected_tags)) {
+        $sql .= ' WHERE ' . implode(' AND ', $where);
+    } else {
+        $sql .= ' WHERE ' . implode(' AND ', $where);
+    }
 }
 
 // 並び順（開始時刻が近い順）
@@ -284,16 +300,13 @@ foreach ($results as $product) {
         position: relative;
         transition: box-shadow 0.2s ease rgba(0,0,0,0.15);">
 
-        <!-- 左側：テキスト情報 -->
         <div style="flex: 1;">
 
-            <!-- タイトル + タグ -->
             <p style="margin-bottom: 10px;">
                 <span class="title is-4">
                     <?= htmlspecialchars($product_data['product_info']['name']) ?>
                 </span>
 
-                <!-- タグ -->
                 <?php foreach (($product_tags[$product_id] ?? []) as $tag): ?>
                     <span class="tag is-info is-light" style="margin-left: 5px; border-radius: 20px;">
                         <?= htmlspecialchars($tag['name']) ?>
@@ -301,12 +314,10 @@ foreach ($results as $product) {
                 <?php endforeach; ?>
             </p>
 
-            <!-- 説明文 -->
             <p style="margin-bottom: 15px; color: #444; line-height: 1.5;">
                 <?= nl2br(htmlspecialchars($product_data['product_info']['detail'])) ?>
             </p>
 
-            <!-- 情報一覧（グリッド） -->
             <div style="
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -321,7 +332,6 @@ foreach ($results as $product) {
                     <?= countMembers($pdo, $product_id) ?>/<?= htmlspecialchars($product_data['product_info']['max_participants']) ?>人
                 </p>
 
-                <!-- 日程 -->
                 <p style="margin-top: 10px;">
                     <strong>開催日程:</strong>
                     <select class="select" style="margin-left: 10px;">
@@ -334,7 +344,6 @@ foreach ($results as $product) {
                 </p>
             </div>
 
-            <!-- ⭐ 詳細ボタン（左側下部） -->
             <div style="margin-top: 15px;">
                 <a href="detail.php?product_id=<?= htmlspecialchars($product_id) ?>" class="button"
                     style="border-radius: 8px; padding: 8px 20px; background-color: #41C0FF; color: white; text-decoration: none;">
@@ -344,7 +353,6 @@ foreach ($results as $product) {
 
         </div>
 
-        <!-- 右側：写真 -->
         <div style="flex-shrink: 0;">
             <img src="<?= htmlspecialchars($product_data['product_info']['image_pass']) ?>"
                 alt="<?= htmlspecialchars($product_data['product_info']['name']) ?>" style="
