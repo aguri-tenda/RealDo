@@ -77,6 +77,7 @@
                         <div class="level">
                             <div class="level-left content">
                                 <p style="color:#278EDD;">このフォームでは開催期間を複数設定することができます</p>
+                                <p class="help">※すでに予約が入っている日程は削除できません。</p>
                             </div>
                             <div class="level-right">
                                 <input type="button" class="button is-link is-outlined" value="イベント情報の更新" @click="toggleForm">
@@ -119,7 +120,7 @@
                                             <input type="date" value="<?= $finish_date[$index]; ?>" name="delete_finish_date" readonly>
                                             <input type="text" value="<?= $finish_time[$index]; ?>" name="delete_finish_time" size="5" readonly>
                                             
-                                            <input type="submit" value="開催日時の削除" name="deleteDate" class="button is-danger is-small is-outlined">
+                                            <input type="submit" value="開催日時の削除" name="deleteDate" class="button is-danger is-small is-outlined" <?php if($datetime['purchased_num'] != 0 ) : ?><?= "disabled"; ?><?php endif; ?> >
                                         </form>
                                     </span>
 
