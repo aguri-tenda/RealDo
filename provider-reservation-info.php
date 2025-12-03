@@ -9,7 +9,7 @@ $sql = $pdo->prepare("SELECT
                       FROM purchases
                       JOIN users ON purchases.user_id = users.user_id
                       WHERE product_id = ?
-                      AND is_active = 1
+                      AND purchases.is_active = 1
                       ORDER BY purchased_date DESC;");
 $sql->execute([$product_id]);
 $purchases = $sql->fetchAll(PDO::FETCH_ASSOC);
