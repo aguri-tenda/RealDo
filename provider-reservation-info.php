@@ -57,7 +57,7 @@ $purchases = $sql->fetchAll(PDO::FETCH_ASSOC);
                     
                     <div class="media-right" style="display: flex; flex-direction: column; gap: 10px; margin-left: 40px;">
                         <h2 class="title is-4">備考</h2>
-                        <p><?= $purchase['remarks'] != '' ? nl2br(htmlspecialchars($purchase['remarks'])) : 'なし' ?></p>
+                        <p><?= $purchase['remark'] != '' ? nl2br(htmlspecialchars($purchase['remark'])) : 'なし' ?></p>
                     </div>
 
                     
