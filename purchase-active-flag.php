@@ -5,7 +5,7 @@
     {
         $getPurchases = $pdo->prepare(" SELECT * FROM purchases WHERE purchase_id = ? AND is_active = 1; ");
         $getPurchases->execute([ $_GET['purchase_id'] ]);
-        $getPurchases->fetch();
+        $getPurchases->fetch(PDO::FETCH_ASSOC);
 
         if( $getPurchases )
         {
