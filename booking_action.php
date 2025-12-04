@@ -44,7 +44,7 @@ try
     }
 
     //日時の購入数更新
-    $count_sql = $pdo->prepare(" SELECT SUM( attendance ) AS total FROM purchases WHERE product_id = ? AND start_time = ? ; ");
+    $count_sql = $pdo->prepare(" SELECT SUM( attendance ) AS total FROM purchases WHERE product_id = ? AND start_time = ? AND is_active = 1 ; ");
     $count_sql->execute([ $product_id, $datetime ]);
     $count = $count_sql->fetch(PDO::FETCH_ASSOC);
     $dates_sql->execute([ $count['total'], $product_id, $datetime ]);

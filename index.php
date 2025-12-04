@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="card-image">
                                         <div class="image ">
-                                            <img src="<?= $recommend['image_pass']; ?>" alt="<?= $recommend['name']; ?>" style="height:200px;">
+                                            <img src="<?= $recommend['image_pass']; ?>" alt="<?= $recommend['name']; ?>" style="height:250px;">
                                         </div>
                                     </div>
 
