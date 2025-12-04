@@ -21,8 +21,8 @@
 
                 foreach( $count_sql as $attendance )
                 {
-                    $attendanceSet = $pdo->prepare(" UPDATE dates SET purchased_num = ? - ? WHERE product_id = ? AND start_time = ? ; ");
-                    $attendanceSet->execute([ $attendance['total'], $purchases['attendance'], $purchases['product_id']. $purchases['start_time'] ]);
+                    $attendanceSet = $pdo->prepare(" UPDATE dates SET purchased_num = ? WHERE product_id = ? AND start_time = ? ; ");
+                    $attendanceSet->execute([ $attendance['total'], $purchases['product_id'], $purchases['start_time'] ]);
                 }
             }
         }
