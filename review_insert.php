@@ -58,6 +58,20 @@ if (!$is_purchased) {
     echo "</div>";
     exit;
 }
+
+$review_sql = $pdo->prepare(
+    "SELECT COUNT(*) FROM reviews 
+    WHERE user_id = ? AND product_id = ?"
+);
+$review_sql->execute([$user_id, $product_id]);
+$review_count = $review_sql->fetchColumn();
+if ($review_count > 0) {
+    echo "<div class=\"box\" style=\"width: 520px; text-align: center; margin: 2rem auto;\">";
+    echo "<p>この商品には既にレビューを投稿しています。</p>";
+    echo '<a href="detail.php?product_id=' . htmlspecialchars($product_id) . '" class="button is-link" style="background-color: #41C0FF; margin-top: 15px;">戻る</a>';
+    echo "</div>";
+    exit;
+}
 ?>
 
 <br>
