@@ -12,7 +12,7 @@ function getAreaFromPostalCode($postalCode) {
     } elseif (($addressNum >= 38 && $addressNum <= 50) || ($addressNum >= 91 && $addressNum <= 95)) {
         $area = '中部';
     } elseif ($addressNum >= 51 && $addressNum <= 67) {
-        $area = '関西';
+        $area = '近畿';
     } elseif ($addressNum >= 68 && $addressNum <= 75) {
         $area = '中国';
     } elseif ($addressNum >= 76 && $addressNum <= 79) {
