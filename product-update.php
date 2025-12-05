@@ -205,7 +205,7 @@
                                                         <div>
                                                             <div>
                                                                 <input type="text" placeholder="<?= $product['post_code']; ?>"  v-model="addressNum" id="zipcode" name="post-code" size="8">
-                                                                <input type="text" placeholder="<?= $product['address']; ?>"  v-model="address" id="address" name="address">
+                                                                <input type="text" placeholder="<?= $product['address']; ?>"  v-model="address" id="address" ref="address" name="address">
                                                                 <input type="button" id="getAddress" value="検索">
                                                             </div>
                                                             <p class="help" v-if="isAddressNum">郵便番号は「xxx-xxxx」形式で入力してください</p>
