@@ -203,11 +203,10 @@ if (!empty($selected_tags)) {
 }
 
 // is_active フラグの追加
-if (!empty($selected_tags)) {
-    $sub_query_where[] = 'p.is_active = 1';
-} else {
-    $where[] = 'p.is_active = 1';
-}
+$sub_query_where[] = 'p.is_active = 1';
+
+$where[] = 'p.is_active = 1';
+
 
 // =====================
 // WHERE句の結合
