@@ -67,6 +67,19 @@
                                 array_push($productIds, $product['product_id']);
                                 $productIds = array_unique($productIds);
                             }
+
+                            $searchUnactives = $pdo->prepare(" SELECT * FROM products WHERE product_id = ? AND is_active = 0; ");
+                            
+                            for( $index = count($productIds)-1 ; $index >= 0 ; $index-- )
+                            {
+                                $searchUnactives->execute([ $productIds[$index] ]);
+                                $searched = $searchUnactives->fetch(PDO::FETCH_ASSOC);
+
+                                if($searched)
+                                {
+                                    array_splice($productIds, $index, 1);
+                                }
+                            }
                         }
                         else
                         {
