@@ -184,6 +184,7 @@ if (!empty($selected_tags)) {
     }
 
     $sub_query_where[] = 'att.tag_id IN (' . implode(',', $placeholders) . ')';
+    $sub_query_where[] = 'p.is_active = 1';
 
     if (!empty($sub_query_where)) {
         $sql .= ' WHERE ' . implode(' AND ', $sub_query_where);
@@ -203,10 +204,9 @@ if (!empty($selected_tags)) {
 }
 
 // is_active フラグの追加
-$sub_query_where[] = 'p.is_active = 1';
-
-$where[] = 'p.is_active = 1';
-
+if (empty($selected_tags)) {
+    $where[] = 'p.is_active = 1';
+}
 
 // =====================
 // WHERE句の結合
