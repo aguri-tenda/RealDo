@@ -41,7 +41,8 @@ $_SESSION['review']['reviewtext'] = $_POST['reviewtext'] ?? '';
         </div>
 
         <div class="field has-text-centered" style="margin-top: 2rem;">
-            <a href="review_insert.php">戻る</a>
+            <a href="review_insert.php?product_id=<?php echo htmlspecialchars($product_id); ?>"
+                class="button is-info is-medium" style="width: 40%;">戻る</a>
             <input class="button is-link is-medium" type="submit" value="登録する"
                 style="background-color: #41C0FF; width: 40%;">
         </div>
