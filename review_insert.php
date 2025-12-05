@@ -65,7 +65,7 @@ if (!$is_purchased) {
 <?php if (isset($_SESSION['user'])): ?>
 
 <div class="level">
-    <a href="<?= $_SERVER['HTTP_REFERER']; ?>"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
+    <a href="detail.php?product_id=<?= $product_id; ?>"><input type="button" class="button is-link level-left ml-3" value="戻る"></a>
 </div>
 
 <div class="level-item">
